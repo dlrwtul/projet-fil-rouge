@@ -1,0 +1,75 @@
+.header {
+    width: 100%;
+    height: 75px;
+    z-index: 100;
+    position: fixed;
+    top: 0;
+}
+
+.header>div {
+    width: 33.333%;
+}
+
+.header .left {
+    font-family: Imbue;
+    font-weight: bold;
+}
+
+.header .icon {
+    border-radius: 100%;
+    background-color: aliceblue;
+    height: 60px;
+    width: 60px;
+    border: 3px solid #0194FE;
+    cursor: pointer;
+}
+
+.header .icon img {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+}
+
+.header .f-right>a {
+    text-decoration: none;
+    margin: 1%;
+    cursor: pointer;
+    transition: all ease 0.35s;
+}
+
+.btn-commandes:hover {
+    border-bottom: 2px solid white;
+    padding-bottom: 2px;
+}
+
+.header .btn-connexion, .btn-inscription {
+    border: 2px solid white;
+    padding: 10px 20px;
+}
+
+
+.header .right {
+    width: 50px;
+    height: 50px;
+    border: 5px solid white;
+    background-color: #FE8A01;
+    cursor: pointer;
+    margin: 0 0 0 3%;
+
+}
+
+.header .right .nbr-produits {
+    width: 12.5px;
+    height: 12.5px;
+    border-radius: 100%;
+    background-color: white;
+    position: relative;
+    bottom: 12.5px;
+    font-weight: bold;
+    font-size: small;
+}
+
+.header .right i {
+    color: white;
+    font-size: 25px;
+}

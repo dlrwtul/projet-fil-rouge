@@ -1,0 +1,79 @@
+.catalogue {
+}
+.catalogue .head {
+    height: 80vh;
+    margin: 10px;
+    border-radius: 15px;
+    background-image: url('https://images.pexels.com/photos/1639562/pexels-photo-1639562.jpeg?auto=compress&cs=tinysrgb&w=1600');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.catalogue .head .title {
+    font-size: 100px;
+    font-family: Imbue;
+    font-weight: bold;
+}
+
+.produits {
+    width: 75%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-self: flex-end;
+}
+
+.produits>span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.produits>span span {
+    margin: 10px;
+}
+
+.produits>span span img {
+    transition: all ease 0.35s;
+    transform: rotate3d(0,0,0,0deg);
+}
+
+.produits>span span img:hover {
+    transform: rotate3d(0,1,0,45deg);
+}
+
+.search-group {
+    font-size: 1em;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.label-search-group {
+    background-color: #212529;
+    height: 40px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 7.5px;
+    font-size:small;
+    border: 2px solid black;
+    cursor: pointer;
+} 
+
+.input-search-group {
+    height: 40px;
+    font-size: small;
+    padding: 5px;
+    width: 25em;
+}
+
+.container-2 {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1% 10%;
+    padding: 0 2.5%;
+}
