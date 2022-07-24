@@ -1,0 +1,77 @@
+.securite-header {
+    width: 100%;
+    height: 100px;
+    padding: 1%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.securite-header>div {
+    width: 50%;
+}
+
+.securite-header>div:first-child>span {
+    margin: 0 1%;
+}
+
+.securite-header>div:first-child>span:last-child {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+}
+
+.logo {
+    position: relative;
+    animation-name: freuthie-freuthie;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+}
+
+@keyframes freuthie-freuthie {
+    from {
+        top: 0px;
+    }
+    50% {
+        top: -3px;
+    }
+    to{
+        top: 0px;
+    }
+}
+
+.securite-header>div:last-child {
+    display: flex;
+    justify-content: end;
+    padding: 0 1%;
+}
+
+.securite-header>div:last-child>a {
+    margin: 0 2%;
+}
+
+.securite-header>div:last-child>a:first-child {
+    text-decoration: none;
+    padding-bottom: 0px;
+    border-bottom: 0px solid;
+    color: black;
+    transition: all ease 0.15s;
+}
+
+.securite-header>div:last-child>a:first-child:hover {
+    padding-bottom: 3px;
+    border-bottom: 2px solid ;
+    font-weight: bold;
+}
+
+.securite-header>div:last-child>a:last-child {
+    border: 1px solid ;
+    transition: all ease 0.5s;
+}
+
+.securite-header>div:last-child>a:last-child:hover {
+    border: none ;
+    background-color: black;
+    color: white;
+    padding: 0.9% 3%;
+    font-weight: bold;
+}

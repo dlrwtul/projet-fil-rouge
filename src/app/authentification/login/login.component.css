@@ -1,0 +1,89 @@
+.connexion {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 2%;
+}
+
+.tab-login {
+    width: 95%;
+    height: 70vh;
+    background-color: #FE8A01;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-part {
+    width: 35%;
+    height: 60%;
+    background-color: rgba(0, 0, 0, 0.3);
+    margin: 0 2%;
+    border-radius: 5px;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-part-head {
+    height: 7.5%;
+    border-bottom: 1px solid white;
+    padding-bottom: 10px;
+}
+
+.form-part-body {
+    height: 92.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5% 0;
+}
+
+.form-part-body>div {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-part-body>div label{
+    font-size: 1.2em;
+    font-weight: 400;
+}
+
+.form-part-body>div input {
+    font-size: 1.2em;
+    padding: 2% 1%;
+    border: none;
+    margin: 1.5% 0;
+    border-radius: 2px;
+}
+
+.form-part-body>div input:focus {
+    
+}
+
+.form-part-body>button {
+    border: 2px solid white;
+    color: white;
+    font-weight: bold;
+    transition: all ease 0.35s;
+    width: 100%;
+    box-shadow: none;
+}
+
+.form-part-body>button:hover {
+    box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.75);
+    width: 101%;
+}
+
+.text-part {
+    width: 35%;
+}
+
+.bz {
+    font-size: 4em;
+    font-weight: bold;
+}
