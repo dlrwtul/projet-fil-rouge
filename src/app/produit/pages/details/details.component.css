@@ -1,0 +1,337 @@
+.details {
+    height: 98vh;
+    z-index: 100;
+    margin: 2%;
+    position: absolute;
+    width: 80em;
+    right: 0;
+    border-radius: 2%;
+}
+
+.head {
+    margin: 0 2%;
+    border-bottom: 2px solid;
+    padding: 1%;
+    height: 5%;
+}
+.head span:last-child{
+    cursor: pointer;
+    position: relative;
+    bottom: 15px;
+    left: 10px;
+}
+
+.container-1 {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 22.5%;
+    padding: 2%;
+}
+
+.container-1 div:first-child {
+    background-image: url('https://images.pexels.com/photos/3738730/pexels-photo-3738730.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 200px;
+    width: 60em;
+    border-radius: 5px;
+}
+
+.container-1 div:last-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 2%;
+}
+
+.container-1 div:last-child>span {
+    padding: 1%;
+}
+
+.container-1 div:last-child>span>span:first-child {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.container-1 div:last-child>span>span:last-child {
+    font-size: 1.4em;
+}
+
+.container-2 {
+    width: 100%;
+    height: 7.5%;
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 0 5%;
+}
+
+.container-2>div:first-child {
+    width: 15%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container-2>div:first-child>span {
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 100%;
+    background-color: grey;
+    color: white;
+    padding: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all ease 0.35s;
+}
+
+.container-2>div:first-child>span:hover {
+    background-color: black;
+    color: white;
+}
+
+.container-2>div:first-child input[type=text] {
+    width: 3em;
+    height: 3em;
+    border-radius: 10px;
+    text-align: center;
+    border: none ;
+    background-color: grey;
+    color: white;
+    font-size: 1.3em;
+}
+
+.container-3 {
+    width: 100%;
+    height: 55%;
+    padding: 0 3%;
+}
+
+.container-3>div {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-3>div>div:first-child {
+    width: 100%;
+    height: 15%;
+    margin: 0.5 5%;
+    border-bottom: 1px solid grey;
+    animation-name: veuthie-veuthie;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    padding: 1%;
+}
+
+
+@keyframes veuthie-veuthie {
+    from {
+        border-bottom: 1px solid grey;
+    }
+    50% {
+        
+        border-bottom: 1.5px solid black;
+    }
+    to {
+        border-bottom: 1px solid grey;
+    }
+}
+
+.card-container {
+    width: 100%;
+    height: 85%;
+    padding: 1%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.mini-card {
+    width: 12.5em;
+    height: 100%;
+    margin: 0 2%;
+    display: inline-block;
+}
+
+.mini-card-img {
+    height: 55%;
+    width: 110%;
+    background-image: url('https://images.pexels.com/photos/11942004/pexels-photo-11942004.jpeg?auto=compress&cs=tinysrgb&w=1600');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 3px;
+    z-index: 0;
+    padding: 3%;
+    transform: rotate3d(0,0,1,0deg);
+    transition: all ease 0.35s;
+}
+
+.mini-card-img:hover {
+    transform: rotate3d(0,0,1,-15deg);
+}
+
+.mini-card-img .prix {
+    background-color: white;
+    color: black;
+    font-weight: 600;
+    border-radius: 3px;
+    padding: 1% 1%;
+    transition: all ease 0.35s;
+    margin-left: 0;
+}
+
+.mini-card-img .prix:hover {
+    margin-left: 5px;
+}
+
+.mini-card-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    background-color: whitesmoke;
+    border-radius: 5px;
+    margin: 1px;
+    position: relative;
+    bottom: 10px;
+    left: 5%;
+    z-index: 1;
+    height: 45%;
+}
+
+.mini-card-title {
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    padding: 3%;
+}
+
+.mini-card-title span {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 1px 2px;
+    margin: 0.5px;
+    border-radius: 1px;
+}
+
+.mini-card-title>span:first-child {
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.mini-card-title>div>span:last-child{
+    border-radius: 15%;
+}
+
+.mini-card-title>div{
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8em;
+}
+
+.mini-card-btns {
+    height: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mini-card-btns>div:first-child {
+    width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: 0 3%;
+}
+
+.mini-card-btns>div:first-child>span {
+    width: 1.2em;
+    height: 1.2em;
+    border-radius: 100%;
+    background-color: grey;
+    color: white;
+    padding: 1%;
+    margin: 0 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all ease 0.35s;
+}
+
+.mini-card-btns>div:first-child>span:hover {
+    background-color: black;
+    color: white;
+}
+
+.mini-card-btns>div:first-child input[type=text] {
+    width: 2em;
+    height: 2em;
+    border-radius: 10px;
+    text-align: center;
+    border: none ;
+    background-color: gray;
+    color: white;
+}
+
+.mini-card-btns>div:last-child {
+    width: 60%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 0 2%;
+}
+
+.mini-card-btns>div:last-child>a {
+    text-decoration: none;
+    color: white;
+    background-color: #212529;
+    border-radius: 3px;
+    padding: 1% 4%;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+
+.footer {
+    width: 100%;
+    height: 7.5%;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    padding: 1% 4%;
+}
+
+.footer>button {
+    background-color: rgb(21, 20, 20);
+    color: white;
+    font-weight: 600;
+    transition: all ease 1s;
+    height: 3em;
+}
+
+.footer>button:hover {
+    background-color: orange;
+    color: white;
+    font-weight: bold;
+    padding: 1% 3%;
+}
+
+.toile {
+    background-color: rgba(255, 255, 255, 0.4);
+    width: 100vw;
+    height: 120vh;
+    position: absolute;
+    top: 1000px;
+    overflow: hidden;
+}

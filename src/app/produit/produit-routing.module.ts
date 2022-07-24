@@ -10,7 +10,11 @@ const routes: Routes = [
   },
   { 
     path: 'details/:id', 
-    component: DetailsComponent 
+    outlet: 'sidebar',
+    component: DetailsComponent ,
+    data: {
+      animation: "slide"
+    }
   }
 ];
 

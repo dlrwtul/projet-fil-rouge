@@ -7,7 +7,8 @@ import { Component, HostListener, Inject, OnInit } from '@angular/core';
   styleUrls: ['./catalogue.component.css'],
 })
 export class CatalogueComponent implements OnInit {
-  showNav : boolean = false;
+  showNav : string = '';
+  topVal : number = 0;
   constructor(@Inject(DOCUMENT) private document: Document) { }
 
   ngOnInit(): void {
@@ -16,10 +17,11 @@ export class CatalogueComponent implements OnInit {
 
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
+    this.topVal= window.scrollY;
     if ( window.scrollY > 100) {
-      this.showNav = true;
+      this.showNav = 'show';
     } else {
-      this.showNav = false;
+      this.showNav = '';
     }
   }
 

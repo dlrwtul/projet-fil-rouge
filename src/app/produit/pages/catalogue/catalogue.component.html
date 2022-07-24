@@ -1,5 +1,5 @@
-<ng-container *ngIf="showNav">
-    <ild-header></ild-header>
+<ng-container *ngIf="showNav == 'show'">
+    <ild-header [showNav]='showNav'></ild-header>
 </ng-container>
 <div class="catalogue d-flex flex-column">
     <div class="head d-flex justify-content-between">

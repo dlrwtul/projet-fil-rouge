@@ -1,1 +1,4 @@
 <router-outlet></router-outlet>
+<main [@routeAnimations]="prepareRouteOutlet(outlet)" class="content">
+    <router-outlet #outlet="outlet" name="sidebar"></router-outlet>
+</main>

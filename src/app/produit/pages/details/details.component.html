@@ -1,1 +1,93 @@
-<p>details works!</p>
+<!-- <div class="toile"></div> -->
+<div class="details p-3 bg-light shadow">
+    <div class="head d-flex justify-content-between">
+        <span class="fs-4">Details Burger Simple</span>
+        <span>
+            <img routerLink="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAArCAYAAADhXXHAAAAABmJLR0QA/wD/AP+gvaeTAAAB0UlEQVRYhe2YT0sCQRjGf5H0HewLJEKSnesQVC5ZfY7sIxQFfpo6delQWeqhTvaHpEPn6JCnNG+JYofZAVm1ZmbfFaR94EGZdZ/35+wwOzMQK1asWAAzAhlZYAdYAVLAPDALdIEP4BW4A86BZ4F6TtoCnoC+hR8Bb5KQaaBiCRl0GfUUIpUHtEKCareB3ahA91HjUAJUuwsUpEG9CEC1e8C2FGga+IoIVLuF0BguRwyqXQ0Lmp8QqHYuDKzpPHrC+CdwA5wa5ty7gi4bFqj5v59leP6t+O0AD4Z5GRfYY8PwJpD070kCDb+9EWhvGuYdusCWDMODPbgOdPxPGN3jv/nSBfbdokAfKA7cmx34XrTMeXOB7VgW6QGbgYw17F8m37agCcsC2vVATt0xJ2ELPDU9C1M2Zq8sCkjOBhcusEeG4Z/IzrMHLrBLhuHSb7BFF1hQeyaTAmeoVdOoa1X/us0fd5JnWETKG2FgAa4nBFoJCwpqBS+1SRznJrAgAQtqURzlHiwvBapViAC4C+xJg2rlMJ8v/3IbdewUqVKorUoY0BKCY9REOdSeyQayxvBix1gSp4gZ1ONcRfV6EphDrQ/0KeIt6hTxRaBerFix/r1+AFK7sPaI+GAqAAAAAElFTkSuQmCC">
+        </span>
+    </div>
+    <div class="container-1">
+        <div class="shadow">
+        </div>
+        <div>
+            <span><span>Nom :</span><span>Burger Simple</span></span>
+            <span><span>Prix :</span><span mx-2>2700 FCFA</span></span>
+            <span><span>Description :</span><span> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eos incidunt quis pariatur sapiente ad, reprehenderit provident possimus quos facilis et repellat, animi eligendi! Dolorem sint facilis quae, vero consequatur amet?</span></span>
+        </div>
+    </div>
+    <div class="container-2">
+        <div d-flex>
+            <span class="shadow-sm">-</span>
+            <input class="shadow" type="text" name="" id="">
+            <span class="shadow-sm">+</span>
+        </div>
+    </div>
+    <div class="container-3">
+        <div>
+            <div class="fs-5">Nos Boissons</div>
+            <div class="card-container">
+                <ng-container *ngFor="let mini of [1,2,3,4,5,6,7,8,9,10,11,12]">
+                    <div class="mini-card">
+                        <div class="mini-card-img">
+                            <span class="prix">300 Fcfa</span>
+                        </div>
+                        <div class="mini-card-info shadow">
+                            <div class="mini-card-title">
+                                <span>Coca Cola Canette</span>
+                                <div>
+                                    <span>Taille</span>
+                                    <span>Cannette</span>
+                                </div>
+                            </div>
+                            <div class="mini-card-btns">
+                                <div>
+                                    <span>-</span>
+                                    <input type="text" name="" id="">
+                                    <span>+</span>
+                                </div>
+                                <div>
+                                    <a class="shadow-ms">Ajouter</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                
+            </div>
+        </div>
+        <div>
+            <div class="fs-5">Nos Frites</div>
+            <div class="card-container">
+                <ng-container *ngFor="let mini of [1,2,3,4,5,6,7,8,9,10,11,12]">
+                    <div class="mini-card">
+                        <div class="mini-card-img">
+                            <span class="prix">300 Fcfa</span>
+                        </div>
+                        <div class="mini-card-info shadow">
+                            <div class="mini-card-title">
+                                <span>Coca Cola Canette</span>
+                                <div>
+                                    <span>Taille</span>
+                                    <span>Cannette</span>
+                                </div>
+                            </div>
+                            <div class="mini-card-btns">
+                                <div>
+                                    <span>-</span>
+                                    <input type="text" name="" id="">
+                                    <span>+</span>
+                                </div>
+                                <div>
+                                    <a class="shadow-ms">Ajouter</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <button routerLink="" class="btn shadow-md">Ajouter au Panier</button>
+    </div>
+</div>

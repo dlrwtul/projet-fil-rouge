@@ -1,9 +1,27 @@
 .header {
     width: 100%;
     height: 75px;
-    z-index: 100;
+    z-index: 99;
     position: fixed;
     top: 0;
+    transition: all ease 0.5s;
+}
+
+.header.show {
+    animation: showNav;
+    animation-duration: 0.25s;
+}
+
+@keyframes showNav {
+    from{
+        opacity: 0;
+        top: -100%;
+    }
+    to{
+        opacity: 1;
+        top: 0%;
+    }
+
 }
 
 .header>div {
