@@ -49,12 +49,12 @@
                 </label>
                 <input type="text" id="search-input" placeholder="Entre produit" class="input-search-group" />
             </div>
-            <div>
-                <select name="" id="" class="fs-6 border border-primary rounded">
-                    <option value="all" checked>All</option>
-                    <option value="burger">Burger</option>
-                    <option value="menu">Menu</option>
-                </select>
+            <div class="fs-6">
+                <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style">
+                    <mat-button-toggle value="all" checked>All</mat-button-toggle>
+                    <mat-button-toggle value="menu">Menu</mat-button-toggle>
+                    <mat-button-toggle value="burger">Burger</mat-button-toggle>
+                </mat-button-toggle-group>
             </div>
         </div>
     </div>

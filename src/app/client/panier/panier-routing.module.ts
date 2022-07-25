@@ -2,7 +2,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PanierComponent } from './panier.component';
 
-const routes: Routes = [{ path: '', component: PanierComponent }];
+const routes: Routes = [
+  { 
+    path: '', 
+    component: PanierComponent,
+    outlet: 'sidebar',
+    data: {
+      animation: "slide"
+    }
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

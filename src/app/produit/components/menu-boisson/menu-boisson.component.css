@@ -1,0 +1,58 @@
+.choice-taille {
+    display: flex;
+    width: 100%;
+    height: 30%;
+    margin: 0.5% 0;
+}
+
+.boissons {
+    width: 90%;
+    justify-content: start;
+    align-items: center;
+    padding: 1%;
+    padding: 1%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.boisson {
+    display: inline-block;
+    flex-direction: column;
+    width: 7.5em;
+    height: 100%;
+    margin: 0 5px;
+}
+
+.boisson>div:first-child {
+    height: 80%;
+    background-image: url('https://img.icons8.com/color/96/000000/coca-cola.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.boisson>div:last-child {
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.taille {
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+    align-items: center;
+    justify-content: center;
+}
+
+.taille>span:first-child {
+    display: flex;
+    align-items: baseline;
+}
+.taille>span:last-child {
+    text-align: center;
+    display: flex;
+    align-items: baseline;
+}

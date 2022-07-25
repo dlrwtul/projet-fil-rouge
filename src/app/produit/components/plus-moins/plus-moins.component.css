@@ -1,0 +1,37 @@
+div {
+    width: 5em;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: 0 3%;
+}
+span {
+    width: 1.2em;
+    height: 1.2em;
+    border-radius: 100%;
+    background-color: grey;
+    color: white;
+    padding: 1%;
+    margin: 0 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all ease 0.35s;
+}
+
+span:hover {
+    background-color: black;
+    color: white;
+}
+
+input[type=text] {
+    width: 2em;
+    height: 2em;
+    border-radius: 10px;
+    text-align: center;
+    border: none ;
+    background-color: gray;
+    color: white;
+}

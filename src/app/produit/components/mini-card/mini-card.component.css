@@ -1,0 +1,145 @@
+.mini-card {
+    width: 12.5em;
+    height: 100%;
+    margin: 0 2%;
+    display: inline-block;
+}
+
+.mini-card-img {
+    height: 55%;
+    width: 110%;
+    background-image: url('https://images.pexels.com/photos/11942004/pexels-photo-11942004.jpeg?auto=compress&cs=tinysrgb&w=1600');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 3px;
+    z-index: 0;
+    padding: 3%;
+    transform: rotate3d(0,0,1,0deg);
+    transition: all ease 0.35s;
+}
+
+.mini-card-img:hover {
+    transform: rotate3d(0,0,1,-15deg);
+}
+
+.mini-card-img .prix {
+    background-color: white;
+    color: black;
+    font-weight: 600;
+    border-radius: 3px;
+    padding: 1% 1%;
+    transition: all ease 0.35s;
+    margin-left: 0;
+}
+
+.mini-card-img .prix:hover {
+    margin-left: 5px;
+}
+
+.mini-card-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    margin: 1px;
+    position: relative;
+    bottom: 10px;
+    left: 5%;
+    z-index: 1;
+    height: 45%;
+}
+
+.mini-card-title {
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    padding: 3%;
+}
+
+.mini-card-title span {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 1px 2px;
+    margin: 0.5px;
+    border-radius: 1px;
+}
+
+.mini-card-title>span:first-child {
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.mini-card-title>div>span:last-child{
+    border-radius: 15%;
+}
+
+.mini-card-title>div{
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8em;
+}
+
+.mini-card-btns {
+    height: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mini-card-btns>div:first-child {
+    width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: 0 3%;
+}
+
+.mini-card-btns>div:first-child>span {
+    width: 1.2em;
+    height: 1.2em;
+    border-radius: 100%;
+    background-color: grey;
+    color: white;
+    padding: 1%;
+    margin: 0 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all ease 0.35s;
+}
+
+.mini-card-btns>div:first-child>span:hover {
+    background-color: black;
+    color: white;
+}
+
+.mini-card-btns>div:first-child input[type=text] {
+    width: 2em;
+    height: 2em;
+    border-radius: 10px;
+    text-align: center;
+    border: none ;
+    background-color: gray;
+    color: white;
+}
+
+.mini-card-btns>div:last-child {
+    width: 60%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 0 2%;
+}
+
+.mini-card-btns>div:last-child>a {
+    text-decoration: none;
+    color: white;
+    background-color: #212529;
+    border-radius: 3px;
+    padding: 1% 4%;
+    font-weight: 400;
+    cursor: pointer;
+}

@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-
+  isConnected:boolean = true;
   @Input('showNav') showNav:string = '';
   constructor() { }
 

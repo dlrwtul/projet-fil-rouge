@@ -1,0 +1,58 @@
+<div class="header">
+    <ild-header></ild-header>
+</div>
+<div class="mes-commandes">
+    <div class="d-flex head justify-content-between">
+        <div class="search-group">
+            <label class="label-search-group" for="search-input">
+              Recherche
+            </label>
+            <input type="text" id="search-input" placeholder="Entre produit" class="input-search-group" />
+        </div>
+        <div>
+            <div>
+                <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style" placement="bottom" ngbTooltip="Filter Par Etat">
+                    <mat-button-toggle value="en cours" checked>Encours</mat-button-toggle>
+                    <mat-button-toggle value="valide">Validé</mat-button-toggle>
+                    <mat-button-toggle value="annule">Annulé</mat-button-toggle>
+                </mat-button-toggle-group>
+            </div>
+            <div>
+                <input #fDtate class="btn border border-dark" type="date" name="" id="" placement="bottom" ngbTooltip="Filter Par date">   
+            </div>
+        </div>
+    </div>
+    <div class="table-container">
+        <table class="table shadow rounded">
+            <thead>
+                <tr>
+                    <th>Etat</th>
+                    <th>Numero Commande</th>
+                    <th>Date</th>
+                    <th>Montant</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let commande of [{numero:0,date:0,montant:0,etat:0},{numero:0,date:0,montant:0,etat:0},{numero:0,date:0,montant:0,etat:0},{numero:0,date:0,montant:0,etat:0},{numero:0,date:0,montant:0,etat:0},{numero:0,date:0,montant:0,etat:0},{numero:0,date:0,montant:0,etat:0},{numero:0,date:0,montant:0,etat:0}]">
+                    <td><span class="etat">{{commande.etat}}</span></td>
+                    <td>{{commande.numero}}</td>
+                    <td>{{commande.date}}</td>
+                    <td>{{commande.montant}}</td>
+                    <td>
+                        <button class="btn bg-dark text-light mx-2">Details</button>
+                        <ng-container *ngIf="commande.etat == 0">
+                            <button class="btn bg-danger text-light mx-2">Annuler</button>
+                        </ng-container>
+                        <ng-container *ngIf="commande.etat == 1">
+                            <button class="btn bg-primary text-light mx-2">Recommender</button>
+                        </ng-container>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="footer">
+    <ild-footer></ild-footer>
+</div>
