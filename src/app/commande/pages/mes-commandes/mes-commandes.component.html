@@ -40,7 +40,7 @@
                     <td>{{commande.date}}</td>
                     <td>{{commande.montant}}</td>
                     <td>
-                        <button class="btn bg-dark text-light mx-2">Details</button>
+                        <a class="btn bg-dark text-light mx-2" [routerLink]='[{ outlets: { sidebar: ["details","1"] } }]' >Details</a>
                         <ng-container *ngIf="commande.etat == 0">
                             <button class="btn bg-danger text-light mx-2">Annuler</button>
                         </ng-container>
@@ -51,6 +51,21 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div class="paginate">
+        <!-- <ngb-pagination 
+            [collectionSize]="120"
+            [(page)]="page"
+            [maxSize]="5" 
+            [rotate]="true" 
+            [ellipses]="true" 
+            [boundaryLinks]="true">
+        </ngb-pagination> -->
+        <mat-paginator [length]="40"
+              [pageSize]="8"
+              [pageSizeOptions]="[5, 8]"
+              aria-label="Select page">
+        </mat-paginator>
     </div>
 </div>
 <div class="footer">

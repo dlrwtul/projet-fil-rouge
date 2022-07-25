@@ -1,0 +1,194 @@
+.header {
+    height: 100px;
+}
+
+.panier {
+    display: flex;
+    height: 70vh;
+    padding: 1%;
+}
+
+.recap {
+    height: 100%;
+    width: 70%;
+    margin: 1%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    padding: 0 1% 0 0;
+}
+
+.ligne-produit {
+    display: inline-block;
+    height: 100px;
+    width: 100%;
+    border-radius: 5px;
+    display: flex;
+}
+
+.ligne-produit.first {
+    width: 65%;
+    height: 35px;
+    background-color: grey;
+    color: white;
+    font-weight: bold;
+    margin: 0 6% 0 2%;
+    position: relative;
+    top: 2%;
+
+}
+
+.img {
+    width: 10%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.img img {
+    width: 120px;
+    height: 100px;
+}
+
+.quantite,.nom,.prix-unit,.prix-total,.actions {
+    height: 100%;
+    display: flex;
+    justify-content:center ;
+    align-items: center;
+}
+
+.nom {
+    width: 15%;
+}
+
+.quantite {
+    width: 10%;
+}
+
+.prix-unit {
+    width: 15%;
+}
+
+.prix-total {
+    width: 15%;
+}
+
+.actions {
+    width: 45%;
+}
+
+.actions>button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 25%;
+    padding: 1% 4%;
+    margin: 0 3%;
+    font-weight: 600;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.7);
+    transition: all ease 0.5s;
+}
+
+.actions>button:hover {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.7);
+}
+
+.actions>button:first-child {
+    width: 27.5%;
+}
+
+.actions>button img {
+    width: 20px;
+    height: 20px;
+    border-radius: 20%;
+    padding: 1%;
+    border: 1px solid;
+    background-color: white;
+}
+
+
+.infos  {
+    height: min-content;
+    width: 30%;
+    border: 1px solid;
+    border-radius: 5px;
+    margin: 0 1%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1%;
+    padding-bottom: 0.2%;
+}
+
+.montant {
+    width: 100%;
+    border: 1px solid;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2% 5%;
+}
+.montant>span:first-child {
+    font-weight: bold;
+}
+.montant>span:last-child {
+    border: 1px solid;
+    padding: 2%;
+}
+
+.livraison {
+    width: 100%;
+    margin: 5% 0 ;
+}
+
+.card-body>div {
+    margin: 3% 0;
+}
+
+.tel {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px
+}
+
+.valider {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: flex-end;
+    margin: 3% 0;
+}
+
+.valider>btn {
+    font-weight: bold;
+}
+
+.infos-footer {
+    height: 10%;
+    border: 1px solid;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1% 5%;
+}
+
+.typeLivraison {
+    font-weight: bold;
+}
+
+.paginate {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}

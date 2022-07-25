@@ -8,7 +8,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
-
 @NgModule({
   declarations: [],
   imports: [
@@ -20,7 +19,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     ReactiveFormsModule,
     FormsModule,
     MatButtonToggleModule,
-    MatDatepickerModule
+    MatDatepickerModule,
   ],
   exports: [
     LayoutModule,

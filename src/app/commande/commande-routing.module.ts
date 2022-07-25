@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DetailsCommandeComponent } from './pages/details-commande/details-commande.component';
 import { MesCommandesComponent } from './pages/mes-commandes/mes-commandes.component';
 
 const routes: Routes = [
-  { 
-    path: '', 
-    redirectTo: 'commandes',
-    pathMatch: 'full' 
+  {
+    path: '',
+    component: MesCommandesComponent
   },
   {
-    path: 'commandes',
-    component: MesCommandesComponent
+    path: 'details/:id',
+    component : DetailsCommandeComponent,
+    outlet : 'sidebar'
   }
 ];
 

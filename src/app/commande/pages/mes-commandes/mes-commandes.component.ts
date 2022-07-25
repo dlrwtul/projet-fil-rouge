@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MesCommandesComponent implements OnInit {
 
+  page = 1;
+
   constructor() { }
 
   ngOnInit(): void {

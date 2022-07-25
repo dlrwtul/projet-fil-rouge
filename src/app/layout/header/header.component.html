@@ -10,7 +10,7 @@
     <div class="f-right d-flex flex-row align-items-center justify-content-end ps-5">
         <ng-container *ngIf="isConnected,then content else other_content "></ng-container>
         <ng-template #content>
-            <a routerLink="/client/commande" class="btn-commandes text-light fs-6 text-center" >Mes Commandes</a>
+            <a routerLink="{{linkUri}}" class="btn-commandes text-light fs-6 text-center" >{{linkText}}</a>
         </ng-template>
         
         <ng-template #other_content >
@@ -18,7 +18,7 @@
             <a routerLink="/securite/signin" class="btn-inscription text-light fs-6" >S'inscrire</a>
         </ng-template>
         
-        <div [routerLink]='[{ outlets: { sidebar: ["/client","panier"] } }]' class="right d-flex justify-content-center align-items-center" placement="left" ngbTooltip="Panier de commande">
+        <div routerLink="/client/panier" class="right d-flex justify-content-center align-items-center" placement="left" ngbTooltip="Panier de commande">
             <span class="d-flex justify-content-center align-items-center"><i class="bi bi-cart-fill"></i></span>
             <span class="nbr-produits d-flex justify-content-center align-items-center">1</span>
         </div>

@@ -11,7 +11,7 @@ import { ClientComponent } from './client.component';
   ],
   imports: [
     CommonModule,
-    ClientRoutingModule
+    ClientRoutingModule,
   ]
 })
 export class ClientModule { }

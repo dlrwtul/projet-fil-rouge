@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PanierComponent } from './panier.component';
+import { DetailsComponent } from '../../produit/pages/details/details.component';
 
 const routes: Routes = [
   { 
     path: '', 
     component: PanierComponent,
-    outlet: 'sidebar',
+  },
+  {
+    path:'produit/details/:id',
+    outlet: "sidebar",
+    component: DetailsComponent,
     data: {
       animation: "slide"
     }
@@ -15,6 +20,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+exports: [RouterModule]
 })
 export class PanierRoutingModule { }

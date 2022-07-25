@@ -14,7 +14,6 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    NgbTooltipModule,
     RouterModule
   ],
   exports: [
