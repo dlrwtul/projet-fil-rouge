@@ -1,17 +1,18 @@
 <div #content class="details p-3 bg-light shadow" >
     <div class="head d-flex justify-content-between">
-        <span class="fs-4">Details Burger Simple</span>
+        <span class="fs-4">Details {{produit?.type}}</span>
         <span>
             <img routerLink="{{quitRoute}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAArCAYAAADhXXHAAAAABmJLR0QA/wD/AP+gvaeTAAAB0UlEQVRYhe2YT0sCQRjGf5H0HewLJEKSnesQVC5ZfY7sIxQFfpo6delQWeqhTvaHpEPn6JCnNG+JYofZAVm1ZmbfFaR94EGZdZ/35+wwOzMQK1asWAAzAhlZYAdYAVLAPDALdIEP4BW4A86BZ4F6TtoCnoC+hR8Bb5KQaaBiCRl0GfUUIpUHtEKCareB3ahA91HjUAJUuwsUpEG9CEC1e8C2FGga+IoIVLuF0BguRwyqXQ0Lmp8QqHYuDKzpPHrC+CdwA5wa5ty7gi4bFqj5v59leP6t+O0AD4Z5GRfYY8PwJpD070kCDb+9EWhvGuYdusCWDMODPbgOdPxPGN3jv/nSBfbdokAfKA7cmx34XrTMeXOB7VgW6QGbgYw17F8m37agCcsC2vVATt0xJ2ELPDU9C1M2Zq8sCkjOBhcusEeG4Z/IzrMHLrBLhuHSb7BFF1hQeyaTAmeoVdOoa1X/us0fd5JnWETKG2FgAa4nBFoJCwpqBS+1SRznJrAgAQtqURzlHiwvBapViAC4C+xJg2rlMJ8v/3IbdewUqVKorUoY0BKCY9REOdSeyQayxvBix1gSp4gZ1ONcRfV6EphDrQ/0KeIt6hTxRaBerFix/r1+AFK7sPaI+GAqAAAAAElFTkSuQmCC">
         </span>
     </div>
     <div class="container-1">
-        <div class="shadow">
+        <div #bgImg class="shadow">
+            <img class="w-full h-full" src="data:image/png;base64,{{produit?.image}}" alt="">
         </div>
         <div>
-            <span><span>Nom :</span><span>Burger Simple</span></span>
-            <span><span>Prix :</span><span mx-2>2700 FCFA</span></span>
-            <span><span>Description :</span><span> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eos incidunt quis pariatur sapiente ad, reprehenderit provident possimus quos facilis et repellat, animi eligendi! Dolorem sint facilis quae, vero consequatur amet?</span></span>
+            <span><span>Nom :</span><span>{{produit?.nom}}</span></span>
+            <span><span>Prix :</span><span mx-2>{{produit?.prix}} FCFA</span></span>
+            <span><span>Description :</span><span>{{produit?.description}}</span></span>
         </div>
     </div>
     <div class="container-2">
@@ -21,222 +22,233 @@
             <span class="shadow-sm">+</span>
         </div>
     </div>
-    <div class="container-menu">
-        <div class="menu-recap">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Produit</th>
-                        <th>Quantite</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let produit of [{nom:1, quantite:5},{nom:1, quantite:5},{nom:1, quantite:5},{nom:1, quantite:5},{nom:1, quantite:5},{nom:1, quantite:5},{nom:1, quantite:5},{nom:1, quantite:5},{nom:1, quantite:5},{nom:1, quantite:5}]">
-                        <td>{{produit.nom}}</td>
-                        <td>{{produit.quantite}}</td>
-                    </tr>
-                </tbody>
-            </table>
+    <ng-container *ngIf="produit?.type == 'Menu'">
+        <div class="container-menu">
+            <div class="menu-recap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Produit</th>
+                            <th>Quantite</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let duo of produit?.menuBurgers">
+                            <td>{{duo.produit.nom}}</td>
+                            <td>{{duo.quantite}}</td>
+                        </tr>
+                        <tr *ngFor="let duo of produit?.menuPortionFrites">
+                            <td>{{duo.produit.nom}}</td>
+                            <td>{{duo.quantite}}</td>
+                        </tr>
+                        <tr *ngFor="let duo of produit?.menuTailles">
+                            <td>{{duo.taille.libelle}}</td>
+                            <td>{{duo.quantite}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="menu-boissons">
+                <ng-container let duo of produit?.menuTailles></ng-container>
+                <div class="choice-taille">
+                    <div class="taille">
+                        <span>
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAACVElEQVR4nO2bsWoUURSGv6wb1zUgrIKsVUDQUqIQSCWIsCK+gNhpJWjARmx8AsEuXQIBixQRA1ZaJRa+gCAislhYiAhqkRAF3YzFbMCdubPZ2XvOHDXng1vsLJz/P//s3pmBM+A4zn5mQqhODZgHLgGTQjWL+Ak8BxaAHWWtkbkBJBWv6xLGaxJFgFmhOpVrSgWwLlSnDBsSReoSRYBO4NgToCtU/zj5n3wHeCxUP4qzQI/B/+cWcERQ4yCwmdHo9bXNeUF+g1pS0Hka0HmJ3JVsLC4ETCXAnILWzQKt8wpaI7MaMPRaSWs6oJUAK0p6I/ExYOiOot6bgN4HRb2hHCK9E/vTzA/gmKLmQ/IB9IDGuAVj7gOa5DegNeBLRM29eBY4VgMOK2oW0iJ/Ni4razbIXw6TvpexkLoR2uVz5vO9/pKkKVlMOoAsLSLOThVIPQv8s3gA1gas8QCsDVjjAVgbsMYDsDZgjQdgbcAaD8DagDUegLUBazwAawPWeADWBqzxAKwNWOMBWBuwxgOwNmCNB2BtwBoPwNqANfs+gJgRsxbwNXPsIoNTo03SUZpYJoAZYBE4Gfj+KPBNQKcUoQmR+8qaVwKaURMiMYQC+AScUNScCWj+VQEkpKNs5xT0DgCPCjTHDiBmD5ginQku4hXwHvgVobFLDTgDnBriZVtApzTvqP5Fiex6q97lEK4VmKpyXVXvcg9uA9+pvvFt4FYF/Y1EmzSIZfQbXyZtvF1JZyWpk258Ws13EZ5t1HjZYBq4C5wWrJ+QbrgPMJwOdxzn/+M3sJA0jlZvjqgAAAAASUVORK5CYII=">
+                        </span>
+                        <span>Canette x 5</span>
+                    </div>
+                    <div class="boissons">
+                        <div class="boisson shadow-sm">
+                            <div>
+                                <input type="checkbox" name="" id="">
+                            </div>
+                            <div>
+                                <ild-plus-moins></ild-plus-moins>
+                            </div>
+                        </div>
+                        <div class="boisson shadow-sm">
+                            <div>
+                                <input type="checkbox" name="" id="">
+                            </div>
+                            <div>
+                                <ild-plus-moins></ild-plus-moins>
+                            </div>
+                        </div>
+                        <div class="boisson shadow-sm">
+                            <div>
+                                <input type="checkbox" name="" id="">
+                            </div>
+                            <div>
+                                <ild-plus-moins></ild-plus-moins>
+                            </div>
+                        </div>
+                        <div class="boisson shadow-sm">
+                            <div>
+                                <input type="checkbox" name="" id="">
+                            </div>
+                            <div>
+                                <ild-plus-moins></ild-plus-moins>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="choice-taille">
+                    <div class="taille">
+                        <span>
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAADlElEQVR4nO2a30sUURTHP/kjK01LDYNKNB/6YWYQUW/VQ1I9hfQcEvRXhBT0f2TRaz4VRE8RRZRJ0S83qDQQi1CLQGN127WHe26t6zruvc49q7YfGM4y95yZ7z07d+bOmQslSpRQpA1IANOLbAlgX9HUKXASyABzi2wZ4HTR1CnxENPZM0CrbGdl3wNtMRXaJwTWi/0MjMjvarGV2mLKtE8IbBD7K2uf/b1JWUtRErBF7ETWvomctjVLBZBi/r9vSQKzQLmmIO0rYCcmCaN52kYx94AdmoK0E9Aq9l2etiGxLUpaAP0E7BWbyNNmE6A6EdJOwDGxr/O0vcnxWZMMA2lgW562Jmn7qKpIkQ7MbG8gwmdQfNpVFKE7BM6JvR/hc09sd2At6pRhLv854GCEX6f4DFOcSVowujAde1qA74D4ngqqSJm7mE5dLMD3kvjeCapIkXbMe/43/r0IRbFRfDPA/oC61OjD/KO9DjG9EnM9iCJFGoEZYApocIhrwJTIkkB9AF1/CX2n7cYUQG4Dkw5xk0A/UEXgR+K6kAfH3NGPYMb0tGNsNWZ2OAAcjVmXGlMsXgAtdJtSVx0jKUwnaj1i6yV2NlZFytgSuA9lEpuOT07+k6xUMmKD3qe0EuBzHpXaoFYCNnvE1In1HUIFEToBVrxPubtuaZflEzoBdhz7dMbGrOqbYEqsz2PQJiAV6bVMQn8bnMG83fUBPx1jbQJmYlWkTILlzwTfhhQY+groBy4DV4FbjrEXgCtyjGCEToD9ALILU+dzoTnnGKuSFsxl7NOJ9xLbvJTjSmcM8yhzmQzVSsxYEEVZaMwEX8h5Oh1iDknMYBBFWWgk4JPY3Q4xbWI/xKxlARoJ+CJ2u0NMk9ivMWtZgEYC7PKXfB9EF6NRrEsd0QuNBNiZnMsCKOsbfBaokYCk2CqHGOubjPSKgVICQp8AvwTYxZSlIRCzlgVoJMB2JhPpNR/rW8jH1GWhkYAOsSORXvOxvgdi1lIUHmNearocYuyCikdBFCmyB3M5j+JW5i6XmIwcIxihh0AP5sPGDdyKm2ngpsT2BNClxhPMpewzlu2yulexKlJmHPiNX+WpQmK/x6ooh9BD4AdmPNd4xNZI7HisinIInQBbCjvuEXtC7FCk1wrnPGYcv8QURrcWuDVjxv4cq3zVaCXwHP9vAs8IXLkOvUYIzIqva8BhCp8LpDH1wF4C3wRLlPjP+QO3L90LG4KLKwAAAABJRU5ErkJggg==">
+                        </span>
+                        <span>Bouteille 250ml x6</span>
+                    </div>
+                    <div class="boissons">
+                        <div class="boisson shadow-sm">
+                            <div>
+                                <input type="checkbox" name="" id="">
+                            </div>
+                            <div>
+                                <ild-plus-moins></ild-plus-moins>
+                            </div>
+                        </div>
+                        <div class="boisson shadow-sm">
+                            <div>
+                                <input type="checkbox" name="" id="">
+                            </div>
+                            <div>
+                                <ild-plus-moins></ild-plus-moins>
+                            </div>
+                        </div>
+                        <div class="boisson shadow-sm">
+                            <div>
+                                <input type="checkbox" name="" id="">
+                            </div>
+                            <div>
+                                <ild-plus-moins></ild-plus-moins>
+                            </div>
+                        </div>
+                        <div class="boisson shadow-sm">
+                            <div>
+                                <input type="checkbox" name="" id="">
+                            </div>
+                            <div>
+                                <ild-plus-moins></ild-plus-moins>
+                            </div>
+                        </div>
+                        <div class="boisson shadow-sm">
+                            <div>
+                                <input type="checkbox" name="" id="">
+                            </div>
+                            <div>
+                                <ild-plus-moins></ild-plus-moins>
+                            </div>
+                        </div>
+                        <div class="boisson shadow-sm">
+                            <div>
+                                <input type="checkbox" name="" id="">
+                            </div>
+                            <div>
+                                <ild-plus-moins></ild-plus-moins>
+                            </div>
+                        </div>
+                        <div class="boisson shadow-sm">
+                            <div>
+                                <input type="checkbox" name="" id="">
+                            </div>
+                            <div>
+                                <ild-plus-moins></ild-plus-moins>
+                            </div>
+                        </div>
+                        <div class="boisson shadow-sm">
+                            <div>
+                                <input type="checkbox" name="" id="">
+                            </div>
+                            <div>
+                                <ild-plus-moins></ild-plus-moins>
+                            </div>
+                        </div>
+                        <div class="boisson shadow-sm">
+                            <div>
+                                <input type="checkbox" name="" id="">
+                            </div>
+                            <div>
+                                <ild-plus-moins></ild-plus-moins>
+                            </div>
+                        </div>
+                        <div class="boisson shadow-sm">
+                            <div>
+                                <input type="checkbox" name="" id="">
+                            </div>
+                            <div>
+                                <ild-plus-moins></ild-plus-moins>
+                            </div>
+                        </div>
+                        <div class="boisson shadow-sm">
+                            <div>
+                                <input type="checkbox" name="" id="">
+                            </div>
+                            <div>
+                                <ild-plus-moins></ild-plus-moins>
+                            </div>
+                        </div>
+                        <div class="boisson shadow-sm">
+                            <div>
+                                <input type="checkbox" name="" id="">
+                            </div>
+                            <div>
+                                <ild-plus-moins></ild-plus-moins>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="choice-taille">
+                    <div class="taille">
+                        <span>
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADkAAAA5CAYAAACMGIOFAAAABmJLR0QA/wD/AP+gvaeTAAADCUlEQVRoge3aT4hVZRzG8c84zpiaI44uLNAkiaBBKlwoLaRFK1246X/hHwKjRdAqlaIasUVkINEudy2UIsho0yKiNu6iTZhERKZCgUXNVJKNtvjdi8Ngd+57PL87917vFw7ncs/7O+d5OPe+5znv+zKgPxjq0HUexyMYm/P9JXyGd/Bv1sWHs048i714Dz/jojDW3EbxHFbi0w5oSeNznGxx/LAwn8aizJM3WI2fWhw/i/FMLZ0wOR9Xsy+wOPsCuIJ1eGjO99/iPDY02qSbzeRlYWDu9jG2NT6/v2DqamIElzGJO2dty/CgMHnfgqmriReEkW3XOTaGf3BMd/QPxQzhkDD4dot2+zCDE1jSAV218pYw+EobbR8V4eAT8fPuCXYLg/sLanaIaPdm3WIysusQLojI9m5h7U5sxF34sS5BGc/JjViLcyKUlzKCB3S5yeY5n8YXhbXjIsfW+kaS0W3/2tjfXqH2tjnn6Gq+xocV6l7FlAgKXc/zIuXcU1CzQrxzHktRlMAS/ICPCmom8TfuSFGUxC7xdrG5jbbj+ANHUhUlMCx6ysk22j4swsO6DCGZoXgGZ7C+jbYbMK31CEJlspP/Iu2lqiuZWjJNLsWEGAGYjzPisVHSG3cFz4g7dHcbbZeJANDqlazrGMH3ygLBa+IRUiUpLQjNu3h/Qc0q/KaH7uY3yoJAk0P4C7fWK6d+bhHPvGcr1G5t1G6pU1BG7zra2E9XqJ1q7Gsd6+nJEbJSMkfQD2BPYc3yDCGZJv8UvWUJMxlCMhgTncdTFWon/P9AdGVuiv/kwGS/MDDZLwxM9gsDk/3CTWEyM7s+hk2FNWsyhGSa3CKyaAmj8zfpDpoB/ckKtYOAXpVMkzeyjKzWJWgZJqfF3OSqCrWrG/uemGk+hS+VLxo+KkYTeqID2i4Gl4/jXtGRvI4XXfv1bBdLYHaKOZCDYvjjpU6LvRGeEPOTzVWRU8LEd+IuX8Xvs45fxhsS/kLZC+2Xi0AwjK/EtME+seb8A7GebkLMNJ/GL8l6+pf/ADBWjYs1mUPKAAAAAElFTkSuQmCC">
+                        </span>
+                        <span>Bouteille 1.5l x2</span>
+                    </div>
+                    <div class="boissons">
+                        <div class="boisson shadow-sm">
+                            <div>
+                                <input type="checkbox" name="" id="">
+                            </div>
+                            <div>
+                                <ild-plus-moins></ild-plus-moins>
+                            </div>
+                        </div>
+                        <div class="boisson shadow-sm">
+                            <div>
+                                <input type="checkbox" name="" id="">
+                            </div>
+                            <div>
+                                <ild-plus-moins></ild-plus-moins>
+                            </div>
+                        </div>
+                        <div class="boisson shadow-sm">
+                            <div>
+                                <input type="checkbox" name="" id="">
+                            </div>
+                            <div>
+                                <ild-plus-moins></ild-plus-moins>
+                            </div>
+                        </div>
+                        <div class="boisson shadow-sm">
+                            <div>
+                                <input type="checkbox" name="" id="">
+                            </div>
+                            <div>
+                                <ild-plus-moins></ild-plus-moins>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
         </div>
-        <div class="menu-boissons">
-            <div class="choice-taille">
-                <div class="taille">
-                    <span>
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAACVElEQVR4nO2bsWoUURSGv6wb1zUgrIKsVUDQUqIQSCWIsCK+gNhpJWjARmx8AsEuXQIBixQRA1ZaJRa+gCAislhYiAhqkRAF3YzFbMCdubPZ2XvOHDXng1vsLJz/P//s3pmBM+A4zn5mQqhODZgHLgGTQjWL+Ak8BxaAHWWtkbkBJBWv6xLGaxJFgFmhOpVrSgWwLlSnDBsSReoSRYBO4NgToCtU/zj5n3wHeCxUP4qzQI/B/+cWcERQ4yCwmdHo9bXNeUF+g1pS0Hka0HmJ3JVsLC4ETCXAnILWzQKt8wpaI7MaMPRaSWs6oJUAK0p6I/ExYOiOot6bgN4HRb2hHCK9E/vTzA/gmKLmQ/IB9IDGuAVj7gOa5DegNeBLRM29eBY4VgMOK2oW0iJ/Ni4razbIXw6TvpexkLoR2uVz5vO9/pKkKVlMOoAsLSLOThVIPQv8s3gA1gas8QCsDVjjAVgbsMYDsDZgjQdgbcAaD8DagDUegLUBazwAawPWeADWBqzxAKwNWOMBWBuwxgOwNmCNB2BtwBoPwNqANfs+gJgRsxbwNXPsIoNTo03SUZpYJoAZYBE4Gfj+KPBNQKcUoQmR+8qaVwKaURMiMYQC+AScUNScCWj+VQEkpKNs5xT0DgCPCjTHDiBmD5ginQku4hXwHvgVobFLDTgDnBriZVtApzTvqP5Fiex6q97lEK4VmKpyXVXvcg9uA9+pvvFt4FYF/Y1EmzSIZfQbXyZtvF1JZyWpk258Ws13EZ5t1HjZYBq4C5wWrJ+QbrgPMJwOdxzn/+M3sJA0jlZvjqgAAAAASUVORK5CYII=">
-                    </span>
-                    <span>Canette x 5</span>
-                </div>
-                <div class="boissons">
-                    <div class="boisson shadow-sm">
-                        <div>
-                            <input type="checkbox" name="" id="">
-                        </div>
-                        <div>
-                            <ild-plus-moins></ild-plus-moins>
-                        </div>
-                    </div>
-                    <div class="boisson shadow-sm">
-                        <div>
-                            <input type="checkbox" name="" id="">
-                        </div>
-                        <div>
-                            <ild-plus-moins></ild-plus-moins>
-                        </div>
-                    </div>
-                    <div class="boisson shadow-sm">
-                        <div>
-                            <input type="checkbox" name="" id="">
-                        </div>
-                        <div>
-                            <ild-plus-moins></ild-plus-moins>
-                        </div>
-                    </div>
-                    <div class="boisson shadow-sm">
-                        <div>
-                            <input type="checkbox" name="" id="">
-                        </div>
-                        <div>
-                            <ild-plus-moins></ild-plus-moins>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="choice-taille">
-                <div class="taille">
-                    <span>
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAADlElEQVR4nO2a30sUURTHP/kjK01LDYNKNB/6YWYQUW/VQ1I9hfQcEvRXhBT0f2TRaz4VRE8RRZRJ0S83qDQQi1CLQGN127WHe26t6zruvc49q7YfGM4y95yZ7z07d+bOmQslSpRQpA1IANOLbAlgX9HUKXASyABzi2wZ4HTR1CnxENPZM0CrbGdl3wNtMRXaJwTWi/0MjMjvarGV2mLKtE8IbBD7K2uf/b1JWUtRErBF7ETWvomctjVLBZBi/r9vSQKzQLmmIO0rYCcmCaN52kYx94AdmoK0E9Aq9l2etiGxLUpaAP0E7BWbyNNmE6A6EdJOwDGxr/O0vcnxWZMMA2lgW562Jmn7qKpIkQ7MbG8gwmdQfNpVFKE7BM6JvR/hc09sd2At6pRhLv854GCEX6f4DFOcSVowujAde1qA74D4ngqqSJm7mE5dLMD3kvjeCapIkXbMe/43/r0IRbFRfDPA/oC61OjD/KO9DjG9EnM9iCJFGoEZYApocIhrwJTIkkB9AF1/CX2n7cYUQG4Dkw5xk0A/UEXgR+K6kAfH3NGPYMb0tGNsNWZ2OAAcjVmXGlMsXgAtdJtSVx0jKUwnaj1i6yV2NlZFytgSuA9lEpuOT07+k6xUMmKD3qe0EuBzHpXaoFYCNnvE1In1HUIFEToBVrxPubtuaZflEzoBdhz7dMbGrOqbYEqsz2PQJiAV6bVMQn8bnMG83fUBPx1jbQJmYlWkTILlzwTfhhQY+groBy4DV4FbjrEXgCtyjGCEToD9ALILU+dzoTnnGKuSFsxl7NOJ9xLbvJTjSmcM8yhzmQzVSsxYEEVZaMwEX8h5Oh1iDknMYBBFWWgk4JPY3Q4xbWI/xKxlARoJ+CJ2u0NMk9ivMWtZgEYC7PKXfB9EF6NRrEsd0QuNBNiZnMsCKOsbfBaokYCk2CqHGOubjPSKgVICQp8AvwTYxZSlIRCzlgVoJMB2JhPpNR/rW8jH1GWhkYAOsSORXvOxvgdi1lIUHmNearocYuyCikdBFCmyB3M5j+JW5i6XmIwcIxihh0AP5sPGDdyKm2ngpsT2BNClxhPMpewzlu2yulexKlJmHPiNX+WpQmK/x6ooh9BD4AdmPNd4xNZI7HisinIInQBbCjvuEXtC7FCk1wrnPGYcv8QURrcWuDVjxv4cq3zVaCXwHP9vAs8IXLkOvUYIzIqva8BhCp8LpDH1wF4C3wRLlPjP+QO3L90LG4KLKwAAAABJRU5ErkJggg==">
-                    </span>
-                    <span>Bouteille 250ml x6</span>
-                </div>
-                <div class="boissons">
-                    <div class="boisson shadow-sm">
-                        <div>
-                            <input type="checkbox" name="" id="">
-                        </div>
-                        <div>
-                            <ild-plus-moins></ild-plus-moins>
-                        </div>
-                    </div>
-                    <div class="boisson shadow-sm">
-                        <div>
-                            <input type="checkbox" name="" id="">
-                        </div>
-                        <div>
-                            <ild-plus-moins></ild-plus-moins>
-                        </div>
-                    </div>
-                    <div class="boisson shadow-sm">
-                        <div>
-                            <input type="checkbox" name="" id="">
-                        </div>
-                        <div>
-                            <ild-plus-moins></ild-plus-moins>
-                        </div>
-                    </div>
-                    <div class="boisson shadow-sm">
-                        <div>
-                            <input type="checkbox" name="" id="">
-                        </div>
-                        <div>
-                            <ild-plus-moins></ild-plus-moins>
-                        </div>
-                    </div>
-                    <div class="boisson shadow-sm">
-                        <div>
-                            <input type="checkbox" name="" id="">
-                        </div>
-                        <div>
-                            <ild-plus-moins></ild-plus-moins>
-                        </div>
-                    </div>
-                    <div class="boisson shadow-sm">
-                        <div>
-                            <input type="checkbox" name="" id="">
-                        </div>
-                        <div>
-                            <ild-plus-moins></ild-plus-moins>
-                        </div>
-                    </div>
-                    <div class="boisson shadow-sm">
-                        <div>
-                            <input type="checkbox" name="" id="">
-                        </div>
-                        <div>
-                            <ild-plus-moins></ild-plus-moins>
-                        </div>
-                    </div>
-                    <div class="boisson shadow-sm">
-                        <div>
-                            <input type="checkbox" name="" id="">
-                        </div>
-                        <div>
-                            <ild-plus-moins></ild-plus-moins>
-                        </div>
-                    </div>
-                    <div class="boisson shadow-sm">
-                        <div>
-                            <input type="checkbox" name="" id="">
-                        </div>
-                        <div>
-                            <ild-plus-moins></ild-plus-moins>
-                        </div>
-                    </div>
-                    <div class="boisson shadow-sm">
-                        <div>
-                            <input type="checkbox" name="" id="">
-                        </div>
-                        <div>
-                            <ild-plus-moins></ild-plus-moins>
-                        </div>
-                    </div>
-                    <div class="boisson shadow-sm">
-                        <div>
-                            <input type="checkbox" name="" id="">
-                        </div>
-                        <div>
-                            <ild-plus-moins></ild-plus-moins>
-                        </div>
-                    </div>
-                    <div class="boisson shadow-sm">
-                        <div>
-                            <input type="checkbox" name="" id="">
-                        </div>
-                        <div>
-                            <ild-plus-moins></ild-plus-moins>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="choice-taille">
-                <div class="taille">
-                    <span>
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADkAAAA5CAYAAACMGIOFAAAABmJLR0QA/wD/AP+gvaeTAAADCUlEQVRoge3aT4hVZRzG8c84zpiaI44uLNAkiaBBKlwoLaRFK1246X/hHwKjRdAqlaIasUVkINEudy2UIsho0yKiNu6iTZhERKZCgUXNVJKNtvjdi8Ngd+57PL87917vFw7ncs/7O+d5OPe+5znv+zKgPxjq0HUexyMYm/P9JXyGd/Bv1sWHs048i714Dz/jojDW3EbxHFbi0w5oSeNznGxx/LAwn8aizJM3WI2fWhw/i/FMLZ0wOR9Xsy+wOPsCuIJ1eGjO99/iPDY02qSbzeRlYWDu9jG2NT6/v2DqamIElzGJO2dty/CgMHnfgqmriReEkW3XOTaGf3BMd/QPxQzhkDD4dot2+zCDE1jSAV218pYw+EobbR8V4eAT8fPuCXYLg/sLanaIaPdm3WIysusQLojI9m5h7U5sxF34sS5BGc/JjViLcyKUlzKCB3S5yeY5n8YXhbXjIsfW+kaS0W3/2tjfXqH2tjnn6Gq+xocV6l7FlAgKXc/zIuXcU1CzQrxzHktRlMAS/ICPCmom8TfuSFGUxC7xdrG5jbbj+ANHUhUlMCx6ysk22j4swsO6DCGZoXgGZ7C+jbYbMK31CEJlspP/Iu2lqiuZWjJNLsWEGAGYjzPisVHSG3cFz4g7dHcbbZeJANDqlazrGMH3ygLBa+IRUiUpLQjNu3h/Qc0q/KaH7uY3yoJAk0P4C7fWK6d+bhHPvGcr1G5t1G6pU1BG7zra2E9XqJ1q7Gsd6+nJEbJSMkfQD2BPYc3yDCGZJv8UvWUJMxlCMhgTncdTFWon/P9AdGVuiv/kwGS/MDDZLwxM9gsDk/3CTWEyM7s+hk2FNWsyhGSa3CKyaAmj8zfpDpoB/ckKtYOAXpVMkzeyjKzWJWgZJqfF3OSqCrWrG/uemGk+hS+VLxo+KkYTeqID2i4Gl4/jXtGRvI4XXfv1bBdLYHaKOZCDYvjjpU6LvRGeEPOTzVWRU8LEd+IuX8Xvs45fxhsS/kLZC+2Xi0AwjK/EtME+seb8A7GebkLMNJ/GL8l6+pf/ADBWjYs1mUPKAAAAAElFTkSuQmCC">
-                    </span>
-                    <span>Bouteille 1.5l x2</span>
-                </div>
-                <div class="boissons">
-                    <div class="boisson shadow-sm">
-                        <div>
-                            <input type="checkbox" name="" id="">
-                        </div>
-                        <div>
-                            <ild-plus-moins></ild-plus-moins>
-                        </div>
-                    </div>
-                    <div class="boisson shadow-sm">
-                        <div>
-                            <input type="checkbox" name="" id="">
-                        </div>
-                        <div>
-                            <ild-plus-moins></ild-plus-moins>
-                        </div>
-                    </div>
-                    <div class="boisson shadow-sm">
-                        <div>
-                            <input type="checkbox" name="" id="">
-                        </div>
-                        <div>
-                            <ild-plus-moins></ild-plus-moins>
-                        </div>
-                    </div>
-                    <div class="boisson shadow-sm">
-                        <div>
-                            <input type="checkbox" name="" id="">
-                        </div>
-                        <div>
-                            <ild-plus-moins></ild-plus-moins>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    </ng-container>
     <div class="container-3">
         <div>
             <div class="fs-5">Nos Boissons</div>
             <div class="card-container">
-                <ng-container *ngFor="let mini of [1,2,3,4,5,6,7,8,9,10,11,12]">
-                    <ild-mini-card></ild-mini-card>
+                <ng-container *ngFor="let boisson of (complement$ | async)?.boissonTailles">
+                    <ild-mini-card [produit]="boisson"></ild-mini-card>
                 </ng-container>
                 
             </div>
@@ -244,8 +256,8 @@
         <div>
             <div class="fs-5">Nos Frites</div>
             <div class="card-container">
-                <ng-container *ngFor="let mini of [1,2,3,4,5,6,7,8,9,10,11,12]">
-                   <ild-mini-card></ild-mini-card>
+                <ng-container *ngFor="let frite of (complement$ | async)?.portionFrites">
+                   <ild-mini-card [produit]="frite"></ild-mini-card>
                 </ng-container>
             </div>
         </div>

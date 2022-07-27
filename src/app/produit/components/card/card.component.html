@@ -1,24 +1,26 @@
 <div class="card m-3 shadow-sm">
-    <div class="card-img">
-        <span class="prix">2700 Fcfa</span>
+    <div class="card-img" #bgImg>
+        <span class="prix">
+            {{produit?.prix}} FCFA
+        </span>
     </div>
     <div class="card-info">
         <div class="card-title">
-            <span>Burger Simple Viande</span>
+            <span>{{produit?.nom}}</span>
             <div>
                 <span>Categorie</span>
-                <span>Burger</span>
+                <span>{{produit?.type}}</span>
             </div>
         </div>
         <div class="card-btns">
-            <div>
-                <span>-</span>
-                <input type="text" name="" id="">
-                <span>+</span>
+            <div class="plus-moins">
+                <span (click)="moins()">-</span>
+                <input #quantite (change)="onValueChange(quantite.value)" type="text" name="" id="" value="{{quantiteVal}}">
+                <span (click)="plus()">+</span>
             </div>
             <div>
                 <a class="shadow-ms">Ajouter</a>
-                <a class="shadow-ms" [routerLink]='[{ outlets: { sidebar: ["details","1"] } }]'>Details</a>
+                <a class="shadow-ms" [routerLink]='[{ outlets: { sidebar: ["details",produit?.type,produit?.id] } }]'>Details</a>
             </div>
         </div>
     </div>

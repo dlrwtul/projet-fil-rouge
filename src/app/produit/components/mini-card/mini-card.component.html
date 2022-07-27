@@ -1,13 +1,21 @@
 <div class="mini-card">
     <div class="mini-card-img">
-        <span class="prix">300 Fcfa</span>
+        <span class="prix">{{produit?.prix}} Fcfa</span>
     </div>
     <div class="mini-card-info shadow">
         <div class="mini-card-title">
-            <span>Coca Cola Canette</span>
+            <span>{{produit?.nom}}</span>
             <div>
-                <span>Taille</span>
-                <span>Cannette</span>
+                <ng-container *ngIf="(produit?.type == 'PortionFrites'),then content else other_content ">
+                </ng-container>
+                 <ng-template #content>
+                        <span>Taille</span>
+                        <span>Cannette</span>
+                </ng-template>
+                <ng-template #other_content>
+                    <span>Taille</span>
+                    <span>Cannette</span>
+                </ng-template>
             </div>
         </div>
         <div class="mini-card-btns">

@@ -13,7 +13,6 @@
 
 .card .card-img {
     height: 65%;
-    background-image: url('https://images.pexels.com/photos/3738730/pexels-photo-3738730.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -87,7 +86,7 @@
     align-items: center;
 }
 
-.card-btns>div:first-child {
+.plus-moins {
     width: 40%;
     display: flex;
     align-items: center;
@@ -95,7 +94,7 @@
     padding: 0 3%;
 }
 
-.card-btns>div:first-child>span {
+.plus-moins>span {
     width: 1.2em;
     height: 1.2em;
     border-radius: 100%;
@@ -111,14 +110,15 @@
     transition: all ease 0.35s;
 }
 
-.card-btns>div:first-child>span:hover {
+.plus-moins>span:hover {
     background-color: black;
     color: white;
 }
 
-.card-btns>div:first-child input[type=text] {
+.plus-moins input[type=text] {
     width: 2em;
     height: 2em;
+    color: black;
     border-radius: 10px;
     text-align: center;
     border: none ;

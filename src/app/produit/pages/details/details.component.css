@@ -30,16 +30,16 @@
 }
 
 .container-1 div:first-child {
-    background-image: url('https://images.pexels.com/photos/3738730/pexels-photo-3738730.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     height: 200px;
-    width: 60em;
+    width: 30%;
     border-radius: 5px;
 }
 
 .container-1 div:last-child {
+    width: 70%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
