@@ -20,7 +20,7 @@
             </div>
             <div>
                 <a class="shadow-ms">Ajouter</a>
-                <a class="shadow-ms" [routerLink]='[{ outlets: { sidebar: ["details",produit?.type,produit?.id] } }]'>Details</a>
+                <a class="shadow-ms" [routerLink]='[{ outlets: { sidebar: ["details",produit?.id] } }]' [queryParams]="{data: quantiteVal}" >Details</a>
             </div>
         </div>
     </div>

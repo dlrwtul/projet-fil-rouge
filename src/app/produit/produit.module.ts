@@ -10,6 +10,8 @@ import { SharedModule } from '../shared/shared.module';
 import { MiniCardComponent } from './components/mini-card/mini-card.component';
 import { PlusMoinsComponent } from './components/plus-moins/plus-moins.component';
 import { MenuBoissonComponent } from './components/menu-boisson/menu-boisson.component';
+import { WaitCardComponent } from './components/wait-card/wait-card.component';
+import { CardBoissonMenuComponent } from './components/card-boisson-menu/card-boisson-menu.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { MenuBoissonComponent } from './components/menu-boisson/menu-boisson.com
     CardComponent,
     MiniCardComponent,
     PlusMoinsComponent,
-    MenuBoissonComponent
+    MenuBoissonComponent,
+    WaitCardComponent,
+    CardBoissonMenuComponent
   ],
   imports: [
     CommonModule,

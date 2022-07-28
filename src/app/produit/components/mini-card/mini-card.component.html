@@ -1,20 +1,32 @@
 <div class="mini-card">
-    <div class="mini-card-img">
-        <span class="prix">{{produit?.prix}} Fcfa</span>
+    <div #bgImg class="mini-card-img">
+        <ng-container *ngIf="produit?.prix != undefined">
+            <span class="prix">{{produit?.prix}} Fcfa</span>
+        </ng-container>
+        <ng-container *ngIf="produit?.prix == undefined">
+            <span class="prix">{{produits?.taille?.prix}} Fcfa</span>
+        </ng-container>
     </div>
     <div class="mini-card-info shadow">
         <div class="mini-card-title">
-            <span>{{produit?.nom}}</span>
+            <ng-container *ngIf="(produit?.type == 'PortionFrites'),then content else other_content ">
+            </ng-container>
+            <ng-template #content>
+                <span>{{produit?.nom}}</span>
+            </ng-template>
+            <ng-template #other_content>
+                <span>{{produit?.nom + " " + produits?.taille?.libelle}}</span>
+            </ng-template>
             <div>
-                <ng-container *ngIf="(produit?.type == 'PortionFrites'),then content else other_content ">
+                <ng-container *ngIf="(produit?.type == 'PortionFrites'),then content2 else other_content2 ">
                 </ng-container>
-                 <ng-template #content>
-                        <span>Taille</span>
-                        <span>Cannette</span>
+                 <ng-template #content2>
+                        <span>Categorie</span>
+                        <span>{{produit?.type}}</span>
                 </ng-template>
-                <ng-template #other_content>
+                <ng-template #other_content2>
                     <span>Taille</span>
-                    <span>Cannette</span>
+                    <span>{{produits?.taille?.libelle}}</span>
                 </ng-template>
             </div>
         </div>

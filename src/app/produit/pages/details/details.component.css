@@ -1,10 +1,9 @@
 .details {
-    height: 98vh;
+    height: 100vh;
     z-index: 100;
     position: absolute;
     width: 80em;
     right: 0;
-    border-radius: 2%;
     overflow-y: scroll;
 }
 
@@ -14,6 +13,7 @@
     padding: 1%;
     height: 5%;
 }
+
 .head span:last-child{
     cursor: pointer;
     position: relative;
@@ -27,6 +27,7 @@
     width: 100%;
     height: 22.5%;
     padding: 2%;
+    margin-bottom: 2%;
 }
 
 .container-1 div:first-child {
@@ -106,11 +107,11 @@
 }
 
 .container-menu {
-    height: 40vh;
     padding: 0 2%;
     overflow-y: scroll;
     overflow-x: hidden;
     display: flex;
+    flex-direction: column;
     width: 100%;
 }
 
@@ -181,15 +182,17 @@
 }
 
 .menu-recap table {
-    width: 20em;
+    width: 60em;
     border-collapse: collapse;
     border-radius: 0.5em;
     overflow: hidden;
+    margin-bottom: 1% 0;
 }
 
 .menu-recap table th,td {
     padding: 0.25em;
     border-bottom: 2px solid white;
+    color: black;
 }
 
 .menu-recap table thead th {
@@ -272,4 +275,13 @@
     color: white;
     font-weight: bold;
     padding: 1% 3%;
+}
+
+
+.toile {
+    background-color: rgba(255, 255, 255, 0.6);
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    z-index: 100;
 }

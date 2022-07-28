@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, EventEmitter, HostListener, Inject, OnInit, Output } from '@angular/core';
 import { MatButtonToggle, MatButtonToggleChange } from '@angular/material/button-toggle';
-import { Observable, timeout } from 'rxjs';
+import { catchError, Observable, timeout } from 'rxjs';
 import { Catalogue } from '../../shared/models/catalogue';
 import { Complement } from '../../shared/models/complement';
 import { Produit } from '../../shared/models/produit';
@@ -18,9 +18,9 @@ export class CatalogueComponent implements OnInit {
   topVal : number = 0;
   catalogue$ : Observable<Catalogue> | null = null;
   catalogue : Catalogue | null = null;
-  fAll :string = 'all';
-  fBurger: string = 'burger';
-  fMenu: string = 'menu';
+  fAll :string = 'produits';
+  fBurger: string = 'burgers';
+  fMenu: string = 'menus';
   filterVal: string = this.fAll;
 
   constructor(@Inject(DOCUMENT) private document: Document ,private store: ProduitDataStoreService) { }
@@ -28,12 +28,14 @@ export class CatalogueComponent implements OnInit {
   ngOnInit(): void {
 
     this.store.catalogue$().pipe(
-      timeout({ each: 10000 })
+      timeout(5000)
     ).subscribe( (x) => {
-        this.catalogue = x
-        this.catalogue.produits = [...this.catalogue?.burgers,...this.catalogue?.menus];
+      this.catalogue = x
+      this.catalogue.produits = [...this.catalogue?.burgers,...this.catalogue?.menus];
       }
     );
+
+
     
   }
 

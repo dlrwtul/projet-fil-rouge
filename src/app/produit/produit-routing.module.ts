@@ -9,7 +9,7 @@ const routes: Routes = [
     component: CatalogueComponent 
   },
   { 
-    path: 'details/:type/:id', 
+    path: 'details/:id', 
     outlet: 'sidebar',
     component: DetailsComponent ,
     data: {

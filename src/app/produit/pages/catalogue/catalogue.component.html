@@ -58,25 +58,37 @@
             </div>
         </div>
     </div>
-    <div class="container-2">
-        <ng-container [ngSwitch]="filterVal">
-            <ng-container *ngSwitchCase="fAll">
-                <ng-container *ngFor="let produit of catalogue?.produits  ">
-                    <ild-card [produit]="produit"></ild-card>
+    <ng-container *ngIf="catalogue != null,then ready else not_ready">
+    </ng-container>
+    <ng-template #ready>
+        <div class="container-2">
+            <ng-container [ngSwitch]="filterVal">
+                <ng-container *ngSwitchCase="fAll">
+                    <ng-container *ngFor="let produit of catalogue?.produits  ">
+                        <ild-card [produit]="produit"></ild-card>
+                    </ng-container>
+                </ng-container>
+                <ng-container *ngSwitchCase="fBurger">
+                    <ng-container *ngFor="let produit of catalogue?.burgers  ">
+                        <ild-card [produit]="produit"></ild-card>
+                    </ng-container>
+                </ng-container>
+                <ng-container *ngSwitchCase="fMenu">
+                    <ng-container *ngFor="let produit of catalogue?.menus  ">
+                        <ild-card [produit]="produit"></ild-card>
+                    </ng-container>
                 </ng-container>
             </ng-container>
-            <ng-container *ngSwitchCase="fBurger">
-                <ng-container *ngFor="let produit of catalogue?.burgers  ">
-                    <ild-card [produit]="produit"></ild-card>
+        </div>
+        </ng-template>
+        <ng-template #not_ready>
+            <div class="container-2">
+                <ng-container *ngFor="let wait_card of [1,2,3,4]">
+                    <ild-wait-card></ild-wait-card>
                 </ng-container>
-            </ng-container>
-            <ng-container *ngSwitchCase="fMenu">
-                <ng-container *ngFor="let produit of catalogue?.menus  ">
-                    <ild-card [produit]="produit"></ild-card>
-                </ng-container>
-            </ng-container>
-        </ng-container>
-    </div>
+            </div>
+        </ng-template>
+        
     <div class="foot">
 
     </div>

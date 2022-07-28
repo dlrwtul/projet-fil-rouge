@@ -1,0 +1,22 @@
+.boisson {
+    display: inline-block;
+    flex-direction: column;
+    width: 7.5em;
+    height: 100px;
+    margin: 0 5px;
+}
+
+.boisson>div:first-child {
+    height: 80%;
+    background-image: url('https://img.icons8.com/color/96/000000/coca-cola.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.boisson>div:last-child {
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

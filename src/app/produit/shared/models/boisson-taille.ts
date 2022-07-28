@@ -5,4 +5,5 @@ export interface BoissonTaille {
     id: number;
     boisson: Produit;
     taille: Taille;
+    quantiteStock: number;
 }

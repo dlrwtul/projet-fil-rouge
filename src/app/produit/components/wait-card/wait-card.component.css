@@ -1,0 +1,106 @@
+.card {
+    width: 22.5em;
+    height: 25em;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.card>div {
+    width: 100%;
+}
+
+.card .card-img {
+    height: 65%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    padding: 3%;
+    transform: scale(1);
+    transition: all ease 0.5s;
+}
+
+
+.card .card-img .prix {
+    border-radius: 3px;
+    padding: 1% 3%;
+    transition: all ease 0.35s;
+    margin-left: 0;
+    width: 35%;
+    height: 30px;
+}
+
+.card .card-img .prix:hover {
+    margin-left: 5px;
+}
+
+.card .card-info {
+    height: 35%;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-title {
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    padding: 3%;
+}
+
+.card-title span {
+    padding: 2px 4px;
+    margin: 1px;
+    border-radius: 2px;
+    height: 10em;
+}
+.card-title>div{
+    display: flex;
+    justify-content: space-between;
+    height: 10em;
+}
+
+.card-title>div>span{
+    height: 100%;
+}
+
+.card-title>div>span:first-child{
+    width: 40%;
+}
+
+.card-title>div>span:last-child{
+    width: 20%;
+}
+
+.card-btns {
+    height: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.plus-moins {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: 0 3%;
+    height: 30px;
+    margin-left: 5%;
+    border-radius: 5px;
+}
+
+
+
+.card-btns>div:last-child {
+    width: 30%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 0 1%;
+    height: 30px;
+}
