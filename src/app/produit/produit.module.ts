@@ -30,6 +30,9 @@ import { CardBoissonMenuComponent } from './components/card-boisson-menu/card-bo
     CommonModule,
     ProduitRoutingModule,
     SharedModule,
+  ],
+  exports : [
+    PlusMoinsComponent
   ]
 })
 export class ProduitModule { }

@@ -1,13 +1,13 @@
 .boisson {
-    display: inline-block;
+    display: inline-table;
     flex-direction: column;
     width: 7.5em;
     height: 100px;
-    margin: 0 5px;
+    margin: 0 10px;
 }
 
 .boisson>div:first-child {
-    height: 80%;
+    height: 80px;
     background-image: url('https://img.icons8.com/color/96/000000/coca-cola.png');
     background-repeat: no-repeat;
     background-position: center;

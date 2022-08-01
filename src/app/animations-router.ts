@@ -29,7 +29,7 @@ export const slider = trigger('routeAnimations',[
                 animate('600ms ease-out', style({ right: '-100%', opacity: 0 }))
             ],{ optional: true }),
             query(':enter',[
-                animate('600ms ease-out', style({ right: '0%'}))
+                animate('600ms ease-out', style({ right: '10%'}))
             ],{ optional: true })
         ])
     ])

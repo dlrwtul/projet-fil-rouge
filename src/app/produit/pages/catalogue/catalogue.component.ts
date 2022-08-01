@@ -2,6 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Component, EventEmitter, HostListener, Inject, OnInit, Output } from '@angular/core';
 import { MatButtonToggle, MatButtonToggleChange } from '@angular/material/button-toggle';
 import { catchError, Observable, timeout } from 'rxjs';
+import { PanierService } from 'src/app/shared/services/panier-service.service';
 import { Catalogue } from '../../shared/models/catalogue';
 import { Complement } from '../../shared/models/complement';
 import { Produit } from '../../shared/models/produit';

@@ -38,8 +38,7 @@ export class ProduitDataStoreService {
           data.produit = data.burger;
         }
         return data
-      }),
-      tap(console.log)
+      })
     )
   }
 

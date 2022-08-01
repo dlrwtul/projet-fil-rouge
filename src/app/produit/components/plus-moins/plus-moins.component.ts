@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
+import { Component, ElementRef, OnInit, Output, ViewChild, EventEmitter, Input } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { EventService } from 'src/app/shared/services/event-service.service';
 
@@ -8,10 +8,12 @@ import { EventService } from 'src/app/shared/services/event-service.service';
   styleUrls: ['./plus-moins.component.css']
 })
 export class PlusMoinsComponent implements OnInit {
-
+  @Input('block') block: boolean = false ;
+  @Input() checked: boolean = false;
   quantiteVal : number = 0;
   @ViewChild('inputQuantite') quantite!: ElementRef<HTMLInputElement>;
-  @Output() emiter : EventEmitter<number> = new EventEmitter
+  @ViewChild('plusBtn') plusBtn!: ElementRef<HTMLInputElement>;
+  @Output() emiter : EventEmitter<[number,number]> = new EventEmitter
 
   constructor(private eventServ : EventService) { }
 
@@ -19,12 +21,21 @@ export class PlusMoinsComponent implements OnInit {
   }
 
   plus() {
-    this.quantiteVal += 1;
+    if (this.block == false) {
+      this.quantiteVal += 1;
+      this.emiter.emit([-1,this.quantiteVal])
+    } else {
+      this.plusBtn.nativeElement.style.backgroundColor = "red"
+      setTimeout(() => {
+        this.plusBtn.nativeElement.style.backgroundColor = "gray"
+      }, 2000);
+    }
   }
 
   moins() {
     if (this.quantiteVal > 0) {
       this.quantiteVal -= 1;
+      this.emiter.emit([1,this.quantiteVal])
     } else {
       this.quantite.nativeElement.style.border = '3px solid red';
       setTimeout(() => {
@@ -33,8 +44,8 @@ export class PlusMoinsComponent implements OnInit {
     }
   }
 
-  sendToGrandParent(value:number){
+  /* sendToGP(value:number){
     this.emiter.emit(value)
-  }
+  } */
 
 }

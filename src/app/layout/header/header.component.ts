@@ -11,18 +11,21 @@ export class HeaderComponent implements OnInit {
   linkText :string = '';
   linkUri :string = '';
   isConnected:boolean = true;
+  showTwo : boolean = false
   @Input('showNav') showNav:string = '';
   constructor(private router: Router) { }
 
   ngOnInit(): void {
     if (this.router.url == "/client/commande") {
-      console.log('commande')
       this.linkText = 'Catalogue'
       this.linkUri = "/client/produit"
     } else {
-      console.log('catalogue')
       this.linkText = 'Mes Commandes'
       this.linkUri = "/client/commande"
+    }
+
+    if (this.router.url == "/client/panier") {
+      this.showTwo = true
     }
   }
 

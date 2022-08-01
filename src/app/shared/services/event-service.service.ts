@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Produit } from 'src/app/produit/shared/models/produit';
 
 @Injectable({
   providedIn: 'root'
@@ -7,16 +8,15 @@ import { BehaviorSubject } from 'rxjs';
 
 export class EventService{
 
-  private childClickedEvent = new BehaviorSubject<number>(0);
+  private childClickedEvent = new BehaviorSubject<Produit | null>(null);
 
-  emitChildEvent(value: number){
-      this.childClickedEvent.next(value)
+  emitChildEvent(produit: Produit){
+      this.childClickedEvent.next(produit)
   }
 
   childEventListner(){
-      return this.childClickedEvent.asObservable();
-
-    } 
+    return this.childClickedEvent.asObservable();
+  } 
 
 }
    

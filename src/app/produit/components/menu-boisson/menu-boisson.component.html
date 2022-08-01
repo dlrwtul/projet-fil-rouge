@@ -2,10 +2,13 @@
     <div class="taille">
         <span>{{menuTaille?.taille?.prix}} FCFA</span>
         <span>{{menuTaille?.taille?.libelle}} x {{menuTaille?.quantite}}</span>
+        <ng-container *ngIf="block">
+            <span class="text-green-500 font-bold" >Choix Complets</span>
+        </ng-container>
     </div>
     <div class="boissons">
         <ng-container *ngFor="let boissonTaille of menuTaille?.taille?.boissonTailles">
-            <ild-card-boisson-menu (emiter)="getVal($event)"  [boissonTaille]="boissonTaille"></ild-card-boisson-menu>
+            <ild-card-boisson-menu (emiter)="getVal($event)"  [boissonTaille]="boissonTaille" [block]="block"></ild-card-boisson-menu>
         </ng-container>
     </div>
 </div>

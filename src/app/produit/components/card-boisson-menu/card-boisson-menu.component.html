@@ -1,8 +1,8 @@
 <div class="boisson shadow-sm">
-    <div (click)="checkbox.checked === false ? checkbox.checked = true : checkbox.checked = false" #bgImg>
+    <div (click)="checkbox.checked === false  ? checkbox.checked = true : checkbox.checked = false" (click)="changeVal()" #bgImg>
         <input #checkbox type="checkbox" name="" id="">
     </div>
-    <div>
-        <ild-plus-moins (emiter)="sendToP($event)"></ild-plus-moins>
+    <div [hidden]="checkbox.checked == false">
+        <ild-plus-moins (emiter)="sendToP($event)" [checked]="checkbox.checked" [block]="block"></ild-plus-moins>
     </div>
 </div>

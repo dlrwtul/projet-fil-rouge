@@ -13,7 +13,10 @@
 </div>
 <div class="panier">
     <div class="recap">
-        <div class="ligne-produit shadow-sm">
+        <ng-container *ngFor="let commandeProduit of (commande$ |async)?.commandeProduits">
+            <ild-ligne-produit [commandeProduit]="commandeProduit"></ild-ligne-produit>
+        </ng-container>
+        <!-- <div class="ligne-produit shadow-sm">
             <div class="img">
                 <img src="https://images.pexels.com/photos/3738730/pexels-photo-3738730.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
             </div>
@@ -212,12 +215,12 @@
                     </span>
                 </button>
             </div>
-        </div>
+        </div> -->
     </div>
     <div class="infos shadow-sm">
         <div class="montant bg-dark">
             <span class="text-2xl text-light">Total</span>
-            <span class="fs-5 border-2 bg-light text-dark rounded">24000 FCFA</span>
+            <span class="fs-5 border-2 bg-light text-dark rounded">{{montantTotal}} FCFA</span>
         </div>
         <div class="livraison">
             <p>

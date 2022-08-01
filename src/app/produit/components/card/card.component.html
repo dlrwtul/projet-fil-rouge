@@ -19,7 +19,7 @@
                 <span (click)="plus()">+</span>
             </div>
             <div>
-                <a class="shadow-ms">Ajouter</a>
+                <a class="shadow-ms" (click)="addBtn()">Ajouter</a>
                 <a class="shadow-ms" [routerLink]='[{ outlets: { sidebar: ["details",produit?.id] } }]' [queryParams]="{data: quantiteVal}" >Details</a>
             </div>
         </div>

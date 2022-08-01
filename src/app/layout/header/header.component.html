@@ -10,7 +10,10 @@
     <div class="f-right d-flex flex-row align-items-center justify-content-end ps-5">
         <ng-container *ngIf="isConnected,then content else other_content "></ng-container>
         <ng-template #content>
-            <a routerLink="{{linkUri}}" class="btn-commandes text-light fs-6 text-center" >{{linkText}}</a>
+            <ng-container *ngIf="showTwo">
+                <a routerLink="/client/produit" class="btn-commandes text-light fs-6 text-center" >Catalogue</a>
+            </ng-container>
+                <a routerLink="{{linkUri}}" class="btn-commandes text-light fs-6 text-center" >{{linkText}}</a>
         </ng-template>
         
         <ng-template #other_content >

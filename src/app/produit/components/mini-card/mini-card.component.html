@@ -31,9 +31,9 @@
             </div>
         </div>
         <div class="mini-card-btns">
-            <ild-plus-moins></ild-plus-moins>
+            <ild-plus-moins (emiter)="getVal($event)"></ild-plus-moins>
             <div>
-                <a class="shadow-ms">Ajouter</a>
+                <a (click)="addBtn()" class="shadow-ms">Ajouter</a>
             </div>
         </div>
     </div>

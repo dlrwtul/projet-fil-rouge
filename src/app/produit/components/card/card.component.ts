@@ -1,5 +1,9 @@
 import { Component, ElementRef, Input, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { PanierService } from 'src/app/shared/services/panier-service.service';
 import { Produit } from '../../shared/models/produit';
+import { CommandeProduit } from '../../../shared/models/commande-produit';
+import { tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ild-card',
@@ -12,7 +16,12 @@ export class CardComponent implements OnInit,AfterViewInit {
   @Input('produit') produit : Produit | null = null;
   quantiteVal : number = 1;
   @ViewChild('quantite') quantite!: ElementRef<HTMLInputElement>;
-  constructor() { }
+  commandeBurger : CommandeProduit = {
+    quantite : 0,
+    produit : undefined,
+  };
+
+  constructor(private panierServ : PanierService,private router : Router) { }
 
   ngOnInit(): void {
   }
@@ -43,6 +52,19 @@ export class CardComponent implements OnInit,AfterViewInit {
         this.quantite.nativeElement.style.border = 'none';
       }, 2000);
     }
+  }
+
+  addBtn() {
+
+    if (this.produit?.type == "Burger") {
+      this.commandeBurger.produit = this.produit
+      this.commandeBurger.quantite = this.quantiteVal
+      this.commandeBurger.prix = this.produit.prix
+      this.panierServ.addCommandeBurger(this.commandeBurger)
+    } else {
+      this.router.navigate([ "/client/produit",{ outlets: { sidebar: ["details",this.produit?.id] } }],{ queryParams :{data: this.quantiteVal}})
+    }
+
   }
 
 }

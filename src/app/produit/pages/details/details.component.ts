@@ -2,6 +2,9 @@ import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { CommandeProduit } from 'src/app/shared/models/commande-produit';
+import { EventService } from 'src/app/shared/services/event-service.service';
+import { PanierService } from 'src/app/shared/services/panier-service.service';
 import { Complement } from '../../shared/models/complement';
 import { DetailsProduitComplement } from '../../shared/models/details-produit-complement';
 import { Produit } from '../../shared/models/produit';
@@ -17,12 +20,17 @@ export class DetailsComponent implements OnInit,OnDestroy,AfterViewInit {
   @ViewChild('content') content!: ElementRef;
   @ViewChild('bgImg') bgImg!: ElementRef;
   @ViewChild('quantite') quantite!: ElementRef<HTMLInputElement>;
+  nbrBlockCheck = 0;
   quitRoute : string = '';
   topVal: number = 0;
   produitComplements : Observable<DetailsProduitComplement> | null = null;
-  quantiteVal : number = 0;
+  quantiteVal : number = 1;
+  commandeProduit : CommandeProduit = {
+    quantite : 0,
+    produit : undefined,
+  };
 
-  constructor(@Inject(DOCUMENT) private document: Document,private router: Router,private activatedRoute:ActivatedRoute,private store: ProduitDataStoreService) {
+  constructor(@Inject(DOCUMENT) private document: Document,private router: Router,private activatedRoute:ActivatedRoute,private store: ProduitDataStoreService,private panierServ: PanierService) {
 
   }
 
@@ -35,7 +43,6 @@ export class DetailsComponent implements OnInit,OnDestroy,AfterViewInit {
     this.quantiteVal = data;
     this.produitComplements = this.store.getWithComplements$(id)
     this.quitRoute = this.router.url
-    console.log(this.quitRoute)
     if (this.router.url == `/client/produit/(sidebar:details/${id})?data=${this.activatedRoute.snapshot.queryParams['data']}`) {
       this.document.documentElement.style.overflowY = 'hidden';
     }
@@ -71,6 +78,22 @@ export class DetailsComponent implements OnInit,OnDestroy,AfterViewInit {
       setTimeout(() => {
         this.quantite.nativeElement.style.border = 'none';
       }, 2000);
+    }
+  }
+
+  activeBtn(value:number) {
+    this.nbrBlockCheck+=value
+    console.log(this.nbrBlockCheck)
+  }
+
+  addBtn(produit : Produit) {
+    this.commandeProduit.produit = produit
+    this.commandeProduit.quantite = this.quantiteVal
+    this.commandeProduit.prix = produit.prix
+    if (produit.type == "Menu") {
+      this.panierServ.addCommandeMenu(this.commandeProduit)
+    } else {
+      this.panierServ.addCommandeBurger(this.commandeProduit)
     }
   }
 

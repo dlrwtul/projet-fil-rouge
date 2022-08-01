@@ -2,21 +2,21 @@
     <div class="details p-3 bg-light shadow" >
         <ng-container *ngIf="(produitComplements | async) as produitComplements">
             <div class="head d-flex justify-content-between">
-
+                
                 <span class="fs-4">Details {{produitComplements.produit.nom}}</span>
                 <span>
                     <img routerLink="{{quitRoute}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAArCAYAAADhXXHAAAAABmJLR0QA/wD/AP+gvaeTAAAB0UlEQVRYhe2YT0sCQRjGf5H0HewLJEKSnesQVC5ZfY7sIxQFfpo6delQWeqhTvaHpEPn6JCnNG+JYofZAVm1ZmbfFaR94EGZdZ/35+wwOzMQK1asWAAzAhlZYAdYAVLAPDALdIEP4BW4A86BZ4F6TtoCnoC+hR8Bb5KQaaBiCRl0GfUUIpUHtEKCareB3ahA91HjUAJUuwsUpEG9CEC1e8C2FGga+IoIVLuF0BguRwyqXQ0Lmp8QqHYuDKzpPHrC+CdwA5wa5ty7gi4bFqj5v59leP6t+O0AD4Z5GRfYY8PwJpD070kCDb+9EWhvGuYdusCWDMODPbgOdPxPGN3jv/nSBfbdokAfKA7cmx34XrTMeXOB7VgW6QGbgYw17F8m37agCcsC2vVATt0xJ2ELPDU9C1M2Zq8sCkjOBhcusEeG4Z/IzrMHLrBLhuHSb7BFF1hQeyaTAmeoVdOoa1X/us0fd5JnWETKG2FgAa4nBFoJCwpqBS+1SRznJrAgAQtqURzlHiwvBapViAC4C+xJg2rlMJ8v/3IbdewUqVKorUoY0BKCY9REOdSeyQayxvBix1gSp4gZ1ONcRfV6EphDrQ/0KeIt6hTxRaBerFix/r1+AFK7sPaI+GAqAAAAAElFTkSuQmCC">
                 </span>
             </div>
             <div class="container-1">
-            <div #bgImg class="shadow">
-                <img class="w-full h-full" src="data:image/png;base64,{{produitComplements.produit.image}}" alt="">
-            </div>
-            <div>
-                <span><span>Nom :</span><span>{{produitComplements.produit.nom}}</span></span>
-                <span><span>Prix :</span><span mx-2>{{produitComplements.produit.prix}} FCFA</span></span>
-                <span><span>Description :</span><span>{{produitComplements.produit.description}}</span></span>
-            </div>
+                <div #bgImg class="shadow">
+                    <img class="w-full h-full" src="data:image/png;base64,{{produitComplements.produit.image}}" alt="">
+                </div>
+                <div>
+                    <span><span>Nom :</span><span>{{produitComplements.produit.nom}}</span></span>
+                    <span><span>Prix :</span><span mx-2>{{produitComplements.produit.prix}} FCFA</span></span>
+                    <span><span>Description :</span><span>{{produitComplements.produit.description}}</span></span>
+                </div>
             </div>
             <div class="container-2">
                 <div d-flex>
@@ -45,41 +45,44 @@
                                     <td>{{duo.quantite}}</td>
                                 </tr>
                                 <tr *ngFor="let duo of produitComplements.produit?.menuTailles">
-                                    <td>{{duo.taille.libelle}}</td>
-                                    <td>{{duo.quantite}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                        <td>{{duo.taille.libelle}}</td>
+                                        <td>{{duo.quantite}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="menu-boissons">
+                            <ng-container *ngFor="let duo of produitComplements.produit?.menuTailles">
+                                <ild-menu-boisson (emiter)="activeBtn($event)" [menuTaille]="duo"></ild-menu-boisson>
+                            </ng-container>
+                        </div>
                     </div>
-                    <div class="menu-boissons">
-                        <ng-container *ngFor="let duo of produitComplements.produit?.menuTailles">
-                            <ild-menu-boisson [menuTaille]="duo"></ild-menu-boisson>
-                        </ng-container>
+                </ng-container>
+                <div class="container-3">
+                    <div>
+                        <div class="fs-5">Nos Boissons</div>
+                        <div class="card-container">
+                            <ng-container *ngFor="let boissonTaille of produitComplements?.boissonTailles">
+                                <ild-mini-card [produit]="boissonTaille"></ild-mini-card>
+                            </ng-container>
+                            
+                        </div>
+                    </div>
+                    <div>
+                        <div class="fs-5">Nos Frites</div>
+                        <div class="card-container">
+                            <ng-container *ngFor="let frite of produitComplements?.portionFrites">
+                                <ild-mini-card [produit]="frite"></ild-mini-card>
+                            </ng-container>
+                        </div>
                     </div>
                 </div>
-            </ng-container>
-            <div class="container-3">
-                <div>
-                    <div class="fs-5">Nos Boissons</div>
-                    <div class="card-container">
-                        <ng-container *ngFor="let boissonTaille of produitComplements?.boissonTailles">
-                            <ild-mini-card [produit]="boissonTaille"></ild-mini-card>
-                        </ng-container>
-                        
-                    </div>
+                <div class="footer">
+                    <button (click)="addBtn(produitComplements.produit)" [disabled]="nbrBlockCheck != produitComplements.produit.menuTailles?.length && produitComplements.produit.type == 'Menu' " class="btn shadow-md">Ajouter au Panier</button>
                 </div>
-                <div>
-                    <div class="fs-5">Nos Frites</div>
-                    <div class="card-container">
-                        <ng-container *ngFor="let frite of produitComplements?.portionFrites">
-                            <ild-mini-card [produit]="frite"></ild-mini-card>
-                        </ng-container>
-                    </div>
-                </div>
-            </div>
-            <div class="footer">
-                <button routerLink="" class="btn shadow-md">Ajouter au Panier</button>
-            </div>
+        </ng-container>
+        <ng-container *ngIf="produitComplements == null">
+            <div class="page">Chargement</div>
         </ng-container>
     </div>
 </div>
