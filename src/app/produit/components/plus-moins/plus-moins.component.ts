@@ -10,7 +10,8 @@ import { EventService } from 'src/app/shared/services/event-service.service';
 export class PlusMoinsComponent implements OnInit {
   @Input('block') block: boolean = false ;
   @Input() checked: boolean = false;
-  quantiteVal : number = 0;
+  @Input() lpQuantite :number = 0;
+  @Input() quantiteVal : number = 0;
   @ViewChild('inputQuantite') quantite!: ElementRef<HTMLInputElement>;
   @ViewChild('plusBtn') plusBtn!: ElementRef<HTMLInputElement>;
   @Output() emiter : EventEmitter<[number,number]> = new EventEmitter

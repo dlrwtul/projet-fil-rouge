@@ -19,8 +19,6 @@ export class PanierService {
     commandePortionFrites: []
   }
   private commandePanier : BehaviorSubject<Commande> = new BehaviorSubject(this.panier);
-  montantTotal :number =0;
-
   constructor() { }
 
   setZone(zone : Zone) {
@@ -144,21 +142,50 @@ export class PanierService {
     )
   }
 
-  getMontant() {
-    this.getCommande().pipe(
-      map((data) => {
-        if (data.commandeProduits != undefined) {
-          data?.commandeProduits.forEach(element => {
-            if (element.prix != undefined) {
-              this.montantTotal += element.prix
-            }
-          });
+  delete(commandeProduit: CommandeProduit | CommandeBoissonTaille) {
+    let index :number|undefined = 0;
+    if (commandeProduit.type == "CommandeBoissonTaille") {
+      this.commandePanier.value.commandeBoissonTailles?.map(data => {
+        if (data.boissonTaille?.id == commandeProduit.boissonTaille?.id) {
+          index = this.commandePanier.value.commandeBoissonTailles?.indexOf(data)
+          if (index != undefined) { 
+            this.commandePanier.value.commandeBoissonTailles?.splice(index,1)
+          }
         }
-        return data
       })
-    )
-    return this.montantTotal
+    } else {
+      if (commandeProduit.produit?.type == "Menu") {
+        this.commandePanier.value.commandeMenus?.map(data => {
+          if (data.produit?.id == commandeProduit.produit?.id) {
+            index = this.commandePanier.value.commandeMenus?.indexOf(data)
+            if (index != undefined) { 
+              this.commandePanier.value.commandeMenus?.splice(index,1)
+            }
+          }
+        })
+      }else if (commandeProduit.produit?.type == "Burger") {
+        this.commandePanier.value.commandeBurgers?.map(data => {
+          if (data.produit?.id == commandeProduit.produit?.id) {
+            index = this.commandePanier.value.commandeBurgers?.indexOf(data)
+            if (index != undefined) { 
+              this.commandePanier.value.commandeBurgers?.splice(index,1)
+            }
+          }
+        })
+      }else {
+        this.commandePanier.value.commandePortionFrites?.map(data => {
+          if (data.produit?.id == commandeProduit.produit?.id) {
+            index = this.commandePanier.value.commandePortionFrites?.indexOf(data)
+            if (index != undefined) { 
+              this.commandePanier.value.commandePortionFrites?.splice(index,1)
+            }
+          }
+        })
+      }
+    }
+    return this.commandePanier?.next
   }
+
 
   viderPanier() {
     this.panier = {

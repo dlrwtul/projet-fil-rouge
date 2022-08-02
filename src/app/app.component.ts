@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { slider } from './animations-router';
 
@@ -11,10 +11,11 @@ import { slider } from './animations-router';
   ]
 })
 export class AppComponent {
-
+  loading :boolean = true;
   title = 'projet-fil-rouge';
-  
+
   prepareRouteOutlet(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData &&  outlet.activatedRouteData['animation'];
   }
+
 }

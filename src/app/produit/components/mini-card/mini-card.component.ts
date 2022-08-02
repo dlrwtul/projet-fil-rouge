@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { NgToastService } from 'ng-angular-popup';
 import { CommandeBoissonTaille } from 'src/app/shared/models/commande-boisson-taille';
 import { CommandeProduit } from 'src/app/shared/models/commande-produit';
 import { PanierService } from 'src/app/shared/services/panier-service.service';
@@ -19,15 +20,17 @@ export class MiniCardComponent implements OnInit,AfterViewInit {
   commandeProduit : CommandeProduit = {
     quantite : 0,
     produit : undefined,
+    type:"CommandeProduit"
   };
 
   commandeBoissonTaille : CommandeBoissonTaille = {
     quantite: 0 ,
     boissonTaille: undefined,
+    type:"CommandeBoissonTaille"
   }
 
 
-  constructor(private panierServ : PanierService) { }
+  constructor(private panierServ : PanierService,private toast : NgToastService) { }
 
   ngOnInit(): void {
     if (this.produits?.hasOwnProperty('boisson')) {
@@ -63,11 +66,12 @@ export class MiniCardComponent implements OnInit,AfterViewInit {
         } else {
           this.commandeBoissonTaille.quantite = this.quantiteVal
           this.commandeBoissonTaille.boissonTaille = this.produits
-          this.commandeBoissonTaille.prix = this.commandeBoissonTaille.boissonTaille?.taille.prix
+          this.commandeBoissonTaille.prix = this.commandeBoissonTaille.boissonTaille?.taille?.prix
           this.panierServ.addCommandeBoissonTaille(this.commandeBoissonTaille)
         }
+        this.toast.success({detail:"SUCCESS",summary:'Nouveau Produit Ajoutée',position:'tr',duration:5000});
       } else {
-        console.log("veuillez mettre une quantite valide")
+        this.toast.error({detail:"ERROR",summary:'Veuiller mettre une quantite valide',position:'tl',duration:5000});
       }
       
     }

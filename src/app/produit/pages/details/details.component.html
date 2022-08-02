@@ -53,7 +53,7 @@
                         </div>
                         <div class="menu-boissons">
                             <ng-container *ngFor="let duo of produitComplements.produit?.menuTailles">
-                                <ild-menu-boisson (emiter)="activeBtn($event)" [menuTaille]="duo"></ild-menu-boisson>
+                                <ild-menu-boisson (emiter2)="getCommandeMenuBoissonTailles($event)" (emiter)="activeBtn($event)" [menuTaille]="duo"></ild-menu-boisson>
                             </ng-container>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                     </div>
                 </div>
                 <div class="footer">
-                    <button (click)="addBtn(produitComplements.produit)" [disabled]="nbrBlockCheck != produitComplements.produit.menuTailles?.length && produitComplements.produit.type == 'Menu' " class="btn shadow-md">Ajouter au Panier</button>
+                    <button #ajoutBtn (click)="addBtn(produitComplements.produit)" [disabled]="nbrBlockCheck != produitComplements.produit.menuTailles?.length && produitComplements.produit.type == 'Menu' " class="btn shadow-md">Ajouter au Panier</button>
                 </div>
         </ng-container>
         <ng-container *ngIf="produitComplements == null">

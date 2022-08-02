@@ -3,7 +3,7 @@ import { Taille } from "./taille";
 
 export interface BoissonTaille {
     id: number;
-    boisson: Produit;
-    taille: Taille;
+    boisson?: Produit;
+    taille?: Taille;
     quantiteStock: number;
 }

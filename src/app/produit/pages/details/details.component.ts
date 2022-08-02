@@ -1,11 +1,11 @@
 import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 import { Observable } from 'rxjs';
+import { CommandeMenuBoissonTaille } from 'src/app/shared/models/commande-menu-boisson-taille';
 import { CommandeProduit } from 'src/app/shared/models/commande-produit';
-import { EventService } from 'src/app/shared/services/event-service.service';
 import { PanierService } from 'src/app/shared/services/panier-service.service';
-import { Complement } from '../../shared/models/complement';
 import { DetailsProduitComplement } from '../../shared/models/details-produit-complement';
 import { Produit } from '../../shared/models/produit';
 import { ProduitDataStoreService } from '../../shared/services/produit-data-store.service';
@@ -20,17 +20,21 @@ export class DetailsComponent implements OnInit,OnDestroy,AfterViewInit {
   @ViewChild('content') content!: ElementRef;
   @ViewChild('bgImg') bgImg!: ElementRef;
   @ViewChild('quantite') quantite!: ElementRef<HTMLInputElement>;
+  tabCommandeMenuBoissonTailles : ([number,CommandeMenuBoissonTaille[]])[] = [];
+  commandeMenuBoissonTailles: CommandeMenuBoissonTaille[] = []
   nbrBlockCheck = 0;
   quitRoute : string = '';
+  checkedBoissons : number[] = []
   topVal: number = 0;
   produitComplements : Observable<DetailsProduitComplement> | null = null;
   quantiteVal : number = 1;
   commandeProduit : CommandeProduit = {
     quantite : 0,
     produit : undefined,
+    type:"CommandeProduit"
   };
 
-  constructor(@Inject(DOCUMENT) private document: Document,private router: Router,private activatedRoute:ActivatedRoute,private store: ProduitDataStoreService,private panierServ: PanierService) {
+  constructor(@Inject(DOCUMENT) private document: Document,private router: Router,private activatedRoute:ActivatedRoute,private store: ProduitDataStoreService,private panierServ: PanierService,private toast : NgToastService) {
 
   }
 
@@ -83,7 +87,6 @@ export class DetailsComponent implements OnInit,OnDestroy,AfterViewInit {
 
   activeBtn(value:number) {
     this.nbrBlockCheck+=value
-    console.log(this.nbrBlockCheck)
   }
 
   addBtn(produit : Produit) {
@@ -91,10 +94,32 @@ export class DetailsComponent implements OnInit,OnDestroy,AfterViewInit {
     this.commandeProduit.quantite = this.quantiteVal
     this.commandeProduit.prix = produit.prix
     if (produit.type == "Menu") {
+      this.commandeProduit.produit.commandeMenuBoissonTailles = this.setCommandeMenuBoissonTailles()
       this.panierServ.addCommandeMenu(this.commandeProduit)
     } else {
       this.panierServ.addCommandeBurger(this.commandeProduit)
     }
+    this.toast.success({detail:"SUCCESS",summary:'Nouveau Produit Ajoutée',position:'tr',duration:5000});
+  }
+
+  getCommandeMenuBoissonTailles(tab: [number,CommandeMenuBoissonTaille[]]) {    
+    if (this.checkedBoissons.indexOf(tab[0]) == -1) {
+      this.checkedBoissons.push(tab[0])
+      this.tabCommandeMenuBoissonTailles.push(tab)
+    } else {
+      this.tabCommandeMenuBoissonTailles.forEach(element => {
+        if (element[0] == tab[0]) {
+          element[1]=tab[1]
+        }
+      });
+    }
+  }
+
+  setCommandeMenuBoissonTailles(){
+    this.tabCommandeMenuBoissonTailles.forEach(element => {
+      this.commandeMenuBoissonTailles = [...this.commandeMenuBoissonTailles,...element[1]]
+    });
+    return this.commandeMenuBoissonTailles
   }
 
 }

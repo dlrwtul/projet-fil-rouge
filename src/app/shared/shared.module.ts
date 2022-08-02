@@ -7,6 +7,8 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { NotifierModule } from 'angular-notifier';
+
 
 @NgModule({
   declarations: [],
@@ -20,6 +22,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     FormsModule,
     MatButtonToggleModule,
     MatDatepickerModule,
+    NotifierModule
   ],
   exports: [
     LayoutModule,
@@ -29,7 +32,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     ReactiveFormsModule,
     FormsModule,
     MatButtonToggleModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    NotifierModule
   ]
 })
 export class SharedModule { }

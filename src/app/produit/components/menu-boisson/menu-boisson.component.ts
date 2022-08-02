@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { EventService } from 'src/app/shared/services/event-service.service';
 import { MenuTaille } from '../../shared/models/menu-taille';
+import { CommandeMenuBoissonTaille } from 'src/app/shared/models/commande-menu-boisson-taille';
 
 @Component({
   selector: 'ild-menu-boisson',
@@ -11,8 +12,10 @@ export class MenuBoissonComponent implements OnInit {
 
   @Input('menuTaille') menuTaille:MenuTaille|null = null;
   @Output() emiter : EventEmitter<number> = new EventEmitter 
+  @Output() emiter2: EventEmitter<[number,CommandeMenuBoissonTaille[]]> = new EventEmitter
   block: boolean = false;
   tot : number = 0;
+  commandeMenuBoissonTailles : CommandeMenuBoissonTaille[] = []
 
   constructor(private eventServ: EventService) { }
 
@@ -22,9 +25,10 @@ export class MenuBoissonComponent implements OnInit {
     }
   }
 
-  getVal(value:number){
+  getVal(tab:[number,number|undefined,number,boolean]){
+
     if (this.menuTaille != null) {
-      this.tot += value
+      this.tot += tab[0]
       if (this.tot == 0) {
         this.emiter.emit(1)
         this.block = true
@@ -35,10 +39,45 @@ export class MenuBoissonComponent implements OnInit {
         this.block = false
       }
     }
+
+    if (tab[1] != undefined) {
+
+      let exist:boolean = false;
+      let index = 0
+
+      this.commandeMenuBoissonTailles.forEach(data => {
+        if (data.boissonTaille?.id == tab[1]) {
+          exist = true
+          index = this.commandeMenuBoissonTailles.indexOf(data)
+        }
+      })
+
+      if ((!tab[3] && exist) || tab[2]==0) {
+        this.commandeMenuBoissonTailles.splice(index,1)
+      } else if (tab[3]) {
+        if (exist) {
+          this.commandeMenuBoissonTailles[index].quantite = tab[2]
+        }else {
+          let commandeMenuBoissonTaille :CommandeMenuBoissonTaille = {
+            quantite:tab[2],
+            boissonTaille:{
+              id:tab[1],
+              quantiteStock:0,
+            }
+          }
+          this.commandeMenuBoissonTailles.push(commandeMenuBoissonTaille)
+        }
+      }
+
+      if (this.block && this.menuTaille?.taille.id != undefined) {
+        this.emiter2.emit([this.menuTaille?.taille.id,this.commandeMenuBoissonTailles])
+      }
+    }
+
   }
 
   sendBlock() {
-    if (this.block == true) {
+    if (this.block) {
       this.emiter.emit(1)
     }else {
       this.emiter.emit(-1)
