@@ -7,6 +7,6 @@
     </div>
     <div class="d-flex align-items-center">
         <a routerLink="">Catalogue</a>
-        <a class="btn" routerLink="/securite/signin">S'inscrire</a>
+        <a class="btn" routerLink="{{text[1]}}" [queryParams]="{ previousUrl : previousUrl }">{{text[0]}}</a>
     </div>
 </div>

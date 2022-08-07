@@ -8,10 +8,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NotifierModule } from 'angular-notifier';
+import { LoaderComponent } from './loader/loader.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    LoaderComponent
+  ],
   imports: [
     CommonModule,
     LayoutModule,
@@ -33,7 +36,8 @@ import { NotifierModule } from 'angular-notifier';
     FormsModule,
     MatButtonToggleModule,
     MatDatepickerModule,
-    NotifierModule
+    NotifierModule,
+    LoaderComponent
   ]
 })
 export class SharedModule { }

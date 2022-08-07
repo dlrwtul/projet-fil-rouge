@@ -101,7 +101,6 @@
 }
 
 .etat {
-    background-color: rgb(245, 94, 94);
     height: 60px;
     border-radius: 15px;
     padding: 1% 3em;
@@ -134,3 +133,4 @@
     position: absolute;
     bottom: 0;
 }
+

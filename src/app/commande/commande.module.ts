@@ -18,9 +18,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
   imports: [
     CommonModule,
     CommandeRoutingModule,
-    SharedModule,
     NgbPaginationModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    SharedModule,
   ]
 })
 export class CommandeModule { }

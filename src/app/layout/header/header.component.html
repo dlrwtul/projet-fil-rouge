@@ -12,7 +12,9 @@
         </div>
     </ng-container>
     <div class="f-right d-flex flex-row align-items-center justify-content-end ps-5">
+        <ng-container *ngIf="!isPanier">
             <a routerLink="/client/produit" class="btn-commandes text-light fs-6 text-center" >Catalogue</a>
+        </ng-container>
         <ng-container *ngIf="isConnected,then content else other_content "></ng-container>
         <ng-template #content>
             <a routerLink="{{linkUri}}" class="btn-commandes text-light fs-6 text-center" >{{linkText}}</a>

@@ -5,7 +5,9 @@ import { AuthService } from '../shared/services/auth.service';
 import { TokenService } from '../shared/services/token.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgToastService } from 'ng-angular-popup';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Route } from '@angular/router';
+import { Location } from '@angular/common';
+import { EventService } from 'src/app/shared/services/event-service.service';
 
 @Component({
   selector: 'ild-login',
@@ -14,6 +16,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  previousUrl:any
+  text = ["S'inscrire","/securite/signin"]
   private token : string = ''
   user : User = {
     id : 0,
@@ -23,9 +27,10 @@ export class LoginComponent implements OnInit {
   connexion$ : Observable<any> = new Observable
   myForm : FormGroup = new FormGroup({})
 
-  constructor(private authServ : AuthService,private tokenServ : TokenService,private formBuilder : FormBuilder,private toast : NgToastService,private router: Router) { }
+  constructor(private authServ : AuthService,private tokenServ : TokenService,private formBuilder : FormBuilder,private toast : NgToastService,private activatedRouter: ActivatedRoute,private router : Router,private eventServ : EventService) { }
 
   ngOnInit(): void {
+    this.previousUrl = this.activatedRouter.snapshot.queryParams['previousUrl']
     //==========================================================
     //option 1
     //==========================================================
@@ -60,12 +65,22 @@ export class LoginComponent implements OnInit {
     this.connexion$ = this.authServ.$connexion(this.user)
     this.connexion$.subscribe({
       next:(value:any)=> {
+        this.tokenServ.setUser(this.user)
         this.tokenServ.setToken(value.token)
         this.toast.success({detail:"SUCCESS",summary:'Connexion reussie',position:'tl',duration:5000});
-        
+        if (this.previousUrl != null) {
+          if (this.previousUrl == '/client/panier') {
+            this.router.navigate(['/client/commande'])
+          }else {
+            this.router.navigate([this.previousUrl])
+          }
+        } else {
+          this.router.navigate([''])
+        }
       },
-      error:(err:string)=>{
-        this.toast.error({detail:"ERROR",summary:err,position:'tl',duration:5000});
+      error:(err:any)=>{
+        const errMess = err.error.message
+        this.toast.error({detail:"Error Connexion",summary:errMess,position:'tl',duration:5000});
       },
       complete() {}
     })

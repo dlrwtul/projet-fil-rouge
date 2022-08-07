@@ -60,6 +60,7 @@ export class MiniCardComponent implements OnInit,AfterViewInit {
       if (this.quantiteVal > 0) {
         if (this.produit.type == "PortionFrites") {
           this.commandeProduit.produit = this.produit
+          this.commandeProduit.portionFrites = this.produit
           this.commandeProduit.quantite = this.quantiteVal
           this.commandeProduit.prix = this.produit.prix
           this.panierServ.addCommandePortonFrite(this.commandeProduit)  

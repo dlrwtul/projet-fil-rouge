@@ -1,4 +1,4 @@
-<ild-layout></ild-layout>
+<ild-layout [text]="text" [previousUrl]="previousUrl"></ild-layout>
 <div class="connexion">
     <div class="tab-login shadow">
         <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)" class="form-part shadow-sm">
@@ -12,8 +12,6 @@
                     <label for="">Password</label>
                     <input formControlName="password" placeholder="Entrer Votre Password" type="password" name="" id="" class="form-control">
                 </div>
-                <!-- <ng-container *ngIf="myForm.get('login')?.invalid">{{sendMessError("Veuillez remplir l'email")}}</ng-container>
-                <ng-container *ngIf="myForm.get('password')?.invalid,sendMessError('Password Invalid')"></ng-container> -->
                 <button type="submit" [disabled]="myForm.invalid" class="btn">Connexion</button>
             </div>
         </form>

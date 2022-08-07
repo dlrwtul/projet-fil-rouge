@@ -5,6 +5,7 @@ import { Quartier } from '../models/quartier';
 import { Zone } from '../models/zone';
 import { CommandeBoissonTaille } from '../models/commande-boisson-taille';
 import { CommandeProduit } from 'src/app/shared/models/commande-produit';
+const PANIER_KEY = "current-panier"
 
 @Injectable({
   providedIn: 'root'
@@ -186,6 +187,23 @@ export class PanierService {
     return this.commandePanier?.next
   }
 
+  getCommandeObject() {
+    return this.commandePanier.asObservable().pipe(
+      map(data => {
+        if (this.commandePanier.value.commandeBoissonTailles?.length == 0) {
+          delete this.commandePanier.value.commandeBoissonTailles
+        }else if (this.commandePanier.value.commandeBurgers?.length == 0) {
+          delete this.commandePanier.value.commandeBurgers
+        } else if (this.commandePanier.value.commandeMenus?.length == 0) {
+          delete this.commandePanier.value.commandeMenus
+        }else if (this.commandePanier.value.commandePortionFrites?.length == 0) {
+          delete this.commandePanier.value.commandePortionFrites
+        }
+        delete this.commandePanier.value.commandeProduits
+        return data
+      })
+    )
+  }
 
   viderPanier() {
     this.panier = {
@@ -198,6 +216,18 @@ export class PanierService {
       commandeProduits: []
     }
     this.commandePanier = new BehaviorSubject(this.panier)
+  }
+
+  savePanier(){
+    window.sessionStorage.removeItem(PANIER_KEY)
+    window.sessionStorage.setItem(PANIER_KEY,JSON.stringify(this.commandePanier.value))
+  }
+
+  restorePanier(){
+    let data = window.sessionStorage.getItem(PANIER_KEY)
+    if (data != null) {
+      this.commandePanier = new BehaviorSubject(JSON.parse(data))  
+    }
   }
 
 }

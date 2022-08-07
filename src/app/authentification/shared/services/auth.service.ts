@@ -4,7 +4,6 @@ import { catchError, Observable, throwError } from 'rxjs';
 import { User } from '../models/user';
 import { TokenService } from './token.service';
 
-
 const SECURITY_API_URL = "https://lang-projet-fil-rouge-api.herokuapp.com/api/"
 const options = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -30,13 +29,17 @@ export class AuthService {
   $connexion = (user : User):Observable<any> => {
     return this.http.post<any>(`${SECURITY_API_URL}login`,user,options).pipe(
       catchError((err) => {
-        return throwError(() => new Error("Identifiants Invalides"))
+        return throwError(() => err)
       })
     )
   }
 
   $inscription = (user : User,role : string):Observable<any> => {
-    return this.http.post<any>(`${SECURITY_API_URL}${role}`,user,options)
+    return this.http.post<any>(`${SECURITY_API_URL}${role}`,user,options).pipe(
+      catchError((err) => {
+        return throwError(() => err)
+      })
+    )
   }
 
   logout() {

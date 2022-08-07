@@ -29,32 +29,32 @@
                   Livraison a Domicile
                 </button>
               </p>
-              <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+              <form [formGroup]="myForm" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
                 <div class="card">
                   <div class="card-body">
                     <div>
                         <label for="">Zone</label>
-                        <select name="" id="" class="form-control">
+                        <select formControlName="quartier" name="" id="" class="form-control">
                             <option value="" checked>Choisir la zone</option>
                             <ng-container *ngFor="let quartier of quartiers$|async">
-                                <option value="{{quartier.id}}">{{quartier.zone.libelle + " " + quartier.libelle}}</option>
+                                <option value="{{(quartiers$|async)?.indexOf(quartier)}}">{{quartier.zone?.libelle + " " + quartier.libelle}}</option>
                             </ng-container>
                         </select>
                     </div>
                     <div>
                         <label for="">Adresse</label>
-                        <input type="text" class="form-control rounded">
+                        <input formControlName="adresse" type="text" class="form-control rounded">
                     </div>
                     <div>
                         <label for="">Telephone</label>
                         <div class="flex">
                             <input type="text" value="+ 221" class=" p-2 bg-dark text-light w-12 rounded-sm">
-                            <input type="text" class="form-control tel">
+                            <input formControlName="telephone" type="text" class="form-control tel">
                         </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </form>
         </div>
         <div class="infos-footer">
             <span class="">Type de livraison</span>
@@ -69,7 +69,7 @@
             </span>
         </div>
         <div class="valider">
-            <button (click)="validCommande()" class="btn btn-success px-5">Valider</button>
+            <button [disabled]="!isCollapsed && myForm.invalid" type="submit" (click)="validCommande()" class="btn btn-success bg-green-700 px-5">Valider</button>
         </div>
     </div>
 </div>

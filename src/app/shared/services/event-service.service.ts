@@ -8,13 +8,13 @@ import { Produit } from 'src/app/produit/shared/models/produit';
 
 export class EventService{
 
-  private childClickedEvent = new BehaviorSubject<Produit | null>(null);
+  private childClickedEvent = new BehaviorSubject<any>(null);
 
-  emitChildEvent(produit: Produit){
-      this.childClickedEvent.next(produit)
+  setToBihavior(data: any){
+      this.childClickedEvent.next(data)
   }
 
-  childEventListner(){
+  getEventObs(){
     return this.childClickedEvent.asObservable();
   } 
 

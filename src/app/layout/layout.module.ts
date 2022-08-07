@@ -18,8 +18,8 @@ import { RouterModule } from '@angular/router';
     NgbDropdownModule
   ],
   exports: [
-    HeaderComponent,
     FooterComponent,
+    HeaderComponent,
     
   ]
 })

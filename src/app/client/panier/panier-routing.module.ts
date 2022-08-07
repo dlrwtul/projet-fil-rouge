@@ -9,7 +9,7 @@ const routes: Routes = [
     component: PanierComponent,
   },
   {
-    path:'produit/details/:id',
+    path:'details/:id',
     outlet: "sidebar",
     component: DetailsComponent,
     data: {

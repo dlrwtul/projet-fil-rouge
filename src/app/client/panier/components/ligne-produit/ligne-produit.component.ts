@@ -1,5 +1,7 @@
 import { AfterViewChecked, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Produit } from 'src/app/produit/shared/models/produit';
+import { EventService } from 'src/app/shared/services/event-service.service';
 import { PanierService } from 'src/app/shared/services/panier-service.service';
 
 @Component({
@@ -15,7 +17,7 @@ export class LigneProduitComponent implements OnInit {
   produit : Produit | null = null;
   total : number = 0;
 
-  constructor(private panierServ : PanierService) { }
+  constructor(private panierServ : PanierService, private router : Router,private eventServ : EventService) { }
 
   ngOnInit(): void {
 
@@ -50,5 +52,10 @@ export class LigneProduitComponent implements OnInit {
       this.total = this.commandeProduit.produit.prix * this.commandeProduit.quantite
     }
   }
+
+  modify(){
+    this.eventServ.setToBihavior(this.commandeProduit)
+    //console.log([ "" , { outlets: { sidebar: ["produit","details",this.produit?.id] } } ])
+    this.router.navigate(["client","panier",{ outlets: { sidebar: [ 'details', this.produit?.id ] }}]);   }
 
 }

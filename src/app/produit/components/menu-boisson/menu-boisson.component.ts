@@ -11,6 +11,8 @@ import { CommandeMenuBoissonTaille } from 'src/app/shared/models/commande-menu-b
 export class MenuBoissonComponent implements OnInit {
 
   @Input('menuTaille') menuTaille:MenuTaille|null = null;
+  @Input('quantite') quantite : number = 0
+  @Input() commandeMenuBoissonTaillesMod: CommandeMenuBoissonTaille[] | undefined = []
   @Output() emiter : EventEmitter<number> = new EventEmitter 
   @Output() emiter2: EventEmitter<[number,CommandeMenuBoissonTaille[]]> = new EventEmitter
   block: boolean = false;
@@ -20,9 +22,19 @@ export class MenuBoissonComponent implements OnInit {
   constructor(private eventServ: EventService) { }
 
   ngOnInit(): void {
-    if (this.menuTaille != null) {
-      this.tot = structuredClone(this.menuTaille.quantite)
+    if(this.commandeMenuBoissonTaillesMod != undefined){
+      console.log(this.commandeMenuBoissonTaillesMod);
     }
+    this.eventServ.getEventObs().subscribe(data => {
+      if (this.menuTaille != null) {
+        if (data ==null) {
+            this.tot = structuredClone(this.menuTaille.quantite)*this.quantite
+        }else {
+          this.tot = this.tot + structuredClone(this.menuTaille.quantite)*data
+          this.block = false
+        }
+      }
+    })
   }
 
   getVal(tab:[number,number|undefined,number,boolean]){

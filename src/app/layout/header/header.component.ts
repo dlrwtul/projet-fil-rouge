@@ -12,6 +12,7 @@ import { PanierService } from 'src/app/shared/services/panier-service.service';
 })
 export class HeaderComponent implements OnInit {
 
+  @Input() isPanier = false
   linkText :string = '';
   linkUri :string = '';
   isConnected:boolean = true;

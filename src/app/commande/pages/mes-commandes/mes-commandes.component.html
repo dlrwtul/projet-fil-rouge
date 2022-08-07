@@ -1,5 +1,5 @@
 <div class="header">
-    <ild-header></ild-header>
+    <ild-header [isPanier]="isPanier"></ild-header>
 </div>
 <div class="mes-commandes">
     <div class="d-flex head justify-content-between">
@@ -7,23 +7,23 @@
             <label class="label-search-group" for="search-input">
               Recherche
             </label>
-            <input type="text" id="search-input" placeholder="Entre produit" class="input-search-group" />
+            <input type="text" id="search-input" placeholder="Entre Numero Commande" class="input-search-group" />
         </div>
         <div>
             <div>
-                <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style" placement="bottom" ngbTooltip="Filter Par Etat">
-                    <mat-button-toggle value="en cours" checked>Encours</mat-button-toggle>
-                    <mat-button-toggle value="valide">Validé</mat-button-toggle>
-                    <mat-button-toggle value="annule">Annulé</mat-button-toggle>
+                <mat-button-toggle-group (change)="onValChange($event.value)" appearance="legacy" name="fontStyle" aria-label="Font Style">
+                    <mat-button-toggle value="{{enCours}}" checked>En cours</mat-button-toggle>
+                    <mat-button-toggle value="{{valide}}">Validé</mat-button-toggle>
+                    <mat-button-toggle value="{{annule}}">Annulé</mat-button-toggle>
                 </mat-button-toggle-group>
             </div>
             <div>
-                <input #fDtate class="btn border border-dark" type="date" name="" id="" placement="bottom" ngbTooltip="Filter Par date">   
+                <input #fDate (input)="getDate(fDate.value)" class="btn border border-dark" type="date" name="" id="" placement="bottom" ngbTooltip="Filter Par date">   
             </div>
         </div>
     </div>
     <div class="table-container">
-        <table class="table shadow rounded">
+        <table class="table shadow-sm rounded">
             <thead>
                 <tr>
                     <th>Etat</th>
@@ -34,23 +34,29 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let commande of [{numero:0,date:0,montant:0,etat:0},{numero:0,date:0,montant:0,etat:0},{numero:0,date:0,montant:0,etat:0},{numero:0,date:0,montant:0,etat:0},{numero:0,date:0,montant:0,etat:0},{numero:0,date:0,montant:0,etat:0},{numero:0,date:0,montant:0,etat:0},{numero:0,date:0,montant:0,etat:0}]">
-                    <td><span class="etat">{{commande.etat}}</span></td>
-                    <td>{{commande.numero}}</td>
-                    <td>{{commande.date}}</td>
-                    <td>{{commande.montant}}</td>
-                    <td>
-                        <a class="btn bg-dark text-light mx-2" [routerLink]='[{ outlets: { sidebar: ["details","1"] } }]' >Details</a>
-                        <ng-container *ngIf="commande.etat == 0">
-                            <button class="btn bg-danger text-light mx-2">Annuler</button>
-                        </ng-container>
-                        <ng-container *ngIf="commande.etat == 1">
-                            <button class="btn bg-primary text-light mx-2">Recommender</button>
-                        </ng-container>
-                    </td>
-                </tr>
+                <ng-container *ngIf="(commandes$|async) != null">
+                    <tr *ngFor="let commande of commandes$|async">
+                        <td><span class="etat text-light font-bold"  [ngClass]="{'bg-blue-500': filterVal == enCours, 'bg-green-500': filterVal == valide, 'bg-red-500': filterVal == annule}">{{filterVal}}</span></td>
+                        <td>{{commande.numero}}</td>
+                        <td>{{commande.createdAt | date:'dd/MM/yyyy'}}</td>
+                        <td>{{commande.montant}}</td>
+                        <td>
+                            <a (click)="detailsCommande(commande)" class="btn bg-dark text-light mx-2" routerLink="/client/panier" >Details</a>
+                            <ng-container *ngIf="filterVal == enCours">
+                                <button (click)="annulerCommande(commande)" class="btn bg-danger text-light mx-2">Annuler</button>
+                            </ng-container>
+                            <ng-container *ngIf="filterVal == valide">
+                                <button (click)="recommanderCommande(commande)" class="btn bg-primary text-light mx-2">Recommender</button>
+                            </ng-container>
+                        </td>
+                    </tr>
+                </ng-container>
             </tbody>
         </table>
+        <ng-container *ngIf="(commandes$|async) == null">
+            <ild-loader></ild-loader>
+        </ng-container>
+        
     </div>
     <div class="paginate">
         <!-- <ngb-pagination 
@@ -61,9 +67,9 @@
             [ellipses]="true" 
             [boundaryLinks]="true">
         </ngb-pagination> -->
-        <mat-paginator [length]="40"
+        <mat-paginator [length]="(commandes$|async)?.length"
               [pageSize]="8"
-              [pageSizeOptions]="[5, 8]"
+              [pageSizeOptions]="[8]"
               aria-label="Select page">
         </mat-paginator>
     </div>

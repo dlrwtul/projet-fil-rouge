@@ -5,8 +5,12 @@
     margin: 0.5% 0;
 }
 
+.choice-taille:hover .taille {
+    transform: rotate3d(0,1,0,25deg);
+}
+
 .boissons {
-    width: 90%;
+    width: 80%;
     justify-content: start;
     align-items: center;
     padding: 1%;
@@ -41,9 +45,11 @@
 .taille {
     display: flex;
     flex-direction: column;
-    width: 10%;
+    width: 20%;
     align-items: center;
     justify-content: center;
+    transform: rotate3d(0,0,0,0deg);
+    transition: all ease 0.5s;
 }
 
 .taille>span:first-child {

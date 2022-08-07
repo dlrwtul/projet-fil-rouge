@@ -2,9 +2,10 @@ import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
-import { Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { CommandeMenuBoissonTaille } from 'src/app/shared/models/commande-menu-boisson-taille';
 import { CommandeProduit } from 'src/app/shared/models/commande-produit';
+import { EventService } from 'src/app/shared/services/event-service.service';
 import { PanierService } from 'src/app/shared/services/panier-service.service';
 import { DetailsProduitComplement } from '../../shared/models/details-produit-complement';
 import { Produit } from '../../shared/models/produit';
@@ -28,24 +29,44 @@ export class DetailsComponent implements OnInit,OnDestroy,AfterViewInit {
   topVal: number = 0;
   produitComplements : Observable<DetailsProduitComplement> | null = null;
   quantiteVal : number = 1;
+  menu:Produit| null = null
   commandeProduit : CommandeProduit = {
     quantite : 0,
     produit : undefined,
     type:"CommandeProduit"
   };
 
-  constructor(@Inject(DOCUMENT) private document: Document,private router: Router,private activatedRoute:ActivatedRoute,private store: ProduitDataStoreService,private panierServ: PanierService,private toast : NgToastService) {
+  constructor(@Inject(DOCUMENT) private document: Document,private router: Router,private activatedRoute:ActivatedRoute,private store: ProduitDataStoreService,private panierServ: PanierService,private toast : NgToastService,private eventServ : EventService) {
 
   }
 
   ngOnInit(): void {
 
+    
     this.topVal = this.document.documentElement.scrollTop;
-
+    
     const id = this.activatedRoute.snapshot.params['id']
     const data = parseInt(this.activatedRoute.snapshot.queryParams['data'])
     this.quantiteVal = data;
-    this.produitComplements = this.store.getWithComplements$(id)
+
+    this.eventServ.getEventObs().subscribe(data => {
+      this.quantiteVal = data.quantite
+      this.menu = data.menu
+    });
+    
+    if (this.menu == null) {
+      this.produitComplements = this.store.getWithComplements$(id)
+    }else {
+      this.produitComplements = this.store.getWithComplements$(id).pipe(
+        map(data => {
+          if (this.menu != null) {
+            data.produit = this.menu
+          }
+          return data
+        })
+      )
+    }
+
     this.quitRoute = this.router.url
     if (this.router.url == `/client/produit/(sidebar:details/${id})?data=${this.activatedRoute.snapshot.queryParams['data']}`) {
       this.document.documentElement.style.overflowY = 'hidden';
@@ -63,10 +84,15 @@ export class DetailsComponent implements OnInit,OnDestroy,AfterViewInit {
   }
 
   onValueChange(value: any) {
-    if (isNaN(parseInt(value))) {
+    if (isNaN(value) || value <= 0) {
       this.quantiteVal = 1;
+      this.quantite.nativeElement.style.border = '3px solid red';
+      setTimeout(() => {
+        this.quantite.nativeElement.style.border = 'none';
+      }, 2000);
     }else {
-      this.quantiteVal = parseInt(value)
+      this.eventServ.setToBihavior(value-this.quantiteVal)
+      this.quantiteVal = value
     }
   }
 
@@ -83,6 +109,7 @@ export class DetailsComponent implements OnInit,OnDestroy,AfterViewInit {
         this.quantite.nativeElement.style.border = 'none';
       }, 2000);
     }
+    
   }
 
   activeBtn(value:number) {
@@ -94,9 +121,11 @@ export class DetailsComponent implements OnInit,OnDestroy,AfterViewInit {
     this.commandeProduit.quantite = this.quantiteVal
     this.commandeProduit.prix = produit.prix
     if (produit.type == "Menu") {
+      this.commandeProduit.menu = produit
       this.commandeProduit.produit.commandeMenuBoissonTailles = this.setCommandeMenuBoissonTailles()
       this.panierServ.addCommandeMenu(this.commandeProduit)
     } else {
+      this.commandeProduit.burger = produit
       this.panierServ.addCommandeBurger(this.commandeProduit)
     }
     this.toast.success({detail:"SUCCESS",summary:'Nouveau Produit Ajoutée',position:'tr',duration:5000});

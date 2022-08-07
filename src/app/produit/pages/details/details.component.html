@@ -20,9 +20,9 @@
             </div>
             <div class="container-2">
                 <div d-flex>
-                    <span (click)="moins()" class="shadow-sm">-</span>
+                    <span (click)="onValueChange(quantiteVal-1)" class="shadow-sm">-</span>
                     <input #quantite (change)="onValueChange(quantite.value)"  class="shadow" type="text" name="" id="" value="{{quantiteVal}}">
-                    <span (click)="plus()" class="shadow-sm">+</span>
+                    <span (click)="onValueChange(quantiteVal+1)" class="shadow-sm">+</span>
                 </div>
             </div>
             <ng-container *ngIf="produitComplements.produit?.type == 'Menu'">
@@ -53,7 +53,7 @@
                         </div>
                         <div class="menu-boissons">
                             <ng-container *ngFor="let duo of produitComplements.produit?.menuTailles">
-                                <ild-menu-boisson (emiter2)="getCommandeMenuBoissonTailles($event)" (emiter)="activeBtn($event)" [menuTaille]="duo"></ild-menu-boisson>
+                                <ild-menu-boisson [commandeMenuBoissonTaillesMod]="produitComplements?.produit?.commandeMenuBoissonTailles" [quantite]="quantiteVal" (emiter2)="getCommandeMenuBoissonTailles($event)" (emiter)="activeBtn($event)" [menuTaille]="duo"></ild-menu-boisson>
                             </ng-container>
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                 </div>
         </ng-container>
         <ng-container *ngIf="produitComplements == null">
-            <div class="page">Chargement</div>
+            <ild-loader></ild-loader>>
         </ng-container>
     </div>
 </div>

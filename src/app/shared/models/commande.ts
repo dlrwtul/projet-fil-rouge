@@ -8,6 +8,8 @@ export interface Commande {
     numero?: string;
     createdAt?: Date;
     montant?: number;
+    telephone?:string;
+    adresse?:string
     zone?: Zone;
     quartier?: Quartier;
     commandeBoissonTailles?: CommandeBoissonTaille[];

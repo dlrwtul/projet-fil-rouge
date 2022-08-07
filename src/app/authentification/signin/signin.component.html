@@ -1,47 +1,54 @@
-<ild-layout></ild-layout>
+<ild-layout [text]="text" [previousUrl]="previousUrl"></ild-layout>
 <div class="inscription">
     <div class="tab-signin shadow">
-        <div class="form-part shadow-sm">
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)" class="form-part shadow-sm">
             <div class="form-part-head fs-4">S'Inscrire</div>
             <div class="form-part-body">
                 <div>
                     <div>
                         <label for="">Prenom</label>
-                        <input type="text" name="" id="" class="form-control">
+                        <input formControlName="prenom" placeholder="Entrer Votre Prenom" type="text" name="" id="" class="form-control">
                     </div>
                     <div>
                         <label for="">Nom</label>
-                        <input type="text" name="" id="" class="form-control">
+                        <input formControlName="nom" placeholder="Entrer Votre Nom" type="text" name="" id="" class="form-control">
                     </div>
                     <div>
                         <label for="">Telephone</label>
                         <div class="telephone">
                             <input class="indicatif" type="text" value="+ 221">
-                            <input type="text" name="" id="" class="phone form-control">
+                            <input formControlName="telephone" placeholder="Entrer Votre Numero de Telephone" type="text" name="" id="" class="phone form-control">
                         </div>
                     </div>
                     <div>
                         <label for="">Adresse</label>
-                        <input type="text" name="" id="" class="form-control">
+                        <input formControlName="adresse" placeholder="Entrer Votre Adresse de Domicile" type="text" name="" id="" class="form-control">
                     </div>
                 </div>
                 <div>
                     <div>
                         <label for="">login</label>
-                        <input type="email" name="" id="" class="form-control">
+                        <input formControlName="login" placeholder="Entrer Votre Email" type="email" name="" id="" class="form-control">
                     </div>
                     <div>
                         <label for="">Password</label>
-                        <input type="password" name="" id="" class="form-control">
+                        <input #passwordInput formControlName="planPassword" placeholder="Entrer Votre Mot de Passe" type="password" name="" id="" class="form-control ">
                     </div>
                     <div>
                         <label for="">Confirm Password</label>
-                        <input type="password" name="" id="" class="form-control">
+                        <input #confirmInput formControlName="confirmPassword" placeholder="Confirmer Votre Mot de Passe" type="password" name="" id="" class="form-control">
+                        <ng-container *ngIf="confirmInput.value != passwordInput.value,then content else content_rev"></ng-container>
+                        <ng-template #content>
+                            <small class="bg-danger text-light px-3 font-bold animate-bounce rounded w-max">Confirmation Invalide</small>
+                        </ng-template>
+                        <ng-template #content_rev>
+                            <small [hidden]=" passwordInput.value == '' " class="bg-green-700 text-light px-3 font-bold rounded w-max">Confirmation Valide</small>
+                        </ng-template>
                     </div>
 
                 </div>
             </div>
-            <button class="btn">Connexion</button>
-        </div>
+            <button type="submit" [disabled]="myForm.invalid" class="btn">Connexion</button>
+        </form>
     </div>
 </div>

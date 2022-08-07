@@ -66,6 +66,7 @@ export class CardComponent implements OnInit,AfterViewInit {
 
     if (this.produit?.type == "Burger") {
       this.commandeBurger.produit = this.produit
+      this.commandeBurger.burger = this.produit
       this.commandeBurger.quantite = this.quantiteVal
       this.commandeBurger.prix = this.produit.prix
       console.log(this.commandeBurger)
