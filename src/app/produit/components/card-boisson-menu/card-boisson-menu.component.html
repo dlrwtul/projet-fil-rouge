@@ -3,6 +3,6 @@
         <input #checkbox type="checkbox" name="" id="">
     </div>
     <div [hidden]="checkbox.checked == false">
-        <ild-plus-moins (emiter)="sendToP($event)" [checked]="checkbox.checked" [block]="block"></ild-plus-moins>
+        <ild-plus-moins [quantiteVal]="quantiteVal" (emiter)="sendToP($event)" [checked]="checkbox.checked" [block]="block"></ild-plus-moins>
     </div>
 </div>

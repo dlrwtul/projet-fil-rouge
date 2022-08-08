@@ -3,6 +3,7 @@ import { NgToastService } from 'ng-angular-popup';
 import { map } from 'rxjs';
 import { EventService } from 'src/app/shared/services/event-service.service';
 import { BoissonTaille } from '../../shared/models/boisson-taille';
+import { CommandeMenuBoissonTaille } from 'src/app/shared/models/commande-menu-boisson-taille';
 
 @Component({
   selector: 'ild-card-boisson-menu',
@@ -17,15 +18,29 @@ export class CardBoissonMenuComponent implements OnInit,AfterViewInit {
   @ViewChild('checkbox') checkbox!: ElementRef;
   @Output() emiter : EventEmitter<[number,(number|undefined),number,boolean]> = new EventEmitter
   quantiteVal:number = 0;
+  @Input() checkedBoissonTaille : CommandeMenuBoissonTaille[]|undefined = []
 
   constructor(private eventServ: EventService,private toast : NgToastService) { }
 
   ngOnInit(): void {
+    
   }
 
   ngAfterViewInit(): void {
     const divEl: HTMLDivElement = this.content.nativeElement;
     divEl.style.backgroundImage = `url('./assets/img/${this.boissonTaille?.boisson?.nom}.jpg')`;
+    if (this.checkedBoissonTaille != undefined) {
+      
+      this.checkedBoissonTaille.forEach(element => {
+        if (element.boissonTaille?.id == this.boissonTaille?.id) {
+          this.checkbox.nativeElement.checked = true
+          this.quantiteVal = element.quantite
+          for (let index = 0; index < element.quantite; index++) {
+            this.sendToP([-1,element.quantite])
+          }
+        }
+      });
+    }
   }
 
   sendToP(tab : [number,number]){

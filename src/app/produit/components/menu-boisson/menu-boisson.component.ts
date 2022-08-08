@@ -22,19 +22,20 @@ export class MenuBoissonComponent implements OnInit {
   constructor(private eventServ: EventService) { }
 
   ngOnInit(): void {
-    if(this.commandeMenuBoissonTaillesMod != undefined){
-      console.log(this.commandeMenuBoissonTaillesMod);
-    }
     this.eventServ.getEventObs().subscribe(data => {
       if (this.menuTaille != null) {
         if (data ==null) {
-            this.tot = structuredClone(this.menuTaille.quantite)*this.quantite
+          this.tot = structuredClone(this.menuTaille.quantite)*this.quantite
         }else {
           this.tot = this.tot + structuredClone(this.menuTaille.quantite)*data
           this.block = false
         }
       }
     })
+
+    if (this.menuTaille != null && this.commandeMenuBoissonTaillesMod != []) {
+      this.tot = structuredClone(this.menuTaille.quantite)*this.quantite
+    }
   }
 
   getVal(tab:[number,number|undefined,number,boolean]){

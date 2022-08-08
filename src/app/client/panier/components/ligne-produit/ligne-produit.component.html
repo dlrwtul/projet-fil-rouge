@@ -38,7 +38,7 @@
                 </button>
             </ng-container>
             <ng-container *ngIf="produit?.type == 'Menu' || produit?.type == 'Burger'">
-                <button [routerLink]='[{ outlets: { sidebar: ["produit","details",produit?.id] } }]' [queryParams]="{data: commandeProduit.quantite}" class="btn border">
+                <button (click)="modify()" [routerLink]='[{ outlets: { sidebar: ["produit","details",produit?.id] } }]' [queryParams]="{data: commandeProduit.quantite}" class="btn border">
                     <span>
                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAAf0lEQVRIie2VWwqAIBBFj9JqWkA/0Y5aVHuxttB27McvcXyEQeAcGJA7wtXBi6CMyAX4qFxvE5PQfMPe19hMbwW2hO7IT6TULxpb6m8pTUns/2rUZ0Lr/rgUGDnHR6iYLjmeBNMb2MN6AebMAUFzrFQybo6NYPb5f9yC5lhReAAeWkWhCem/HQAAAABJRU5ErkJggg==">
                     </span>

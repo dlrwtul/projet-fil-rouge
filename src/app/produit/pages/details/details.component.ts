@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
-import { map, Observable, tap } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { CommandeMenuBoissonTaille } from 'src/app/shared/models/commande-menu-boisson-taille';
 import { CommandeProduit } from 'src/app/shared/models/commande-produit';
 import { EventService } from 'src/app/shared/services/event-service.service';
@@ -50,10 +50,12 @@ export class DetailsComponent implements OnInit,OnDestroy,AfterViewInit {
     this.quantiteVal = data;
 
     this.eventServ.getEventObs().subscribe(data => {
-      this.quantiteVal = data.quantite
-      this.menu = data.menu
+      if (typeof data.quantite == "number") {
+        this.quantiteVal = data.quantite
+        this.menu = data.menu
+      }
     });
-    
+
     if (this.menu == null) {
       this.produitComplements = this.store.getWithComplements$(id)
     }else {
@@ -117,15 +119,16 @@ export class DetailsComponent implements OnInit,OnDestroy,AfterViewInit {
   }
 
   addBtn(produit : Produit) {
-    this.commandeProduit.produit = produit
     this.commandeProduit.quantite = this.quantiteVal
     this.commandeProduit.prix = produit.prix
     if (produit.type == "Menu") {
       this.commandeProduit.menu = produit
-      this.commandeProduit.produit.commandeMenuBoissonTailles = this.setCommandeMenuBoissonTailles()
+      this.commandeProduit.menu.commandeMenuBoissonTailles = this.setCommandeMenuBoissonTailles()
+      this.commandeProduit.produit = this.commandeProduit.menu
       this.panierServ.addCommandeMenu(this.commandeProduit)
     } else {
       this.commandeProduit.burger = produit
+      this.commandeProduit.produit = this.commandeProduit.burger
       this.panierServ.addCommandeBurger(this.commandeProduit)
     }
     this.toast.success({detail:"SUCCESS",summary:'Nouveau Produit Ajoutée',position:'tr',duration:5000});

@@ -9,7 +9,7 @@
     </div>
     <div class="boissons">
         <ng-container *ngFor="let boissonTaille of menuTaille?.taille?.boissonTailles">
-            <ild-card-boisson-menu (emiter)="getVal($event)"  [boissonTaille]="boissonTaille" [block]="block"></ild-card-boisson-menu>
+            <ild-card-boisson-menu [checkedBoissonTaille]="commandeMenuBoissonTaillesMod"  (emiter)="getVal($event)"  [boissonTaille]="boissonTaille" [block]="block"></ild-card-boisson-menu>
         </ng-container>
     </div>
 </div>

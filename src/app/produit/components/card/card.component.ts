@@ -71,7 +71,7 @@ export class CardComponent implements OnInit,AfterViewInit {
       this.commandeBurger.prix = this.produit.prix
       console.log(this.commandeBurger)
       this.panierServ.addCommandeBurger(this.commandeBurger)
-      this.toast.success({detail:"SUCCESS",summary:'Nouveau Produit Ajoutée',position:'br',duration:5000});
+      this.toast.success({detail:"SUCCESS",summary:'Nouveau Produit Ajoutée',position:'tr',duration:5000});
     } else {
       this.router.navigate([ "/client/produit",{ outlets: { sidebar: ["details",this.produit?.id] } }],{ queryParams :{data: this.quantiteVal}})
       this.toast.warning({detail:"WARNING",summary:"Veuillez d'abord choisir les boissons !",position:'tr',duration:5000});

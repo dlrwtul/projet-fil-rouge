@@ -28,14 +28,20 @@ export class LigneProduitComponent implements OnInit {
     }
     this.getTotal()
     this.emiter.emit(this.total)
+    console.log(this.commandeProduit);
+    
   }
 
   getVal(tab:[number,number]) {
     if (tab[1] > 0) {
       this.commandeProduit.quantite = tab[1]
-      this.getTotal()
-      this.emiter.emit(-1*this.commandeProduit.prix*tab[0])
-      this.emiterChange.emit(true)
+      if (this.produit?.type != "Menu") {
+        this.getTotal()
+        this.emiter.emit(-1*this.commandeProduit.prix*tab[0])
+        this.emiterChange.emit(true)
+      }else {
+        this.modify()
+      }
     }
   }
 
@@ -55,7 +61,7 @@ export class LigneProduitComponent implements OnInit {
 
   modify(){
     this.eventServ.setToBihavior(this.commandeProduit)
-    //console.log([ "" , { outlets: { sidebar: ["produit","details",this.produit?.id] } } ])
-    this.router.navigate(["client","panier",{ outlets: { sidebar: [ 'details', this.produit?.id ] }}]);   }
+    this.router.navigate(["client","panier",{ outlets: { sidebar: [ 'details', this.produit?.id ] }}]);  
+  }
 
 }
