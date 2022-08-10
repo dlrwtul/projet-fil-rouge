@@ -1,5 +1,5 @@
-import { AfterViewInit, ChangeDetectorRef, Component, HostListener, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { slider } from './animations-router';
 import { PanierService } from './shared/services/panier-service.service';
 
@@ -11,12 +11,30 @@ import { PanierService } from './shared/services/panier-service.service';
     slider,
   ]
 })
-export class AppComponent implements AfterViewInit {
+
+export class AppComponent implements AfterViewInit,OnInit {
+
+  @ViewChild('nav') navBar!: ElementRef;
+  @ViewChild('messages') messages!: ElementRef;
+  @ViewChild('parameters') parameters!: ElementRef;
+  isAdmin :boolean = false;
   loading :boolean = true;
-  title = 'projet-fil-rouge';
+  title : string = 'projet-fil-rouge';
 
-  constructor(private panierServ : PanierService){
+  constructor(private panierServ : PanierService,private router : Router){
 
+  }
+
+  ngOnInit(): void {
+      this.router.events.subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+          const url = (<NavigationEnd>event).url;
+          if (url.split("/")[1] == "admin") {
+            this.isAdmin = true
+          }
+
+        }
+    });
   }
 
   prepareRouteOutlet(outlet: RouterOutlet) {
@@ -25,7 +43,6 @@ export class AppComponent implements AfterViewInit {
 
   @HostListener('window:beforeunload', ['$event'])
     beforeUnloadHander($event : any) {
-      console.log("bain")
       this.panierServ.savePanier();
     }
 
@@ -36,6 +53,24 @@ export class AppComponent implements AfterViewInit {
     
   ngAfterViewInit(): void {
     this.panierServ.restorePanier();
+  }
+
+  toggleNav() {
+    this.navBar.nativeElement.classList.toggle('hide')
+  }
+
+  toggleMessages() {
+    if (this.parameters.nativeElement.classList.contains('show')) {
+      this.parameters.nativeElement.classList.remove('show')
+    }
+    this.messages.nativeElement.classList.toggle('show')
+  }
+
+  toggleParameters () {
+    if (this.messages.nativeElement.classList.contains('show')) {
+      this.messages.nativeElement.classList.remove('show')
+    }
+    this.parameters.nativeElement.classList.toggle('show')
   }
 
 }

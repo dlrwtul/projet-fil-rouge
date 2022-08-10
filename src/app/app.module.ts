@@ -20,7 +20,7 @@ import { NgToastModule } from 'ng-angular-popup'
     BrowserAnimationsModule,
     NgbModule,
     HttpClientModule,
-    NgToastModule
+    NgToastModule,
   ],
   providers: [
   ],

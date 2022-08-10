@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/authentification/shared/services/auth.service';
@@ -26,7 +26,7 @@ export class PanierComponent implements OnInit {
   commande$ : Observable<Commande> |undefined = undefined ; 
   commande : Commande = {}
   quartiers$ : Observable<Quartier[]> | undefined = undefined
-  constructor(private formBuilder : FormBuilder,private panierServ: PanierService,private toast : NgToastService,private zoneStoreServ : ZoneStoreService,private commandeServ : CommandeStoreService,private changeDetector:ChangeDetectorRef,private authServ : AuthService,private router : Router) { }
+  constructor(private formBuilder : FormBuilder,private panierServ: PanierService,private toast : NgToastService,private zoneStoreServ : ZoneStoreService,private commandeServ : CommandeStoreService,private changeDetector:ChangeDetectorRef,private authServ : AuthService,private router : Router,private activatedRouter : ActivatedRoute) { }
 
   ngOnInit(): void {
     this.commande$ = this.panierServ.getCommande();
@@ -35,6 +35,9 @@ export class PanierComponent implements OnInit {
       adresse : ["",Validators.required],
       telephone : ["",Validators.required,Validators.pattern(/^[0-9]+$/),Validators.maxLength(9),Validators.minLength(9)]
     })
+    if (this.activatedRouter.snapshot.queryParams['previousUrl'] != null) {
+      this.validCommande()
+    }
   }
 
   getMontant(value :number) {
@@ -48,6 +51,7 @@ export class PanierComponent implements OnInit {
 
   validCommande(){
     if (this.authServ.isAuthentificated()) {
+      
       this.panierServ.getCommandeObject().subscribe((data) => this.commande = data)
       if (!this.isCollapsed) {
         this.commande.telephone = this.myForm.value.telephone
@@ -55,7 +59,7 @@ export class PanierComponent implements OnInit {
         this.quartiers$?.subscribe(data => this.commande.quartier = data[this.myForm.value.quartier])
         this.commande.zone = this.commande.quartier?.zone
       }
-      console.log(this.commande)
+
       this.commandeServ.$newCommande(this.commande).subscribe({
         next:(value:any) => {
           this.panierServ.viderPanier()

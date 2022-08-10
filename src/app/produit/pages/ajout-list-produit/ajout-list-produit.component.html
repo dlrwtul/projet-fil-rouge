@@ -1,0 +1,40 @@
+<div class="produits flex">
+    <div class="new w-full border-2 rounded">
+        <mat-tab-group class="h-full border-none shadow-sm" color="warn" mat-align-tabs="start">
+            <mat-tab class="h-full" label="Burger">
+                <form [formGroup]="myForm" (ngSubmit)="submit()" enctype="multipart/form-data" action="" class="form">
+                    <div class="form-head text-2xl">
+                        Ajouter un Burger
+                    </div>
+                    <div class="form-body">
+
+                        <div class="image">
+    
+                        </div>
+                        <div class="champs">
+                            <div>
+                                <label for=""></label>
+                                <input type="text">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </mat-tab>
+            <mat-tab label="Menu">
+            </mat-tab>
+
+            <mat-tab label="Boisson">
+
+            </mat-tab>
+            <mat-tab label="Portion Frites">
+
+            </mat-tab>
+            <mat-tab label="Taille">
+
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+    <div class="list">
+        
+    </div>
+</div>

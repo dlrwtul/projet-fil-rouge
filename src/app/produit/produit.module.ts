@@ -12,6 +12,8 @@ import { PlusMoinsComponent } from './components/plus-moins/plus-moins.component
 import { MenuBoissonComponent } from './components/menu-boisson/menu-boisson.component';
 import { WaitCardComponent } from './components/wait-card/wait-card.component';
 import { CardBoissonMenuComponent } from './components/card-boisson-menu/card-boisson-menu.component';
+import { AjoutListProduitComponent } from './pages/ajout-list-produit/ajout-list-produit.component';
+import {MatTabsModule} from '@angular/material/tabs'; 
 
 
 @NgModule({
@@ -24,12 +26,14 @@ import { CardBoissonMenuComponent } from './components/card-boisson-menu/card-bo
     PlusMoinsComponent,
     MenuBoissonComponent,
     WaitCardComponent,
-    CardBoissonMenuComponent
+    CardBoissonMenuComponent,
+    AjoutListProduitComponent
   ],
   imports: [
     CommonModule,
     ProduitRoutingModule,
     SharedModule,
+    MatTabsModule
   ],
   exports : [
     PlusMoinsComponent

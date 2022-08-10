@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AjoutListProduitComponent } from './pages/ajout-list-produit/ajout-list-produit.component';
 import { CatalogueComponent } from './pages/catalogue/catalogue.component';
 import { DetailsComponent } from './pages/details/details.component';
+import { AuthGuard } from '../authentification/shared/services/auth.guard';
 
 const routes: Routes = [
   { 
@@ -12,14 +14,15 @@ const routes: Routes = [
     path: 'details/:id', 
     outlet: 'sidebar',
     component: DetailsComponent ,
-    data: {
-      animation: "slide"
-    }
-  }
+  },
+  { 
+    path: 'ajout-list-produit', 
+    component: AjoutListProduitComponent ,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+exports: [RouterModule]
 })
 export class ProduitRoutingModule { }

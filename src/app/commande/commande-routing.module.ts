@@ -8,7 +8,8 @@ const routes: Routes = [
   {
     path: '',
     component: MesCommandesComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data : {role:"ROLE_CLIENT"}
   },
   {
     path: 'details/:id',

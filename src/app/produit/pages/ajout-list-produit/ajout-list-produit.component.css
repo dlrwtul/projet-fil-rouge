@@ -1,0 +1,42 @@
+.produits {
+    height: 130vh;
+    width: 100%;
+    padding: 2%;
+}
+
+.mat-primary {
+    color:rgba(0, 136, 255, 0.725) ;
+   }
+
+.new {
+    height: 50vh;
+
+}
+
+.list {
+    height: 80vh;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 1%;
+}
+
+.form-head {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-head {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

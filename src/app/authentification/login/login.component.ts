@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { User } from '../shared/models/user';
 import { AuthService } from '../shared/services/auth.service';
 import { TokenService } from '../shared/services/token.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgToastService } from 'ng-angular-popup';
 import { Router, ActivatedRoute, Route } from '@angular/router';
-import { Location } from '@angular/common';
 import { EventService } from 'src/app/shared/services/event-service.service';
+import jwt_decode from "jwt-decode";
+
 
 @Component({
   selector: 'ild-login',
@@ -68,15 +69,21 @@ export class LoginComponent implements OnInit {
         this.tokenServ.setUser(this.user)
         this.tokenServ.setToken(value.token)
         this.toast.success({detail:"SUCCESS",summary:'Connexion reussie',position:'tl',duration:5000});
-        if (this.previousUrl != null) {
-          if (this.previousUrl == '/client/panier') {
-            this.router.navigate(['/client/commande'])
-          }else {
-            this.router.navigate([this.previousUrl])
+        let decoded : any = jwt_decode(value.token)
+        if (decoded.roles[0] == "ROLE_GESTIONNAIRE") {
+          this.router.navigate(["/admin"])
+        }else {
+          if (this.previousUrl != null) {
+            if (this.previousUrl == '/client/panier') {
+              this.router.navigate(["/client/panier"],{ queryParams: { previousUrl : "commander" }})
+            }else {
+              this.router.navigate([this.previousUrl])
+            }
+          } else {
+            this.router.navigate([''])
           }
-        } else {
-          this.router.navigate([''])
         }
+        
       },
       error:(err:any)=>{
         const errMess = err.error.message

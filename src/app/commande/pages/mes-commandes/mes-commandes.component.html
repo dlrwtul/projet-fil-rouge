@@ -18,7 +18,8 @@
                 </mat-button-toggle-group>
             </div>
             <div>
-                <input #fDate (input)="getDate(fDate.value)" class="btn border border-dark" type="date" name="" id="" placement="bottom" ngbTooltip="Filter Par date">   
+                <input #fDate (input)="dateFilter(fDate.value)" class="btn border border-dark" type="date" name="" id="" placement="bottom" ngbTooltip="Filter Par date">  
+                
             </div>
         </div>
     </div>
@@ -50,12 +51,16 @@
                             </ng-container>
                         </td>
                     </tr>
+                    
                 </ng-container>
             </tbody>
         </table>
         <ng-container *ngIf="(commandes$|async) == null">
             <ild-loader></ild-loader>
         </ng-container>
+        <div *ngIf="(commandes$|async)?.length == 0" class="w-full  text-2xl font-bold ">
+            Pas de commande Disponnibles
+        </div>
         
     </div>
     <div class="paginate">

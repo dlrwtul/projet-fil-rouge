@@ -40,4 +40,12 @@ export class TokenService {
     window.sessionStorage.clear()
   }
 
+  getRole() {
+    let data = window.sessionStorage.getItem(USER)
+    if (data == null) {
+      return null
+    }
+    return JSON.parse(data)
+  }
+
 }

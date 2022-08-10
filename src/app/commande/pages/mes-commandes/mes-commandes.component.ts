@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { Commande } from 'src/app/shared/models/commande';
 import { EventService } from 'src/app/shared/services/event-service.service';
+import { PanierService } from 'src/app/shared/services/panier-service.service';
 import { CommandeStoreService } from '../../shared/services/commande-store.service';
 
 @Component({
@@ -18,10 +19,11 @@ export class MesCommandesComponent implements OnInit {
   valide = "valide"
   annule = "annule"
   filterVal :string = "en cours"
+  dates : string[] = []
   page = 1;
   commandes$ : Observable<Commande[]> = new Observable
-
-  constructor(private commandeServ : CommandeStoreService,private eventServ : EventService,private router : Router,private toast : NgToastService) { 
+  commandesClone$ :any
+  constructor(private commandeServ : CommandeStoreService,private eventServ : EventService,private router : Router,private toast : NgToastService,private panierServ : PanierService) { 
     
   }
 
@@ -35,17 +37,12 @@ export class MesCommandesComponent implements OnInit {
   }
 
   detailsCommande(commande : Commande){
+    
     this.router.navigate(['client','panier'])
   }
 
   annulerCommande(commande : Commande){
-    let delCommande : Commande = {}
-    if (commande.id != undefined) {  
-      this.commandeServ.$annulerCommande(commande.id).subscribe(data => delCommande = data)
-      this.toast.success({detail:"SUCCESS",summary:'Commmande Annulée avec succes',position:'tl',duration:5000});
-
-    }
-    this.commandes$.pipe(
+    this.commandes$ = this.commandes$.pipe(
       map(data => {
         data.forEach(commande => {
           if (commande.id == delCommande.id) {
@@ -55,13 +52,36 @@ export class MesCommandesComponent implements OnInit {
         return data
       })
     )
+    let delCommande : Commande = {}
+    if (commande.id != undefined) {  
+      this.commandeServ.$annulerCommande(commande.id).subscribe(data => delCommande = data)
+      this.toast.success({detail:"SUCCESS",summary:'Commmande Annulée avec succes',position:'tl',duration:5000});
+
+    }
+    
   }
 
-  getDate(value : string) {
-    console.log(value)
+  dateFilter(value:string){
+    this.commandes$ = this.commandeServ.$commandesClient(this.filterVal)
+    const date = new Date(value)
+    this.commandes$ = this.commandes$.pipe(
+      map(data => {
+        let newData : Commande[] = []
+        data.forEach((commande) => {
+          if (commande.createdAt != undefined) {
+            let createdAt = new Date(commande.createdAt)
+            if (createdAt.toLocaleDateString() == date.toLocaleDateString()) {
+              newData.push(commande)
+            }
+          }
+          
+        })
+        return newData
+      })
+    )
   }
 
-  recommanderCommande(commande : Commande) {
+  recommanderCommande(_commande : Commande): void {
 
   }
 

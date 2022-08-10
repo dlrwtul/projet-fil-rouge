@@ -1,5 +1,5 @@
 <div class="d-flex flex-row justify-content-between align-items-center">
     <span class="shadow-sm" (click)="moins()">-</span>
-        <input readonly class="shadow" #inputQuantite type="text" name="" id="" value="{{quantiteVal}}">
+        <input (input)="getValKp(inputQuantite.value)" (change)="getVal(inputQuantite.value)" class="shadow" #inputQuantite type="text" name="" id="" value="{{quantiteVal}}">
     <span class="shadow-sm" #plusBtn (click)="plus()">+</span>
 </div>

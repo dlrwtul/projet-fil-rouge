@@ -10,6 +10,7 @@ import { EventService } from 'src/app/shared/services/event-service.service';
 export class PlusMoinsComponent implements OnInit {
   @Input('block') block: boolean = false ;
   @Input() checked: boolean = false;
+  pastQute : number = 0
   @Input() lpQuantite :number = 0;
   @Input() quantiteVal : number = 0;
   @ViewChild('inputQuantite') quantite!: ElementRef<HTMLInputElement>;
@@ -19,6 +20,7 @@ export class PlusMoinsComponent implements OnInit {
   constructor(private eventServ : EventService) { }
 
   ngOnInit(): void {
+
   }
 
   plus() {
@@ -45,8 +47,24 @@ export class PlusMoinsComponent implements OnInit {
     }
   }
 
-  /* sendToGP(value:number){
-    this.emiter.emit(value)
-  } */
+  getVal(value : string){
+    if (!isNaN(parseInt(value))) {
+      if (parseInt(value) > this.quantiteVal) {
+        this.quantiteVal = parseInt(value)
+        this.emiter.emit([-parseInt(value),this.quantiteVal])
+      }else {
+        this.emiter.emit([this.quantiteVal- parseInt(value),this.quantiteVal])
+        this.quantiteVal = parseInt(value)
+      }
+      this.pastQute = structuredClone(this.quantiteVal)
+    }
+  }
+
+  getValKp(value : string){
+    if (value == "") {
+      this.emiter.emit([this.quantiteVal,this.quantiteVal])
+      this.quantiteVal = 0
+    }
+  }
 
 }

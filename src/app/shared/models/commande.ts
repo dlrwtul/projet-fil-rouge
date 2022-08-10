@@ -6,7 +6,7 @@ import { Zone } from "./zone";
 export interface Commande {
     id?: number;
     numero?: string;
-    createdAt?: Date;
+    createdAt?: string;
     montant?: number;
     telephone?:string;
     adresse?:string
