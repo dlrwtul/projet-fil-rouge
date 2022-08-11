@@ -9,7 +9,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NotifierModule } from 'angular-notifier';
 import { LoaderComponent } from './loader/loader.component';
-
+import { MatSelectModule } from '@angular/material/select';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,9 @@ import { LoaderComponent } from './loader/loader.component';
     FormsModule,
     MatButtonToggleModule,
     MatDatepickerModule,
-    NotifierModule
+    NotifierModule,
+    MatSelectModule,
+    NgxMatSelectSearchModule
   ],
   exports: [
     LayoutModule,
@@ -37,7 +40,9 @@ import { LoaderComponent } from './loader/loader.component';
     MatButtonToggleModule,
     MatDatepickerModule,
     NotifierModule,
-    LoaderComponent
+    LoaderComponent,
+    MatSelectModule,
+    NgxMatSelectSearchModule
   ]
 })
 export class SharedModule { }

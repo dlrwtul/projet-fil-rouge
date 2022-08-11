@@ -1,0 +1,28 @@
+<div #la_accordion class="lut-accordion notClicked">
+    <div #la_header (click)="hideBody(la_header)" class="la-header">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAACWUlEQVQ4jZ2UP0xTURSHv3tfW0L/KEgTw1hCmOwzbDTUwRpJXGTCBNoYJXFBNgcdm7g4GXRw6EBE80ICE8alCzgpCRN1IqYDjaGL1GotzWt577q0T1reA/Vs95ff+e459557Bd4h5ubmYsCgpmkXLcuSwHfg59jYWDGbzdquSb3rTCYzDTxQSiWBCx6b1YFPQohl0zTX1tfXrVPA+fn5iGmab4HpM6p2iy3btu+srq5+A5Ad1TTNV/8BA7gupVybmZnRHGA6nZ4AMl4Zl4aG0HX9TGggELgF4GsL97ycw8PDPFxcJBwOs7m5ybuNDS/rfeC9BBBCJLxciUSCcDgMQCqV4va056lMAGjZbFYeHh4uAZqbq1wucyUeJxgMAhCLxQj09bG3t9drjcTj8Ze+UqkUAgIddWBggMnJSYR07ov9/X2i0aizTqVSAG7tD/ps2w6dVMbHx7k5NeXVVhe0fHDAzs6Oo0kpI9KyrK6Jb7Va58IALMuiUqn0ase+/v7+X/V63RG3t7epVqv4/H5HGx0dJZlMdsHerKxQLBa7gH6/vyYAkU6nfwARt0piIyMsLCzgb2/Qge3u7vZa7VAoFJGAAgperV3V9b+BAXzJ5XJHnavc8gLm83lKpdJ5MIAP0H4pUspl27af8OflONFoNHixtEQwGKRWq3nBlBAiB+1hLhQKVV3Xj4Ebrm6laDabXjCA54ZhrMCJ38YwjGdCiEfAmZk9YSmlnjabzccdofeDZXZ29rKmaXeBa0opHYgCneE/AirAZ6XURyHEa8Mwvv5DAV1xanO3+A0ByNhBtgt8jAAAAABJRU5ErkJggg==">
+    </div>
+    <div #la_body class="la-body hide">
+        <div (click)="la_accordion.parentElement?.removeChild(la_accordion)" class="la-delete badge badge-error gap-2 cursor-pointer">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-4 h-4 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </div>
+        <div class="la-select">
+            <select  (change)="(select.value != '' && quantiteVal == 0 && quantiteVal = 1 ) || (select.value == '' && quantiteVal = 0)" #select name="" id="produit">
+                <option value="">Choisir un produit</option>
+                <ng-container *ngFor="let data of []">
+                    <!-- <option value="{{data.id}}">{{data.nom}}</option> -->
+                </ng-container>
+            </select>
+        </div>
+        <div class="la-compteur">
+            <span>
+                <img (click)="quantiteVal > 1 &&  quantiteVal = quantiteVal - 1"  class="cursor-pointer" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAAcklEQVRIie2WwQnAIAwArx2rXaDS/Rcw7mFffSiCQeKjNgf5ac4EDAHnj9xAArJRCBA0YjGUvhFrydYQZ83rBihc+yRJFxe7eD1xi/rzHwM5zkaeAk3FI13p3vHJ5WIXrylOEzyiORSw3bsicBkW4XyEB74YSpmdXCsqAAAAAElFTkSuQmCC">
+            </span>
+            <input [disabled]="select.value == ''" type="text" value="{{quantiteVal}}">
+            <span>
+                <img (click)="select.value != '' && quantiteVal = quantiteVal + 1" class="cursor-pointer" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAAiUlEQVRIie2WOw6AIAxAn8ZT+dkl3v8C4D1wMAwaEpHWgdiXsLW8toEAGH9kA3YgKq0AuBJxUJSm5e+SLiOOJdVVcHH1H0kekYgnYKlNlow65b6NBxodtYnF3C//WLHHnNnnQknHuZMvzrHrZOLPGAS5E4LC7T2G87+lTSgJcuj+uzywKjZhNMIB+71PTa5DlQgAAAAASUVORK5CYII=">
+            </span>
+        </div>
+    </div>
+</div>
+

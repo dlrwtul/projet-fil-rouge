@@ -33,6 +33,7 @@
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
     "ng-angular-popup": "^0.1.2",
+    "ngx-mat-select-search": "^4.2.1",
     "rxjs": "~7.5.0",
     "sweetalert2": "^11.4.24",
     "tslib": "^2.3.0",

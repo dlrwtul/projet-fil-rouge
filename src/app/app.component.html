@@ -1,13 +1,11 @@
-<ng-container *ngIf="!isAdmin,then content else other_content">
-</ng-container>
-<ng-template #content>
+<ng-container *ngIf="!isAdmin">
     <router-outlet></router-outlet>
-    <main [@routeAnimations]="prepareRouteOutlet(outlet)" class="content">
+    <ng-container [@routeAnimations]="prepareRouteOutlet(outlet)" class="content">
         <router-outlet #outlet="outlet" name="sidebar"></router-outlet>
-    </main>
+    </ng-container>
     <lib-ng-toast></lib-ng-toast>
-</ng-template>
-<ng-template #other_content>
+</ng-container>
+<ng-container *ngIf="isAdmin">
     <div class="admin">
         <div #nav class="nav shadow-sm bg-gray-50">
             <div class="nav-header pr-3 w-full flex items-center justify-between">
@@ -102,4 +100,4 @@
             </div>
         </div>
     </div>
-</ng-template>
+</ng-container>

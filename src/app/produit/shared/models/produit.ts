@@ -8,6 +8,7 @@ export interface Produit {
     nom: string;
     prix:number
     image?: Blob;
+    file? : File;
     description?: string;
     type: string;
     menuBurgers? : MenuProduit[];
