@@ -16,4 +16,7 @@ export interface Produit {
     menuTailles?: MenuTaille[],
     boissonTailles?: BoissonTaille[],
     commandeMenuBoissonTailles?: CommandeMenuBoissonTaille[];
+    issubmitted?: boolean,
+    etat?: string,
+    isEtat?: boolean
 }

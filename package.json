@@ -29,6 +29,7 @@
     "angular-notifier": "^11.0.0",
     "bootstrap": "^5.2.0",
     "bootstrap-icons": "^1.9.1",
+    "cors": "^2.8.5",
     "daisyui": "^2.22.0",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",

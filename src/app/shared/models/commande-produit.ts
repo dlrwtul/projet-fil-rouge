@@ -7,5 +7,6 @@ export interface CommandeProduit {
     burger?: Produit ;
     menu?: Produit ;
     portionFrites?: Produit ;
-    type: 'CommandeProduit'
+    type: 'CommandeProduit',
+    '@type'? : 'CommandeProduit'
 }

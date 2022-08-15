@@ -1,0 +1,52 @@
+<form [formGroup]="myForm" (ngSubmit)="submit()" action="" class="form bg-gray">
+    <div class="form-body flex w-full h-full">
+        <div class="image w-1/3 p-3 flex flex-col justify-center">
+            <img [ngClass]="{'border-green-500':myForm.get('file')?.valid,'border-red-500':checkInvalid && !myForm.get('file')?.valid}" src="{{url}}" class="imagePreview rounded border-2 shadow-sm" alt="">
+            <input formControlName="file" [hidden]="true" (change)="imagePreview($event)"  type="file"  accept="image/*" name="" id="image">
+            <label class="px-6  py-2 border-2 border-gray-800 rounded self-start mt-3 cursor-pointer" for="image">Selectionner image</label>
+        </div>
+        <div class="border-2 h-full my-2"></div>
+        <div class="champs h-full w-2/3 p-3 flex flex-col justify-between ">
+            <div class="flex flex-col justify-start h-full">
+                <div class="mx-2">
+                    <label class="font-bold text-base" for="nom">Nom</label>
+                    <input [ngClass]="{'border-green-500':myForm.get('nom')?.valid,'border-red-500':checkInvalid && !myForm.get('nom')?.valid}" formControlName="nom" class="form-control my-1" type="text" id="nom">
+                    <small [ngClass]="{'invisible':myForm.get('nom')?.valid || (myForm.get('nom')?.value == '' && !checkInvalid)}" class="text-red-500 animate-bounce">Veuillez entrer un nom</small>
+                </div>
+    
+                <div class="mx-2">
+                    <label class="font-bold text-base" for="prix">Prix</label>
+                    <input [readonly]="key == 'menus'" #prix (change)="myForm.get('prix')?.value < 0 && prix.value = '0'" [ngClass]="{'border-green-500':myForm.get('prix')?.valid,'border-red-500':checkInvalid && !myForm.get('prix')?.valid}" formControlName="prix" class="form-control my-1" type="number" id="prix">
+                    <small [ngClass]="{'invisible':myForm.get('prix')?.valid || (myForm.get('prix')?.value == '' && !checkInvalid)}" class="text-red-500 animate-bounce">Veuillez entrer un prix(nombre) valide</small>
+                </div>
+    
+                <div class="mx-2">
+                    <label class="font-bold text-base" for="description">Description</label>
+                    <textarea formControlName="description" class="form-control my-1"  id="description"></textarea>
+                </div>
+    
+                <div *ngIf="key == 'menus'" class="menuComponents-2 m-2 my-3 w-full">
+                    <span class="h-full flex items-center">
+                        <div class="dropdown dropdown-right z-50 dropdown-hover">
+                            <label tabindex="0" class="m-1">
+                                <img alt=""  class="cursor-pointer" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAABmJLR0QA/wD/AP+gvaeTAAACVElEQVRYhe3Yy04UQRTG8d+oicGVC7ntMCRsvMDSSCIv4IXnMCEhMb6EMVFDcIuvoOheBXRjwoqFwag7QRa4UkQEF90TepruGbqqGTfzJSc5qemq86/rnCp66qk2nUutVjUi64/hJqZwCSM4nf72F1+xhtd4ifXIeJXUwDSWcVDRlnBb/AB11ATeBwDmbQXjJwU5i981QDZtBzN1Ap7CfI2AeZtLY0Tr8QlCNu1pLORsFyCbFrwMJlRfk9v4kNp2xbo7AjZYQ9juXsi0sRBQf0XJ0VW2iKdxrWrvsJHxNwPqX8etoh/KQO8FBIHvGT8EFO4XFRaBjmEyMMhmiV9FkxjNFxaBFg79MRU79SRr9AhDEeiNwAC0wm2UftVZU/mCItDLEQHqGFGSTKxFRUfBH5wpaeAHnqdAG9jCtxRqS+tmggH0YxDDqT+U2h2cL4mzi7Pl/UgS3nbn3Gq7yhW12iFWX/bjWpKBbig/xT+xV1De1AieqWfqR9pw7eJXJ/hPwhOLC5l2+iPa+ZiHKpr6tU49aaPBjD8Q0c4RhiLQNxEBhjL+cEQ7RxiKQBclwx+iOkb0IGVoURHouiTdCtFgiV9Fy/icLyw7nh4GBsnCDZV+1V4PigrLQF/gXUCQ2Klfxquqla5KrgfdvIpcCegckgtX7KXtuHY3FLKpR12AnI+FJFnHcycI+UTNOceM6mu205qMnu4yjUvO2FjIJREb57hqSJ4Ol7BfAW4fbyXvqZWfHWPfKUclF7HmQ+5FhyniHr44fMhdVPCP8z/VJ5ed99RThP4BJ2e/nrC14/AAAAAASUVORK5CYII=">
+                            </label>
+                            <ul tabindex="0" class="dropdown-content rounded-sm shadow bg-white text-black flex">
+                                <li class=" cursor-pointer flex justify-center items-center h-8 w-20 bg-slate-700 text-white font-bold hover:bg-slate-900" (click)="tabProduits.push('burgers')"><a>Burger</a></li>
+                                <li class=" cursor-pointer flex justify-center items-center h-8 w-20 bg-slate-700 text-white font-bold hover:bg-slate-900" (click)="tabProduits.push('portion_frites')"><a>Frite</a></li>
+                                <li class=" cursor-pointer flex justify-center items-center h-8 w-20 bg-slate-700 text-white font-bold hover:bg-slate-900" (click)="tabProduits.push('tailles')"><a>Taille</a></li>
+                            </ul>
+                        </div>
+                        
+                    </span>
+                    <div class="menuComponents-2">
+                        <ng-container *ngFor="let produit of tabProduits">
+                            <ild-lut-accordion [isSubmitted]="isSubmitted" [key]="produit"></ild-lut-accordion>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+            <button class="submit-btn submit-btn-menu self-end relative  py-2 px-4 rounded cursor-pointer" type="submit" >Enregistrer</button>
+        </div>
+    </div>
+</form>

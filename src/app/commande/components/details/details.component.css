@@ -1,0 +1,61 @@
+.details {
+    position: absolute;
+    top: 0;
+    height: 100vh;
+    width: 60vw;
+    background-color: white;
+    z-index: 10;
+    right: -100%;
+    transition: all ease 0.5s;
+    display: flex;
+    flex-direction: column;
+    display: none;
+}
+
+.details.show {
+    right: 0;
+}
+
+.details-head {
+    width: 100%;
+    height: 10%;
+}
+
+.details-body {
+    width: 100%;
+    height: 80%;
+}
+
+.details-footer {
+    width: 100%;
+    height: 10%;
+}
+
+.couverture {
+    width: 100vw;
+    z-index: 9;
+    background-color: rgba(255, 255, 255, 0.3);
+    display: none;
+}
+
+.couverture.show {
+    display: block;
+}
+
+.produits {
+    height: 70vh;
+    overflow-y: scroll;
+}
+
+.ligne {
+    width: 100%;
+    transition: all ease 0.5s;
+    border: 1px solid;
+
+}
+
+.ligne:hover {
+    transform: scaleY(1.2);
+    border: 2px solid;
+
+}

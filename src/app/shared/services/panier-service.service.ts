@@ -35,7 +35,7 @@ export class PanierService {
   }
 
   addCommandeBoissonTaille(commandeBoissonTaille : CommandeBoissonTaille) {
-
+    
     let isIn =false
 
     this.commandePanier.value.commandeBoissonTailles?.map(data => {
@@ -45,7 +45,9 @@ export class PanierService {
       }
       return data
     })
-    
+    if (this.commandePanier.value.commandeBoissonTailles == undefined) {
+      this.commandePanier.value.commandeBoissonTailles = []
+    }
     if (!isIn) {
       return this.commandePanier?.next({
         ...this.commandePanier.value,commandeBoissonTailles:this.commandePanier.value.commandeBoissonTailles?.concat(commandeBoissonTaille)
@@ -106,8 +108,9 @@ export class PanierService {
       }
       return data
     })
-    
+
     if (!isIn) {
+      
       return this.commandePanier?.next({
         ...this.commandePanier.value,commandePortionFrites:this.commandePanier.value.commandePortionFrites?.concat(commandePortionFrite)
       })

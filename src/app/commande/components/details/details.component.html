@@ -1,0 +1,44 @@
+<div #details class="details border-2">
+    <div class="details-head border-b-2 border-black flex justify-between p-1 px-3 items-center">
+        <div class="text-2xl font-bold">Details Commande</div>
+        <div class="self-start"><img (click)="quit()" class="cursor-pointer" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAArCAYAAADhXXHAAAAABmJLR0QA/wD/AP+gvaeTAAAB0UlEQVRYhe2YT0sCQRjGf5H0HewLJEKSnesQVC5ZfY7sIxQFfpo6delQWeqhTvaHpEPn6JCnNG+JYofZAVm1ZmbfFaR94EGZdZ/35+wwOzMQK1asWAAzAhlZYAdYAVLAPDALdIEP4BW4A86BZ4F6TtoCnoC+hR8Bb5KQaaBiCRl0GfUUIpUHtEKCareB3ahA91HjUAJUuwsUpEG9CEC1e8C2FGga+IoIVLuF0BguRwyqXQ0Lmp8QqHYuDKzpPHrC+CdwA5wa5ty7gi4bFqj5v59leP6t+O0AD4Z5GRfYY8PwJpD070kCDb+9EWhvGuYdusCWDMODPbgOdPxPGN3jv/nSBfbdokAfKA7cmx34XrTMeXOB7VgW6QGbgYw17F8m37agCcsC2vVATt0xJ2ELPDU9C1M2Zq8sCkjOBhcusEeG4Z/IzrMHLrBLhuHSb7BFF1hQeyaTAmeoVdOoa1X/us0fd5JnWETKG2FgAa4nBFoJCwpqBS+1SRznJrAgAQtqURzlHiwvBapViAC4C+xJg2rlMJ8v/3IbdewUqVKorUoY0BKCY9REOdSeyQayxvBix1gSp4gZ1ONcRfV6EphDrQ/0KeIt6hTxRaBerFix/r1+AFK7sPaI+GAqAAAAAElFTkSuQmCC"></div>
+    </div>
+    <div class="details-body">
+        <div class="h-24 infos w-full flex justify-between mb-3 p-3">
+            <div class="h-full w-1/2 flex flex-col justify-center">
+                <span class="my-1 text-xl">Numero Commande : {{commande?.numero}}</span>
+                <span class="my-1 text-xl">Date : {{commande?.createdAt | date}}</span>
+            </div>
+            <div class="h-full flex">
+                <span class="text-xl">Montant : {{commande?.montant}}</span>
+            </div>
+        </div>
+        <div class="produits w-full py-3 px-4 overflow-y-scroll">
+            <div *ngFor="let commandeProduit of commande?.commandeProduits" class="ligne rounded h-24 flex mb-2">
+                <ng-container *ngIf="commandeProduit['@type'] == 'CommandeProduit'">
+                    <div class="flex justify-start items-center w-1/5">
+                        <img class="td-img w-2/3 h-full rounded" src="data:image/png;base64,{{commandeProduit.burger?.image}}{{commandeProduit.menu?.image}}{{commandeProduit.portionFrites?.image}}" alt="">
+                    </div>
+                    <div class="flex justify-center items-center w-1/5">{{commandeProduit.portionFrites?.nom}}{{commandeProduit.burger?.nom}}{{commandeProduit.menu?.nom}}</div>
+                </ng-container>
+                <ng-container *ngIf="commandeProduit['@type'] == 'CommandeBoissonTaille'">
+                    <div class="flex justify-start items-center w-1/5">
+                        <img class="td-img w-2/3 h-full rounded" src="data:image/png;base64,{{commandeProduit.boissonTaille?.boisson?.image}}" alt="">
+                    </div>
+                    <div class="flex justify-center items-center w-1/5">{{commandeProduit.boissonTaille?.boisson?.nom}}</div>
+                </ng-container>
+                
+                <div class="flex justify-center items-center w-1/5">{{commandeProduit.prix}}</div>
+                <div class="flex justify-center items-center w-1/6">x {{commandeProduit.quantite}}</div>
+                <div class="flex justify-center items-center w-1/5">{{calcMontant(commandeProduit)}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="details-footer flex items-center justify-end p-2">
+        <button *ngIf="etat == termine || etat == enCoursLivraison" class="py-2 px-4 bg-success text-light mx-2 font-bold rounded">Valider</button>
+        <button *ngIf="etat == enCours &&  commande?.zone != null" class="py-2 px-4 bg-primary text-light mx-2 font-bold rounded">En Livraison</button>
+        <button *ngIf="etat == enCours &&  commande?.zone == null" class="py-2 px-4 bg-primary text-light mx-2 font-bold rounded">Terminer</button>
+        <button *ngIf="etat != valide && etat != annule" class="py-2 px-4 bg-danger text-light mx-2 font-bold rounded">Annuler</button>
+    </div>
+</div>
+<div #couverture class="couverture absolute top-0 left-0 h-screen overflow-hidden"></div>

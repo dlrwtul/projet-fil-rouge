@@ -8,109 +8,79 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
 
 </head>
-    <div class="produits flex">
-        <div class="new w-full border-2 rounded">
-            <mat-tab-group #formTabs class="h-full w-full border-none shadow-sm" color="warn" mat-align-tabs="start">
-                <mat-tab label="Burger">
-                    <form [formGroup]="myForm" (ngSubmit)="submit('burgers')" enctype="multipart/form-data" action="" class="form bg-gray">
-                        <div class="form-body flex w-full h-full">
-                            <div class="image w-1/3 p-3 flex flex-col justify-center">
-                                <img src="{{url}}" class="imagePreview rounded border" alt="">
-                                <input formControlName="file" [hidden]="true" (change)="imagePreview($event)"  type="file"  accept="image/*" name="" id="image">
-                                <label class="px-6 py-2 border-2 rounded self-start mt-3 cursor-pointer" for="image">Selectionner image</label>
-                            </div>
-                            <div class="border-2 h-96"></div>
-                            <div class="champs w-2/3 p-3 flex flex-col">
-                                <div class="m-2">
-                                    <label for="nom">Nom</label>
-                                    <input formControlName="nom" class="form-control my-1" type="text" id="nom">
-                                </div>
-                                <div class="m-2 my-3">
-                                    <label for="prix">Prix</label>
-                                    <input formControlName="prix" class="form-control my-1" type="number" id="prix">
-                                </div>
-                                <button class="submit-btn self-end relative  py-2 px-4 rounded cursor-pointer" type="submit" [disabled]="myForm.invalid">Enregistrer</button>
-                            </div>
-                        </div>
-                    </form>
-                </mat-tab>
-                <mat-tab label="Menu">
-                    <form [formGroup]="myForm" (ngSubmit)="submit('burgers')" enctype="multipart/form-data" action="" class="form bg-gray">
-                        <div class="form-body flex w-full h-full">
-                            <div class="image w-1/3 p-3 flex flex-col justify-center">
-                                <img src="{{url}}" class="imagePreview rounded border" alt="">
-                                <input formControlName="file" [hidden]="true" (change)="imagePreview($event)"  type="file"  accept="image/*" name="" id="image">
-                                <label class="px-6 py-2 border-2 rounded self-start mt-3 cursor-pointer" for="image">Selectionner image</label>
-                            </div>
-                            <div class="border-2 h-96"></div>
-                            <div class="champs w-2/3 p-3 flex flex-col justify-start ">
-                                <div class="m-2">
-                                    <label for="nom">Nom</label>
-                                    <input formControlName="nom" class="form-control my-1" type="text" id="nom">
-                                </div>
-                                <div class="m-2">
-                                    <label for="prix">Prix</label>
-                                    <input formControlName="prix" class="form-control my-1" type="number" id="prix">
-                                </div>
-                                <div class="menuComponents-2 m-2 my-3 w-full">
-                                    <span class="h-full flex items-center">
-                                        <div class="dropdown dropdown-right z-50 dropdown-hover">
-                                            <label tabindex="0" class="m-1">
-                                                <img alt=""  class="cursor-pointer" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAABmJLR0QA/wD/AP+gvaeTAAACVElEQVRYhe3Yy04UQRTG8d+oicGVC7ntMCRsvMDSSCIv4IXnMCEhMb6EMVFDcIuvoOheBXRjwoqFwag7QRa4UkQEF90TepruGbqqGTfzJSc5qemq86/rnCp66qk2nUutVjUi64/hJqZwCSM4nf72F1+xhtd4ifXIeJXUwDSWcVDRlnBb/AB11ATeBwDmbQXjJwU5i981QDZtBzN1Ap7CfI2AeZtLY0Tr8QlCNu1pLORsFyCbFrwMJlRfk9v4kNp2xbo7AjZYQ9juXsi0sRBQf0XJ0VW2iKdxrWrvsJHxNwPqX8etoh/KQO8FBIHvGT8EFO4XFRaBjmEyMMhmiV9FkxjNFxaBFg79MRU79SRr9AhDEeiNwAC0wm2UftVZU/mCItDLEQHqGFGSTKxFRUfBH5wpaeAHnqdAG9jCtxRqS+tmggH0YxDDqT+U2h2cL4mzi7Pl/UgS3nbn3Gq7yhW12iFWX/bjWpKBbig/xT+xV1De1AieqWfqR9pw7eJXJ/hPwhOLC5l2+iPa+ZiHKpr6tU49aaPBjD8Q0c4RhiLQNxEBhjL+cEQ7RxiKQBclwx+iOkb0IGVoURHouiTdCtFgiV9Fy/icLyw7nh4GBsnCDZV+1V4PigrLQF/gXUCQ2Klfxquqla5KrgfdvIpcCegckgtX7KXtuHY3FLKpR12AnI+FJFnHcycI+UTNOceM6mu205qMnu4yjUvO2FjIJREb57hqSJ4Ol7BfAW4fbyXvqZWfHWPfKUclF7HmQ+5FhyniHr44fMhdVPCP8z/VJ5ed99RThP4BJ2e/nrC14/AAAAAASUVORK5CYII=">
-                                            </label>
-                                            <ul tabindex="0" class="dropdown-content rounded-sm shadow bg-white text-black flex">
-                                              <li class=" cursor-pointer flex justify-center items-center h-8 w-20 bg-slate-700 text-white font-bold hover:bg-slate-900" (click)="tabProduits.push(1)"><a>Burger</a></li>
-                                              <li class=" cursor-pointer flex justify-center items-center h-8 w-20 bg-slate-700 text-white font-bold hover:bg-slate-900" (click)="tabProduits.push(1)"><a>Frite</a></li>
-                                              <li class=" cursor-pointer flex justify-center items-center h-8 w-20 bg-slate-700 text-white font-bold hover:bg-slate-900" (click)="tabProduits.push(1)"><a>Taille</a></li>
-                                            </ul>
-                                        </div>
-                                        
-                                    </span>
-                                    <div class="menuComponents-2">
-                                        <ng-container *ngFor="let produit of tabProduits">
-                                            <ild-lut-accordion [key]="produit"></ild-lut-accordion>
-                                        </ng-container>
-                                    </div>
-                                </div>
-                                <button class="submit-btn submit-btn-menu self-end relative  py-2 px-4 rounded cursor-pointer" type="submit" [disabled]="myForm.invalid">Enregistrer</button>
-                            </div>
-                        </div>
-                    </form>
-                </mat-tab>
-    
-                <mat-tab label="Boisson">
-    
-                </mat-tab>
-                <mat-tab label="Portion Frites">
-                    <form [formGroup]="myForm" (ngSubmit)="submit('burgers')" enctype="multipart/form-data" action="" class="form bg-gray">
-                        <div class="form-body flex w-full h-full">
-                            <div class="image w-1/3 p-3 flex flex-col justify-center">
-                                <img src="{{url}}" class="imagePreview rounded border" alt="">
-                                <input formControlName="file" [hidden]="true" (change)="imagePreview($event)"  type="file"  accept="image/*" name="" id="image">
-                                <label class="px-6 py-2 border-2 rounded self-start mt-3 cursor-pointer" for="image">Selectionner image</label>
-                            </div>
-                            <div class="border-2 h-96"></div>
-                            <div class="champs w-2/3 p-3 flex flex-col">
-                                <div class="m-2">
-                                    <label for="nom">Nom</label>
-                                    <input formControlName="nom" class="form-control my-1" type="text" id="nom">
-                                </div>
-                                <div class="m-2 my-3">
-                                    <label for="prix">Prix</label>
-                                    <input formControlName="prix" class="form-control my-1" type="number" id="prix">
-                                </div>
-                                <button class="submit-btn self-end relative  py-2 px-4 rounded cursor-pointer" type="submit" [disabled]="myForm.invalid">Enregistrer</button>
-                            </div>
-                        </div>
-                    </form>
-                </mat-tab>
-                <mat-tab label="Taille">
-    
-                </mat-tab>
-            </mat-tab-group>
-        </div>
-        <div class="list">
+<div class="produits flex flex-col">
+    <div class="list-produits text-3xl flex flex-col my-2">
+        <div>Ajouter Nouveau</div>
+        <div class="border-2 border-orange-500 w-full my-2"></div>
+    </div>
+    <div class="new w-full border-2 rounded">
+        <mat-tab-group #formTabs class="h-full w-full border-none shadow-sm" color="warn" mat-align-tabs="start">
+            <mat-tab label="Burger">
+                <ild-form (emitter)="getFormData($event)" [key]="'burgers'"></ild-form>
+            </mat-tab>
+            <mat-tab label="Menu">
+                <ild-form (emitter)="getFormData($event)" [key]="'menus'"></ild-form>
+            </mat-tab>
+
+            <mat-tab label="Boisson">
+                <ild-form (emitter)="getFormData($event)" [key]="'boissons'"></ild-form>
+            </mat-tab>
+            <mat-tab label="Portion Frites">
+                <ild-form (emitter)="getFormData($event)" [key]="'portion_frites'"></ild-form>
+            </mat-tab>
+            <mat-tab label="Taille">
+                <ild-form (emitter)="getFormData($event)" [key]="'tailles'"></ild-form>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+    <div class="list-produits text-3xl flex flex-col mt-3">
+        <div>Listes des Produits</div>
+        <div class="border-2 border-orange-500 w-full my-2"></div>
+    </div>
+    <div class="list flex flex-col">
+        <div class="table-container">
+            <table class="table shadow rounded">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Image</th>
+                        <th>Nom</th>
+                        <th>Prix</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngIf="produits != null">
+                        <tr #tr *ngFor="let produit of produits">
+                            <td>{{produit.type}}</td>
+                            <td class="flex justify-center items-center p-1 border-none"><img class="td-img" src="data:image/png;base64,{{produit.image}}" alt=""></td>
+                            <td>{{produit.nom}}</td>
+                            <td>{{produit.prix}}</td>
+                            <td>
+                                <a  class="bg-blue-500 text-light py-2 px-4 rounded cursor-pointer mx-3 hover:bg-blue-700" >Modifier</a>
+                                <a (click)="delete(produit.id,tr)"  class="bg-red-500 text-light py-2 px-4 rounded cursor-pointer mx-3 hover:bg-red-700" >Supprimer</a>
+
+                            </td>
+                        </tr>
+                        
+                    </ng-container>
+                </tbody>
+            </table>
+            <ng-container *ngIf="produits == null">
+                <ild-loader></ild-loader>
+            </ng-container>
+            <div *ngIf="produits.length == 0" class="w-full  text-2xl font-bold ">
+                Pas de Produits Disponnibles
+            </div>
             
         </div>
+        <div *ngIf="produits.length != 0" class="paginate flex items-center h-16">
+            <span (click)="paginate('first')" class="flex cursor-pointer rounded-l-sm justify-center items-center w-20 h-8 text-white bg-gray-900">Premier</span>
+            <span (click)="paginate('previous')" class="flex cursor-pointer justify-center items-center w-20 h-8 text-white bg-gray-800">precedent</span>
+            <span class="flex cursor-pointer justify-center items-center w-20 h-8 text-white font-bold bg-gray-700">{{page}}</span>
+            <span (click)="paginate('next')" class="flex cursor-pointer justify-center items-center w-20 h-8 text-white bg-gray-800">suivant</span>
+            <span (click)="paginate('last')" class="flex cursor-pointer rounded-r-sm justify-center items-center w-20 h-8 text-white bg-gray-900">Derinier</span>
+        </div>
     </div>
+</div>
 </html>

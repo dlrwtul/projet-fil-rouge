@@ -4,5 +4,6 @@ export interface CommandeBoissonTaille {
     quantite :number;
     boissonTaille?: BoissonTaille;
     prix?: number;
-    type: 'CommandeBoissonTaille'
+    type: 'CommandeBoissonTaille',
+    '@type'? : 'CommandeBoissonTaille'
 }

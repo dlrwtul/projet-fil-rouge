@@ -17,11 +17,16 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree 
   {
-    let decoded : any = jwt_decode(this.tokenServ.getToken())
-    if (!this.authServ.isAuthentificated() || route.data['role'] != decoded.roles[0]) {
+    
+    if (!this.authServ.isAuthentificated()) {
       this.router.navigate(["/securite/login"])
       return false
     }
+    let decoded : any = jwt_decode(this.tokenServ.getToken())  
+    if (decoded.roles.indexOf(route.data['role']) == -1) {
+      this.router.navigate(["/securite/login"])
+      return false
+    } 
     return true;
   }
   

@@ -28,7 +28,12 @@ export class MenuBoissonComponent implements OnInit {
           this.tot = structuredClone(this.menuTaille.quantite)*this.quantite
         }else {
           this.tot = this.tot + structuredClone(this.menuTaille.quantite)*data
-          this.block = false
+          if (this.tot != 0) {
+            this.block = false
+          }else {
+            this.emiter.emit(1)
+            this.block = true
+          }
         }
       }
     })

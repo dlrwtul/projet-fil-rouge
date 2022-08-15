@@ -1,0 +1,87 @@
+<div class="mes-commandes w-full">
+    <div class="list-produits text-3xl flex flex-col w-full mx-2">
+        <div>Listes des Commandes</div>
+        <div class="border-2 border-orange-500 w-full my-2"></div>
+    </div>
+    <div class="d-flex head justify-content-between my-3 px-1.5">
+        <form action="">
+            <div class="search-group">
+                <label class="label-search-group" for="search-input">
+                  Recherche
+                </label>
+                <input  #fNum type="text" id="search-input" placeholder="Entre Numero Commande" class="input-search-group">
+            </div>
+        </form>
+        <div>
+            <div>
+                <mat-button-toggle-group (change)="onValChange($event.value)" appearance="legacy" name="fontStyle" aria-label="Font Style">
+                    <mat-button-toggle value="{{enCours}}" checked>En cours</mat-button-toggle>
+                    <mat-button-toggle value="{{termine}}">Terminé</mat-button-toggle>
+                    <mat-button-toggle value="{{enCoursLivraison}}">En Livraison</mat-button-toggle>
+                    <mat-button-toggle value="{{valide}}">Validé</mat-button-toggle>
+                    <mat-button-toggle value="{{annule}}">Annulé</mat-button-toggle>
+                </mat-button-toggle-group>
+            </div>
+            <div>
+                <form action="">
+                    <input #fDate class="btn border border-dark" type="date" name="" id="" placement="bottom" ngbTooltip="Filter Par date">  
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="table-container">
+        <table class="table shadow-sm rounded">
+            <thead>
+                <tr>
+                    <th>Etat</th>
+                    <th>Numero Commande</th>
+                    <th>Date</th>
+                    <th>Montant</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngIf="(commandes$|async) != null">
+                    <tr #tr *ngFor="let commande of (commandes$|async)|fitlterNum:fNum.value|fitlterDate:fDate.value">
+                    <!-- <tr #tr *ngFor="let commande of (commandes$|async)|fitlterDate:fDate.value"> -->
+                        <td><span class="etat text-light font-bold"  [ngClass]="{'bg-blue-500': filterVal == enCours,'bg-emerald-700': filterVal == termine,'bg-orange-600': filterVal == enCoursLivraison, 'bg-green-500': filterVal == valide, 'bg-red-500': filterVal == annule}">{{filterVal}}</span></td>
+                        <td>{{commande.numero}}</td>
+                        <td>{{commande.createdAt | date:'dd/MM/yyyy'}}</td>
+                        <td>{{commande.montant}}</td>
+                        <td>
+                            <ng-container *ngIf="filterVal == enCours && commande.zone == null">
+                                <button (click)="changeEtat(commande.id,termine,tr)"  class="py-2 px-4 bg-primary text-light mx-2">Terminer</button>
+                            </ng-container>
+                            <ng-container *ngIf="(filterVal == termine && commande.zone == null) || filterVal == enCoursLivraison">
+                                <button (click)="changeEtat(commande.id,valide,tr)"  class="py-2 px-4 bg-primary text-light mx-2">Valider</button>
+                            </ng-container>
+                            <ng-container *ngIf="(filterVal == enCours && commande.zone != null)">
+                                <button (click)="changeEtat(commande.id,enCoursLivraison,tr)"  class="py-2 px-4 bg-primary text-light mx-2">En livraison</button>
+                            </ng-container>
+                            <button (click)="charge(commande)"  class="py-2 px-4 bg-dark text-light mx-2" >Details</button>
+                            <ng-container *ngIf="filterVal != valide && filterVal != annule">
+                                <button (click)="changeEtat(commande.id,annule,tr)"  class="py-2 px-4 bg-danger text-light mx-2">Annuler</button>
+                            </ng-container>
+                        </td>
+                    </tr>
+                    
+                </ng-container>
+            </tbody>
+        </table>
+        <ng-container *ngIf="(commandes$|async) == null">
+            <ild-loader></ild-loader>
+        </ng-container>
+        <div *ngIf="(commandes$|async)?.length == 0" class="w-full  text-2xl font-bold ">
+            Pas de commande Disponnibles
+        </div>
+    </div>
+    <div class="paginate">
+        <mat-paginator [length]="(commandes$|async)?.length"
+              [pageSize]="8"
+              [pageSizeOptions]="[8]"
+              aria-label="Select page">
+        </mat-paginator>
+    </div>
+    <ild-details [etat]="filterVal" [commandes]="detailsCommande"></ild-details>
+</div>
+

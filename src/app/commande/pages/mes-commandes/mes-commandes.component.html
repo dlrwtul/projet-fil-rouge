@@ -64,14 +64,6 @@
         
     </div>
     <div class="paginate">
-        <!-- <ngb-pagination 
-            [collectionSize]="120"
-            [(page)]="page"
-            [maxSize]="5" 
-            [rotate]="true" 
-            [ellipses]="true" 
-            [boundaryLinks]="true">
-        </ngb-pagination> -->
         <mat-paginator [length]="(commandes$|async)?.length"
               [pageSize]="8"
               [pageSizeOptions]="[8]"

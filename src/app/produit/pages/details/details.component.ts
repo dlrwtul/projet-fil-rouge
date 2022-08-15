@@ -93,6 +93,7 @@ export class DetailsComponent implements OnInit,OnDestroy,AfterViewInit {
         this.quantite.nativeElement.style.border = 'none';
       }, 2000);
     }else {
+      this.nbrBlockCheck = 0
       this.eventServ.setToBihavior(value-this.quantiteVal)
       this.quantiteVal = value
     }

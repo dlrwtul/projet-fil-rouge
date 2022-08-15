@@ -3,7 +3,6 @@
     <ng-container [@routeAnimations]="prepareRouteOutlet(outlet)" class="content">
         <router-outlet #outlet="outlet" name="sidebar"></router-outlet>
     </ng-container>
-    <lib-ng-toast></lib-ng-toast>
 </ng-container>
 <ng-container *ngIf="isAdmin">
     <div class="admin">
@@ -44,7 +43,7 @@
                         Livraison
                     </div>
                 </div>
-                <div class="btn-choice shadow-sm flex items-center justify-between">
+                <div routerLink="/admin/commande/all-commandes" class="btn-choice shadow-sm flex items-center justify-between">
                     <div class="icon flex justify-center items-center w-12 h-12 mx-3">
                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAA4klEQVRYhe3WMU7DMBSA4U8IKcwwsbQbJ2jXXgAuhtQj9AR0ZoEOVW8CXKFDwwJLokalqWNwUgn5l6zEku3327GfQyaTyRxnjBVKfP2xlHjFKEZglSDwYXmJEahnfh3TqYUb+5XoTG2ditbxLhIG+RVZ4HKgOI+xHVJvwlZSf4IH7JzOBzvc9yUwQRFoU2Dal0CTu0C9d4E3fFbvJd6HFphhjm31nIUEmhuoJuayOWSBNW6xqeo/aOaB1MdurMMN2BR4xlViiSBnT8X/TuCjY7ujRzIFBZba/yVLPAlny8xwfANtHWDrVhy7DgAAAABJRU5ErkJggg==">
                     </div>
@@ -67,7 +66,7 @@
                     <div (click)="toggleMessages()" class="notifications mx-2 shadow-sm rounded-full">
                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAABmJLR0QA/wD/AP+gvaeTAAAD20lEQVRIieWWX0xbVRzHv+ee21sptNgxJHME8F9YhBYoddNIpWxM6YxNpKm67ElNMEE3BzFxmc64xakzZi7+e+DBxIdlRkFNl6WKJoRSHBrN5piJy7IH44yjEzbHbvGWe+7Ph3FJRy/QYvTF79v5/X7n9zn3fH/35gL/W+0YovqeBD1T6L6dw/T0jiGqXywvWQV7Rqidc4wCaC0UyBjaOEeyN0GbrPJyzgkT5AMhxghHXAaeys6FQiG7LpfcDYEqAGAQv3Ca+TYej2tmjerAVkcafQBivcPUcrCVnbjuQNmL7WPkkjM4BeB0aQDhlxkzAODecNhZJJSXOJe6hTAcdkXRAUDLZGTOuWro4r20nHllNBabBoDox8QrK3AUDHfaJHjeaGHTlsCdCXqVAU+SQO2hNnYZAO5/KLJOkmxfFRc7KrY9GrHd13IPyla5AQCTU5eQSB7H4Y/6Z9X0zISmifahLz45AwC7RsitEc4Qoe9QK3sxB9jzDa2CjvNgeO6tAHsfADaFt1bYYIyvq73DvW/P87LTWWJlC65MT2PPvgOzZ8+emxIzmndw8LMUAMwN3QE7Q+XrAXYJyBoapiMCwOBpfGjGbBDvlpevLt2/d/eiMABwOZ14be8LtrIytxt25W0zrjrwAQBDM9BpxrKndD0RBt58gKkA0P5g5FZdGJHurscVR1HRojBTDkcRurueUAxDPNLR8VgNAPT5WZoIn4Jhg1k3P6VXHXjWnoKYf2Kwh53OEn29v8m2LG1OG+7yweUs0f+8qnYCOAgAQkWXdhN4DrDPz9LZmyXON/t9jVySLF9VS0mSBH9zo5xIjm02ge9sYdp1NVYbg8GgDFCgwVuXP21O3vo6RkSBaDTKrfKWDaWScp8QhqPBU1coDw2eOgghii+rRlPeQAYKlpa6ZtfevKZgYOXaNbix1JUhxoJ5A2WJb2xu9FpeST7yNXltsixbfktzgHN337IS/0wt5WNO08kZNAshilfin6mlfMwB/hP/TC3lYw7QxvlGX6Nnxf6ZuuYjb18WKElyzS011Sv2z1RNdRXjnFcvCxSGfnokOaaranphKm+pahqJkeOzuq6fW5hjCwNtHdFaRWGjANyKoojsWsZYTj0AEBEBIHOdyWQ4A5sySA8MHh34eUkgAIRC21yC/9VqkDQ/OVVVlas7w1v2W9UPfH5s96/nf5s01xIzfufihuF4/PAVq/q8deFC6thE6iKZmkhdpFTqjy8L6ZHzE7WUurb3/qRpmY5Gr0cAwMlT49yu2E/+a0Bf3e27kt+Nf//DiR+vjTvR1z7fbf2x/kK6/Mf6GykrZNhesf+SAAAAAElFTkSuQmCC">
                         <div class="alert-number text-white w-5 h-5 border-2 bg-red-500 text-xs flex justify-center items-center font-bold">3</div>
-                        <div #messages class="messages rounded" (click)="$event.stopPropagation()">
+                        <div #messages class="messages rounded bg-gray-100" (click)="$event.stopPropagation()">
                             <div class="messages-header"></div>
                             <div class="messages-body">
                                 <div></div>
@@ -85,12 +84,12 @@
                     </div>
                     <div (click)="toggleParameters()" class="profil flex justify-center items-center cursor-context-menu w-12 h-12 rounded-full mx-3 shadow-sm">
                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAADCElEQVRYhcXX24tVdRQH8M+Zid4yZwoijQK7N2qO6eRjgQTZSzDWX9AFJCcVSkGKsockKB8qqJ57KCq6yGBSYzc0CyK0UjImfQyJwoyypsEe1hrcHn/nsjeCX9hwfntd97r81jpcYLQayq3EMxjM8394DN/XVTTQ0IFx3IBv8lmCe5souqihA7fgI2zJ81UYaaKoWwTWYg9uLdBuxuHK+TsRhXYsTR3jdR27HzM4gFPY4Ey9LBM5v6vCvwb/OhOFFibwNw6mrvv6Nb42BZ5IRevwF6awN41P4dKKzBC+wCw+we40/kjqeDJ19hWJD/Cjs9MzIkL5PK7sIns1XkpnqikZwBG8348Di/CHaKvzhS34U3ROX3hY5L5UgHUxin/wQB2hlsjjpz34LsunG/ZhshOxUxuexnx8XaANYhOO4td8fhadMljgP4iLezh5DsZE1V5RMP6uqPCnkm8MT+e7dwpOLBLdcVM3gyuxHTsxnQK7C3yb0tBogbY8aY8WaPtE+/6E9/AsVlQZJkVIXxUXyGpcUlB0VHx5J2zLD2jHkLi4NuI1HNNWF7uwo4tiGBa1MdaF5/bkGeqha0fabDQNu43w2uN9bhrOivv/cjFYDmA/TlR4fxMpWIOvOui7R6Tg97b3w1glbscluBPfVhkWYyvexCHRAR8WDGwQhba8QFshLq/1BdqXqfOHtLE1bXbEbcptOIC304lt+VWrxHZ0Cm85N63Xigjf2M1gCfvxXOH9oGi1aVFwp/P3+oJxorM+rmu8JUbuVA++Yb0rfq9IZ60C3SjCvLSOUAeMiH1iol+BxWl83XkwPocJNabrHtGG1ZAtw+d4AQu7yF6Dl0XYq9d1SwylXilFrE0zYo0awGYxz3el4tl0cl5FZj4+q9AmU2Zz6qi1khEL5IxYo07iwQptNA2trry7O/mrvf2Q2IKOqLmUzmFc7HDXFWjTzi6qx8UF1o7rxY5Zey3vhZ14pXJ+HW80UdT0n9EhEdLteb6jzaG+UVqh+sEJ0VILsQC/4EUcb6jvwuF/Y4SzJWhvNd4AAAAASUVORK5CYII=">
-                        <div (click)="$event.stopPropagation()" #parameters class="parameters rounded">
+                        <div (click)="$event.stopPropagation()" #parameters class="parameters rounded bg-gray-100">
                             <div> Profil</div>
                             <div></div>
                             <div></div>
                             <div></div>
-                            <div>Deconnexion</div>
+                            <div (click)="logout()">Deconnexion</div>
                         </div>
                     </div>
                 </div>
@@ -101,3 +100,4 @@
         </div>
     </div>
 </ng-container>
+<lib-ng-toast></lib-ng-toast>

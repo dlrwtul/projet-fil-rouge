@@ -23,7 +23,11 @@ const routes: Routes = [
     path: 'admin', 
     children : [{
       path: 'produit', 
-      loadChildren: () => import('./produit/produit.module').then(m => m.ProduitModule) 
+      loadChildren: () => import('./produit/produit.module').then(m => m.ProduitModule) ,
+    },
+    { 
+      path: 'commande', 
+      loadChildren: () => import('./commande/commande.module').then(m => m.CommandeModule) 
     }],
     canActivate : [AuthGuard],
     data: {

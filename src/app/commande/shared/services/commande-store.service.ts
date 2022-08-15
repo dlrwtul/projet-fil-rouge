@@ -31,8 +31,29 @@ export class CommandeStoreService {
     )
   }
 
+  $commandes = (etat : string):Observable<any> => {
+    return this.http.get<any>(`https://lang-projet-fil-rouge-api.herokuapp.com/api/commandes?etat=${etat}`,this.options).pipe(
+      
+      map(data => {
+        return data["hydra:member"]
+      }),
+      catchError((err) => {
+        return throwError(() => console.log(err.error.message))
+      })
+
+    )
+  }
+
   $annulerCommande = (id : number):Observable<Commande> => {
     return this.http.put<Commande>(`https://lang-projet-fil-rouge-api.herokuapp.com/api/commandes/${id}/annule`,{},this.options)
+  }
+
+  $changerEtat = (id : number,etat : string) => {
+    return this.http.put<Commande>(`https://lang-projet-fil-rouge-api.herokuapp.com/api/commandes/${id}/${etat}`,{},this.options).pipe(
+      catchError((err) => {
+        return throwError(() => console.log(err.error.message))
+      })
+    )
   }
 
 }

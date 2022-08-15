@@ -1,18 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { Quartier } from '../models/quartier';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ZoneStoreService {
+export class QuartierStoreService {
 
-  url: string = 'https://lang-projet-fil-rouge-api.herokuapp.com/api/zones';
+  url: string = 'https://lang-projet-fil-rouge-api.herokuapp.com/api/quartiers';
 
   constructor(private http:HttpClient) { }
 
-  zone$ = ():Observable<Quartier[]> => {
-    return this.http.get<Quartier[]>(`${this.url}`)
+  quartiers$ = ():Observable<Quartier[]> => {
+    return this.http.get<any>(`${this.url}`).pipe(
+      map(data => {
+        return data["hydra:member"]
+      })
+    )
   }
 }

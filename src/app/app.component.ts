@@ -1,6 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { slider } from './animations-router';
+import { AuthService } from './authentification/shared/services/auth.service';
 import { PanierService } from './shared/services/panier-service.service';
 
 @Component({
@@ -21,7 +22,7 @@ export class AppComponent implements AfterViewInit,OnInit {
   loading :boolean = true;
   title : string = 'projet-fil-rouge';
 
-  constructor(private panierServ : PanierService,private router : Router){
+  constructor(private panierServ : PanierService,private router : Router,private authServ : AuthService){
 
   }
 
@@ -73,4 +74,8 @@ export class AppComponent implements AfterViewInit,OnInit {
     this.parameters.nativeElement.classList.toggle('show')
   }
 
+  logout(){
+    this.authServ.logout()
+    window.location.reload()
+  }
 }

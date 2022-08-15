@@ -69,7 +69,6 @@ export class CardComponent implements OnInit,AfterViewInit {
       this.commandeBurger.burger = this.produit
       this.commandeBurger.quantite = this.quantiteVal
       this.commandeBurger.prix = this.produit.prix
-      console.log(this.commandeBurger)
       this.panierServ.addCommandeBurger(this.commandeBurger)
       this.toast.success({detail:"SUCCESS",summary:'Nouveau Produit Ajoutée',position:'tr',duration:5000});
     } else {

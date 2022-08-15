@@ -20,14 +20,40 @@ export class ProduitDataStoreService {
     return this.http.get<Catalogue>(`${this.url}catalogues/1`)
   }
 
-  produits$ = (key : string):Observable<any[]> => {
+  produits$ = (key : string):Observable<any> => {
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.tokenServ.getToken()}`
       })
     };
-    return this.http.get<any[]>(`${this.url}${key}`,options)
+
+    return this.http.get<any>(`${this.url}${key}`,options).pipe(
+      map(data => {
+        return data["hydra:member"]
+      }),
+    )
+  }
+
+  produits2$ = (key : string,parpage : number,page :number = 1):Observable<any> => {
+
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.tokenServ.getToken()}`
+      })
+    };
+      return this.http.get<any>(`${this.url}${key}?parpage=${parpage}&&page=${page}`,options).pipe(
+        // map(data => {
+        //   data["hydra:member"].forEach((element:any) => {
+        //     if (!element.isEtat) {
+        //       console.log(data["hydra:member"].splice(data["hydra:member"].indexOf(element),1))
+        //       data["hydra:member"].splice(data["hydra:member"].indexOf(element),1)
+        //     }
+        //   });
+        //   return data
+        // })
+        )
   }
 
   complement$ = ():Observable<Complement> => {
@@ -36,6 +62,15 @@ export class ProduitDataStoreService {
 
   get$ = (id:number,enterPoint: string) => {
     return this.http.get<Produit>(`${this.url}${enterPoint}/${id}`)
+  }
+
+  delete$ = (id:number):Observable<any> => {
+    const options = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${this.tokenServ.getToken()}`
+      })
+    };
+    return this.http.delete<any>(`${this.url}produits/${id}`,options)
   }
 
   getWithComplements$ = (id:number) => {
@@ -53,17 +88,16 @@ export class ProduitDataStoreService {
     )
   }
 
-  newProduit$ = (produit :Produit,key : string) => {
+  newProduit$ = (produit:FormData,key : string):Observable<any> => {
     const options = {
       headers: new HttpHeaders({
-        'Content-Type': 'multipart/form-data',
-        'Authorization': `Bearer ${this.tokenServ.getToken()}`
+        'Authorization': `Bearer ${this.tokenServ.getToken()}`,
       })
     };
     return this.http.post(`${this.url}${key}`,produit,options).pipe(
       catchError((err) => {
         return throwError(() => err)
-      })
+      }),
     )
   }
 
