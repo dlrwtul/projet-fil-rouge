@@ -26,7 +26,7 @@
                     <ngb-panel *ngIf="zone.commandes?.length != 0" title="{{zone.libelle}}">
                       <ng-template ngbPanelContent>
                         <button (click)="zone.checkAll = !zone.checkAll" class="bg-gray-800 h-max w-max py-1 p-2 my-3 rounded font-medium text-white relative">Selection tout</button>
-                        <div class="flex flex-row">
+                        <div class="flex flex-row flex-wrap">
                             <ng-container *ngFor="let commande of zone.commandes">
                                 <ild-card-commande [checkAll]="zone.checkAll" (emitter)="getVal($event)" [commande]="commande"></ild-card-commande>
                             </ng-container>
