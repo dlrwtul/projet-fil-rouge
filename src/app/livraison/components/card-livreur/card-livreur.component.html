@@ -1,0 +1,10 @@
+<div [ngClass]="{'border-green-500':livreur?.etat == 'disponible','border-red-500':livreur?.etat != 'disponible'}" class="card-livreur border-2 w-full min-h-32 rounded-r-2xl p-3 border-l-8 mb-2 bg-gray-100 shadow-sm flex flex-row">
+    <span [ngClass]="{'bg-green-500':livreur?.etat == 'disponible','bg-red-500':livreur?.etat != 'disponible'}" class="px-2 py-1 rounded h-max w-max text-xs font-bold text-white ">{{livreur?.etat}}</span>
+    <div class="flex flex-col pl-6">
+        <span class="font-medium my-1">Matricule Moto : {{livreur?.matriculeMoto}}</span>
+        <span class="font-medium">Prenom : {{livreur?.prenom}}</span>
+        <span class="font-medium my-1">Nom : {{livreur?.nom}}</span>
+        <span class="font-medium">Telephone : {{livreur?.telephone}}</span>
+    </div>
+    <button (click)="newLivraison()" *ngIf="livreur?.etat == 'disponible'" class="bg-gray-600 h-max w-max py-1 p-2 rounded font-medium text-white relative left-16 bottom-3">Affecter Livraison</button>
+</div>

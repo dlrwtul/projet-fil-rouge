@@ -28,7 +28,7 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     MatDatepickerModule,
     NotifierModule,
     MatSelectModule,
-    NgxMatSelectSearchModule
+    NgxMatSelectSearchModule,
   ],
   exports: [
     LayoutModule,
@@ -42,7 +42,7 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     NotifierModule,
     LoaderComponent,
     MatSelectModule,
-    NgxMatSelectSearchModule
+    NgxMatSelectSearchModule,
   ]
 })
 export class SharedModule { }

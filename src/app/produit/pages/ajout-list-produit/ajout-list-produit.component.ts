@@ -35,84 +35,11 @@ export class AjoutListProduitComponent implements OnInit {
       this.produits = data["hydra:member"]      
       this.first = parseInt(data["hydra:view"]["hydra:first"][data["hydra:view"]["hydra:first"].length - 1])
       this.last = parseInt(data["hydra:view"]["hydra:last"][data["hydra:view"]["hydra:last"].length - 1])
-      console.log(this.last);
       
     })
     
   }
 
-  // submit(key : string){
-  //   if (!this.isSubmitted) {
-  //     this.isSubmitted = true
-  //   }else {
-  //     this.isSubmitted = false
-  //   }
-  //   this.produit = this.myForm.value
-  //   this.menuServ.getEventObs().subscribe(data => {
-  //     if (this.produit != null) {
-  //       this.produit.menuBurgers = data.menuBurgers
-  //       this.produit.menuTailles = data.menuTailles
-  //       this.produit.menuPortionFrites = data.menuPortionFrites
-  //     }
-      
-  //   })
-
-  //   setTimeout(async () => {
-  //     if (this.produit != null) {
-  //       this.menuServ.viderSubject()
-  //       if (this.produit.menuBurgers?.length == 0) {
-  //         this.toast.error({detail:"Error Menu",summary:"Veuillez choisir au moins un Burger",position:'tl',duration:5000});
-  //         return
-  //       }
-  //       if (this.produit.menuTailles?.length == 0 && this.produit.menuPortionFrites?.length == 0) {
-  //         this.toast.error({detail:"Error Menu",summary:"Veuillez choisir au moins un Complement",position:'tl',duration:5000});
-  //         return
-  //       }
-  //       if (this.produit != null) {
-  //         this.formData.append("nom",this.produit.nom)
-  //         this.formData.append("menuBurgers",JSON.stringify(this.produit.menuBurgers))
-  //         this.formData.append("menuTailles",JSON.stringify(this.produit.menuTailles))
-  //         this.formData.append("menuPortionFrites",JSON.stringify(this.produit.menuPortionFrites))
-  //         console.log(this.formData.getAll("menuPortionFrites"),this.produit,this.produit.file,this.formData);
-          
-  //         this.produitServ.newProduit$(this.formData,key).subscribe({
-  //           next:(value:any) => {
-  //             this.toast.success({detail:"SUCCESS",summary:"Nouveau produit ajouté",position:'tl',duration:5000});
-  //           },
-  //           error:(err:any) => {
-  //             const errMess = err.error.message
-  //             console.log(err)
-  //             this.toast.error({detail:"Error Produit",summary:errMess,position:'tl',duration:5000});
-  //             return
-  //           },
-  //         })
-  //       }
-  //       this.tabProduits = []
-  //       this.tabProduits = ["burgers","portion_frites","tailles"]
-  //     }
-  //   }, 50);
-    
-  // }
-
-  // imagePreview(event : any) {
-
-  //   if(!event.target.files[0] || event.target.files[0].length == 0) {
-	// 		return;
-	// 	}
-
-  //   var mimeType = event.target.files[0].type;
-		
-	// 	if (mimeType.match(/image\/*/) == null) {
-	// 		return;
-	// 	}
-		
-	// 	var reader = new FileReader();
-	// 	reader.readAsDataURL(event.target.files[0]);
-		
-	// 	reader.onload = (_event) => {
-	// 		this.url = reader.result;
-	// 	}
-	// }
 
   getFormData(tab : [Produit,string]){
     this.formData.set('nom',tab[0].nom)
@@ -127,18 +54,20 @@ export class AjoutListProduitComponent implements OnInit {
       this.formData.append('menuTailles',JSON.stringify(tab[0].menuTailles))
     }
 
-    this.produitServ.newProduit$(this.formData,tab[1]).subscribe({
-      next:(value:any) => {
-        console.log(value.json())
-        this.toast.success({detail:"SUCCESS",summary:"Nouveau produit ajouté",position:'tl',duration:5000});
-      },
-      error:(err:any) => {
-        const errMess = err.error["hydra:description"]
-        console.log(err)
-        this.toast.error({detail:"Error Produit",summary:errMess,position:'tl',duration:5000});
-        return
-      },
-    })
+    this.produitServ.newProduit$(this.formData,tab[1]).subscribe(
+      {
+        next:(value:any) => {
+          console.log(value)
+          this.toast.success({detail:"SUCCESS",summary:"Nouveau produit ajouté",position:'tl',duration:5000});
+        },
+        error:(err:any) => {
+          const errMess = err.error["hydra:description"]
+          console.log(err)
+          this.toast.error({detail:"Error Produit",summary:errMess,position:'tl',duration:5000});
+          return
+        },
+      }
+    )
 
   }
 

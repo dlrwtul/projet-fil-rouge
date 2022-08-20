@@ -36,7 +36,7 @@
             </thead>
             <tbody>
                 <ng-container *ngIf="(commandes$|async) != null">
-                    <tr *ngFor="let commande of commandes$|async">
+                    <tr *ngFor="let commande of commandes$|async|paginate:page:size">
                         <td><span class="etat text-light font-bold"  [ngClass]="{'bg-blue-500': filterVal == enCours, 'bg-green-500': filterVal == valide, 'bg-red-500': filterVal == annule}">{{filterVal}}</span></td>
                         <td>{{commande.numero}}</td>
                         <td>{{commande.createdAt | date:'dd/MM/yyyy'}}</td>
@@ -63,12 +63,12 @@
         </div>
         
     </div>
-    <div class="paginate">
-        <mat-paginator [length]="(commandes$|async)?.length"
-              [pageSize]="8"
-              [pageSizeOptions]="[8]"
-              aria-label="Select page">
-        </mat-paginator>
+    <div *ngIf="(commandes$|async)?.length != 0" class="paginate p-3">
+        <ngb-pagination 
+            [collectionSize]="count" [(page)]="page"
+            [maxSize]="size" [rotate]="true"
+            [ellipses]="false" [boundaryLinks]="true"
+        ></ngb-pagination>
     </div>
 </div>
 <div class="footer">

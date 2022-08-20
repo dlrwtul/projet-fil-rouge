@@ -3,9 +3,6 @@ import { User } from '../models/user';
 
 const TOKEN = "token"
 const USER = "current-user"
-const PANIER_KEY = "current-panier"
-const EXPIREAT = "expire";
-const EXPIREAT_VALUE : number = 1;
 @Injectable({
   providedIn: 'root'
 })
@@ -15,9 +12,6 @@ export class TokenService {
 
   setToken(token : string){
     window.sessionStorage.setItem(TOKEN,token)
-    setTimeout(() => {
-      this.clearToken()
-    }, EXPIREAT_VALUE*60*60*1000);
   }
 
   getToken():any {

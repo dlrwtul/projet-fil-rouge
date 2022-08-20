@@ -1,8 +1,11 @@
 import { Quartier } from "./quartier";
+import { Commande } from './commande';
 
-export class Zone {
-    id? : number =0;
-    libelle? : string ='';
-    montantLivraison? : number = 0;
-    quartiers? : Quartier[] = [];
+export interface Zone {
+    id? : number ;
+    libelle? : string ;
+    montantLivraison? : number;
+    quartiers? : Quartier[] ;
+    commandes? : Commande[];
+    checkAll?: boolean
 }

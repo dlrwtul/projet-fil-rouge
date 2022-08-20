@@ -37,7 +37,7 @@
                         <select formControlName="quartier" name="" id="" class="form-control">
                             <option value="" checked>Choisir la zone</option>
                             <ng-container *ngFor="let quartier of quartiers$|async">
-                                <option value="{{quartier.id}}">{{quartier.zone?.libelle + " " + quartier.libelle + " " + quartier.zone?.montantLivraison + "FCFA"}}</option>
+                                <option value="{{stringify([quartier.id,quartier.zone.id])}}">{{quartier.zone.libelle + " " + quartier.libelle + " " + quartier.zone.montantLivraison + "FCFA"}}</option>
                             </ng-container>
                         </select>
                     </div>

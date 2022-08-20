@@ -2,15 +2,16 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, 
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { slider } from './animations-router';
 import { AuthService } from './authentification/shared/services/auth.service';
+import { TokenService } from './authentification/shared/services/token.service';
 import { PanierService } from './shared/services/panier-service.service';
+import jwt_decode from "jwt-decode";
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  animations: [
-    slider,
-  ]
+  animations : [slider]
 })
 
 export class AppComponent implements AfterViewInit,OnInit {
@@ -21,8 +22,9 @@ export class AppComponent implements AfterViewInit,OnInit {
   isAdmin :boolean = false;
   loading :boolean = true;
   title : string = 'projet-fil-rouge';
+  timeToLive : any
 
-  constructor(private panierServ : PanierService,private router : Router,private authServ : AuthService){
+  constructor(private panierServ : PanierService,private router : Router,private authServ : AuthService,private tokenServ : TokenService){
 
   }
 
@@ -36,10 +38,21 @@ export class AppComponent implements AfterViewInit,OnInit {
 
         }
     });
+    let decoded : any = jwt_decode(this.tokenServ.getToken())  
+    // this.timeToLive = setInterval(() => {
+    //   const date = new Date();
+    //   const seconds = date.getTime()/1000
+    //   console.log(parseInt(decoded['iat']) - seconds);
+    //   if ((parseInt(decoded['iat']) - seconds) <= 0) {
+    //     this.authServ.logout()
+    //     window.location.reload()
+    //   }
+    // }, 1000);
+    
   }
 
   prepareRouteOutlet(outlet: RouterOutlet) {
-    return outlet && outlet.activatedRouteData &&  outlet.activatedRouteData['animation'];
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
 
   @HostListener('window:beforeunload', ['$event'])
@@ -78,4 +91,5 @@ export class AppComponent implements AfterViewInit,OnInit {
     this.authServ.logout()
     window.location.reload()
   }
+
 }

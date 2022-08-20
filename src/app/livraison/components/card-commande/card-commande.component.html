@@ -1,0 +1,15 @@
+<div (click)="changeCheck()"  class="card-commande shadow-sm border-gray-800 mx-2 cursor-pointer">
+    <div [ngClass]="{'bg-yellow-500':commande?.etat == 'en cours de livraison','bg-blue-500':commande?.etat == 'en cours','bg-green-500':commande?.etat == 'valide','bg-red-500':commande?.etat == 'annule'}"  class="h-1/5 w-full flex p-2 justify-center items-center rounded relative bottom-0.5">
+        {{commande?.etat}}
+    </div>
+    <div [ngClass]="{'border-green-500 border-4':checked,'border-gray-500 border':!checked}" class="h-3/5 w-full flex flex-col p-3 bg-gray-500 rounded text-white shadow">
+        <span>N° {{commande?.numero}}</span>
+        <span>Tel : {{commande?.telephone}}</span>
+        <span>Adsresse : {{commande?.adresse}}</span>
+        <span>Montant : {{commande?.montant}} FCFA</span>
+        <input *ngIf="commande?.etat == 'en cours'" class="relative top-5 left-2 self-end w-5 h-5" [checked]="checked" type="checkbox" name="" id="">
+    </div>
+    <div *ngIf="commande?.etat == 'en cours de livraison'" class="h-1/5 w-full flex justify-center items-center rounded mt-0.5 bg-gray-400">
+        <button (click)="valideCommande()" class="bg-green-500 py-1 px-2 rounded self-center hover:bg-green-400 hover:font-medium">Valider</button>
+    </div>
+</div>

@@ -18,7 +18,8 @@ import { ProduitDataStoreService } from '../../shared/services/produit-data-stor
 })
 
 export class DetailsComponent implements OnInit,OnDestroy,AfterViewInit {
-  @ViewChild('content') content!: ElementRef;
+  @ViewChild('details') details!: ElementRef;
+  @ViewChild('toile') toile!: ElementRef;
   @ViewChild('bgImg') bgImg!: ElementRef;
   @ViewChild('quantite') quantite!: ElementRef<HTMLInputElement>;
   tabCommandeMenuBoissonTailles : ([number,CommandeMenuBoissonTaille[]])[] = [];
@@ -77,12 +78,15 @@ export class DetailsComponent implements OnInit,OnDestroy,AfterViewInit {
 
   ngOnDestroy(): void {
     this.document.documentElement.style.overflowY = 'auto';
+    this.toile.nativeElement.style.display = "none"
   }
 
   ngAfterViewInit(): void {
     let exp = this.document.documentElement.scrollTop;
-    const divEl: HTMLDivElement = this.content.nativeElement;
+    const divEl: HTMLDivElement = this.details.nativeElement;
     divEl.style.top = `${exp}px`;
+    this.toile.nativeElement.style.display = "block"
+    this.toile.nativeElement.style.top = `${exp}px`
   }
 
   onValueChange(value: any) {

@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
-import { Observable } from 'rxjs';
+import { first, map, Observable, timeout, timestamp } from 'rxjs';
 import { AuthService } from 'src/app/authentification/shared/services/auth.service';
 import { Commande } from 'src/app/shared/models/commande';
 import { Quartier } from 'src/app/shared/models/quartier';
@@ -21,7 +21,9 @@ export class PanierComponent implements OnInit {
   montantTotal : number = 0;
   myForm : FormGroup = new FormGroup({})
   zone : Zone = {}
-  quartier : Quartier = {}
+  quartier : Quartier = {
+    zone : {}
+  }
   num=0
   commande$ : Observable<Commande> |undefined = undefined ; 
   commande : Commande = {}
@@ -50,26 +52,39 @@ export class PanierComponent implements OnInit {
     this.commande$ = this.panierServ.getCommande();
   }
 
-  getQuartier(id : number){
-    this.quartiers$?.subscribe(data => {
-      data.forEach(qt => {
-        if (qt.id == id) {
-            this.commande.quartier = qt
-            this.commande.zone = qt.zone
+  getQuartier(id : number){    
+    this.quartiers$?.subscribe((data : Quartier[]) =>
+      data.forEach((qt:Quartier) => {
+        if (qt.id == id) {   
+          this.panierServ.setQuartier(qt)
+          this.panierServ.setZone(qt.zone)
+          this.panierServ.setAdresse(this.myForm.value.adresse)
+          this.panierServ.setTelephone(this.myForm.value.telephone)
+          first()
         }
-      })
-    })
+      }))
+  }
+
+  stringify(data:any){
+    return JSON.stringify(data)
   }
 
   validCommande(){
+
+    if (!this.isCollapsed) {   
+      this.quartier.id = JSON.parse(this.myForm.value.quartier)[0]
+      this.zone.id = JSON.parse(this.myForm.value.quartier)[1]
+      this.panierServ.setQuartier(this.quartier)
+      this.panierServ.setZone(this.zone)
+      this.panierServ.setAdresse(this.myForm.value.adresse)
+      this.panierServ.setTelephone(this.myForm.value.telephone)
+    }  
+
     if (this.authServ.isAuthentificated()) {
       
-      this.panierServ.getCommandeObject().subscribe((data) => this.commande = data)
-      if (!this.isCollapsed) {
-        this.commande.telephone = this.myForm.value.telephone
-        this.commande.adresse = this.myForm.value.adresse
-        this.getQuartier(this.myForm.value.quartier)
-      }      
+      this.panierServ.getCommandeObject().subscribe((data) => {
+        this.commande = data
+      }) 
 
       this.commandeServ.$newCommande(this.commande).subscribe({
         next:(value:any) => {
@@ -83,6 +98,7 @@ export class PanierComponent implements OnInit {
           this.toast.error({detail:"Error Commande",summary:errMess,position:'tl',duration:5000});
         }
       })
+
     } else {
       let currentUrl = this.router.url
       this.router.navigate(["/securite/login"],{ queryParams: { previousUrl : currentUrl }})

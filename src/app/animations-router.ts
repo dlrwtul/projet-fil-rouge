@@ -11,6 +11,7 @@ import {
 
 export const slider = trigger('routeAnimations',[
     transition('* <=> *', [
+        style({ position: 'relative' }),
         query(':enter , :leave',[
             style({
                 position: 'absolute',
@@ -24,12 +25,13 @@ export const slider = trigger('routeAnimations',[
                 right:'-100%',
             })
         ],{ optional: true }),
+        query(':leave', animateChild()),
         group([
             query(':leave',[
-                animate('600ms ease-out', style({ right: '-100%', opacity: 0 }))
+                animate('600ms ease-out', style({ right: '100%', opacity: 0 }))
             ],{ optional: true }),
             query(':enter',[
-                animate('600ms ease-out', style({ right: '10%'}))
+                animate('600ms ease-out', style({ right: '0%'}))
             ],{ optional: true })
         ])
     ])

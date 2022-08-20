@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path : "",
     redirectTo : "dashboard"
+  },
+  { 
+    path: 'livraison', 
+    loadChildren: () => import('../livraison/livraison.module').then(m => m.LivraisonModule) 
   }
 ];
 

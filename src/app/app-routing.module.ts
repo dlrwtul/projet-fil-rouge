@@ -28,7 +28,12 @@ const routes: Routes = [
     { 
       path: 'commande', 
       loadChildren: () => import('./commande/commande.module').then(m => m.CommandeModule) 
-    }],
+    },
+    { 
+      path: 'livraison', 
+      loadChildren: () => import('./livraison/livraison.module').then(m => m.LivraisonModule) 
+    }
+  ],
     canActivate : [AuthGuard],
     data: {
       role: "ROLE_GESTIONNAIRE"

@@ -31,11 +31,39 @@ export class CommandeStoreService {
     )
   }
 
-  $commandes = (etat : string):Observable<any> => {
-    return this.http.get<any>(`https://lang-projet-fil-rouge-api.herokuapp.com/api/commandes?etat=${etat}`,this.options).pipe(
+  $commandes = (etat : string,parpage : number = 5,page : number = 1,numero : string = '',date : string = ''):Observable<any> => {
+    
+    if (date != '') {
+      let newDate = new Date(date)
+      let newStrDate = newDate.toLocaleDateString()
+      newStrDate = newStrDate.replace('/','-');
+      return this.http.get<any>(`https://lang-projet-fil-rouge-api.herokuapp.com/api/commandes?page=${page}&parpage=${parpage}&createdAt=${newStrDate}`,this.options).pipe(
+      
+        map(data => {
+          return data
+        }),
+        catchError((err) => {
+          return throwError(() => console.log(err.error.message))
+        })
+
+      )
+    }
+    if (numero != '') {
+      return this.http.get<any>(`https://lang-projet-fil-rouge-api.herokuapp.com/api/commandes?page=${page}&parpage=${parpage}&numero=${numero}`,this.options).pipe(
+      
+        map(data => {
+          return data
+        }),
+        catchError((err) => {
+          return throwError(() => console.log(err.error.message))
+        })
+
+      )
+    }
+    return this.http.get<any>(`https://lang-projet-fil-rouge-api.herokuapp.com/api/commandes?page=${page}&parpage=${parpage}&etat=${etat}`,this.options).pipe(
       
       map(data => {
-        return data["hydra:member"]
+        return data
       }),
       catchError((err) => {
         return throwError(() => console.log(err.error.message))

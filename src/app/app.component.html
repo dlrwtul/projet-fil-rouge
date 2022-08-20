@@ -1,8 +1,5 @@
 <ng-container *ngIf="!isAdmin">
     <router-outlet></router-outlet>
-    <ng-container [@routeAnimations]="prepareRouteOutlet(outlet)" class="content">
-        <router-outlet #outlet="outlet" name="sidebar"></router-outlet>
-    </ng-container>
 </ng-container>
 <ng-container *ngIf="isAdmin">
     <div class="admin">
@@ -35,12 +32,12 @@
                         Produits
                     </div>
                 </div>
-                <div class="btn-choice shadow-sm  flex items-center justify-between">
+                <div routerLink="/admin/livraison" class="btn-choice shadow-sm  flex items-center justify-between">
                     <div class="icon flex justify-center items-center w-12 h-12 mx-3">
                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAC60lEQVRYhe3WW4hWVRQH8N83DmpTipAPmVHkiNm9sBsTPgSio5JSBBmIGEQPFoEQRRL0YlAgFEVBkGCJvgyOoKCYgnkjRS1BDKyRqMiiJi0xuvDZ+LD2MMfdOX5zFOll/vDxnbPW3mv999rrchjBCP5nNDAPr2P8Zdr6HsvwZV0CP2IH9lwmgaU4i9l1Nw6gu0I3CjMwH13ouIid5WqeHtoq5GPwKn7CIWzCPvyC93BtXUdVaC+RjcNW3IKV6MFJTBD58hrmilD3ZXuvFlcxOpM38UX6/Qf5FfTgBG5M72OwHXcWCO7EsczR8mTr57T/BP4VUTyZdG+LvKsk8HDadH9B35HWzCzIJuI0nssI/ODCqP6Bx9PzY+l9ZdF5ngOLsBsHc5YZ+rEGT2Xy30W4y7ARS/CKQsRzArfhQCa7qsLgftzegmiODXgfH+P6MgLtLjzBXSL7v8O32dqm8iRuhRdF01qPtpxAH+5OzzeJU36FexOJIu5Jurr4G0/iASzNCfSK8poqTrwAC3EqW9chyq23hbMmxpbI+/ARluUh3CJyYB1miRadYxQ+SP/vtiCwHW/h6RLdZHTmBAYMVcJ+cV+f4FzS34c3RXvuxpkWBJbgWVxXojuFWwed5rNgosjUc6Lej4qGMiCiMr3EYN1Z0I2BqizuT+xfxiOiZH4VFXEpiVeJqmHUwGIRhRUi4wcrog5miNZ+TMyXBcMlsAofJodrMAmf46EazueKhB6L1WIe9OKlfGETjxbe7xDzYE5B1sBaHL6Iw2IOtIkyXpWtWZz8TRLRaDawCzcUjHfiGjGOi3hQXMNG5f1+Gm7GNjGW52EKvskO0o/jIq++bscTeN5QqZwVsz9Hu6iC0xUEDhiaI/8U9hTRSLIzieg7JXZMFeW3KHO+CXvLNlTguLj74vx/AX8ZxhfVikSiRzSeI/hNvenXhT/xGd7AZpFbzwzXwGwxsXaKdjq5hvNBdIpvyE9FSXddgo0RXFmcBylIrKTISOh6AAAAAElFTkSuQmCC">
                     </div>
                     <div class="text">
-                        Livraison
+                        Livraisons
                     </div>
                 </div>
                 <div routerLink="/admin/commande/all-commandes" class="btn-choice shadow-sm flex items-center justify-between">
@@ -99,5 +96,8 @@
             </div>
         </div>
     </div>
+</ng-container>
+<ng-container [@routeAnimations]="prepareRouteOutlet(outlet)" class="content">
+    <router-outlet #outlet="outlet" name="sidebar"></router-outlet>
 </ng-container>
 <lib-ng-toast></lib-ng-toast>

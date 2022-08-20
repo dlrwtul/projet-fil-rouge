@@ -1,0 +1,57 @@
+<div class="livraisons w-full flex flex-col p-3">
+    <div class="list-produits text-3xl flex flex-col w-full mx-2">
+        <div>Listes des Commandes</div>
+        <div class="border-2 border-orange-500 w-full my-2"></div>
+    </div>
+    <div class="header w-full h-24 border-2 border-black my-2 flex justify-between items-center px-5 rounded">
+        <div>
+            <mat-button-toggle-group (change)="onValChange($event.value)" appearance="legacy" name="fontStyle" aria-label="Font Style">
+                <mat-button-toggle value="{{enCours}}" checked>En cours</mat-button-toggle>
+                <mat-button-toggle value="{{enCoursLivraison}}" >En Livraison</mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+        <form action="">
+            <select [hidden]="filterVal != enCours" #filterZone (change)="getFilterZoneVal(filterZone.value)" class="py-2 px-4 rounded select border-2 border-orange-500" name="" id="">
+                <option class="font-medium" value="">Filtrer par zone</option>
+                <ng-container *ngFor="let zone of zones$|async">
+                    <option class="" value="{{zone.libelle}}">{{zone.libelle}}</option>
+                </ng-container>
+            </select>
+        </form>
+    </div>
+    <div class="body w-full overflow-y-scroll">
+        <ngb-accordion #acc="">
+            <ng-container *ngIf="filterVal == enCours">
+                <ng-container *ngFor="let zone of (zones$|async)|etat:enCours|zone:getFilterZoneVal(filterZone.value)">
+                    <ngb-panel *ngIf="zone.commandes?.length != 0" title="{{zone.libelle}}">
+                      <ng-template ngbPanelContent>
+                        <button (click)="zone.checkAll = !zone.checkAll" class="bg-gray-800 h-max w-max py-1 p-2 my-3 rounded font-medium text-white relative">Selection tout</button>
+                        <div class="flex flex-row">
+                            <ng-container *ngFor="let commande of zone.commandes">
+                                <ild-card-commande [checkAll]="zone.checkAll" (emitter)="getVal($event)" [commande]="commande"></ild-card-commande>
+                            </ng-container>
+                        </div>
+                      </ng-template>
+                    </ngb-panel>
+                </ng-container>
+            </ng-container>
+            <ng-container *ngIf="filterVal == enCoursLivraison">
+                <ng-container *ngFor="let livraison of (livraisons$|async)">
+                    <ngb-panel *ngIf="livraison.commandes?.length != 0" title="Matricule Moto N° : {{livraison.livreur?.matriculeMoto}}">
+                      <ng-template ngbPanelContent>
+                        <button (click)="validerLivraison(livraison.id)" class="bg-gray-800 h-max w-max py-1 p-2 my-3 rounded font-medium text-white relative">Valider Livraison</button>
+                        <div class="flex flex-row">
+                            <ng-container *ngFor="let commande of livraison.commandes">
+                                <ild-card-commande [commande]="commande"></ild-card-commande>
+                            </ng-container>
+                        </div>
+                      </ng-template>
+                    </ngb-panel>
+                </ng-container>
+            </ng-container>
+        </ngb-accordion>
+    </div>
+</div>
+<button [ngClass]="{'bg-green-500':nbr > 0,'bg-blue-500':nbr == 0}" [routerLink]='[{ outlets: { sidebar: ["livreur"] } }]' class="w-16 h-16 bg-gray-8checked00 rounded-full flex justify-center items-center fixed bottom-5 right-5 cursor-pointer bg-blue-500 text-white">
+    Livrer
+</button>

@@ -43,7 +43,7 @@
 }
 
 .produits {
-    height: 70vh;
+    height: 60vh;
     overflow-y: scroll;
 }
 
@@ -51,11 +51,5 @@
     width: 100%;
     transition: all ease 0.5s;
     border: 1px solid;
-
-}
-
-.ligne:hover {
-    transform: scaleY(1.2);
-    border: 2px solid;
 
 }

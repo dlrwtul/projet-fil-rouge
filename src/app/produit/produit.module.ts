@@ -13,7 +13,7 @@ import { MenuBoissonComponent } from './components/menu-boisson/menu-boisson.com
 import { WaitCardComponent } from './components/wait-card/wait-card.component';
 import { CardBoissonMenuComponent } from './components/card-boisson-menu/card-boisson-menu.component';
 import { AjoutListProduitComponent } from './pages/ajout-list-produit/ajout-list-produit.component';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule} from '@angular/material/tabs';
 import { LutAccordionComponent } from './components/lut-accordion/lut-accordion.component';
 import { FormComponent } from './components/form/form.component'; 
 

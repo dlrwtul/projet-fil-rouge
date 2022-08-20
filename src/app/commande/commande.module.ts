@@ -11,7 +11,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { AllCommandesComponent } from './pages/all-commandes/all-commandes.component';
 import { FitlterDatePipe } from './shared/pipes/fitlter-date.pipe';
 import { FitlterNumPipe } from './shared/pipes/fitlter-num.pipe';
-import { DetailsComponent } from './components/details/details.component'; 
+import { DetailsComponent } from './components/details/details.component';
+import { PaginatePipe } from './shared/pipes/paginate.pipe'; 
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { DetailsComponent } from './components/details/details.component';
     FitlterDatePipe,
     FitlterNumPipe,
     DetailsComponent,
+    PaginatePipe,
   ],
   imports: [
     CommonModule,

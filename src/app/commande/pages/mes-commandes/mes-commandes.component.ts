@@ -21,6 +21,8 @@ export class MesCommandesComponent implements OnInit {
   filterVal :string = "en cours"
   dates : string[] = []
   page = 1;
+  size = 8;
+  count = 0
   commandes$ : Observable<Commande[]> = new Observable
   commandesClone$ :any
   constructor(private commandeServ : CommandeStoreService,private eventServ : EventService,private router : Router,private toast : NgToastService,private panierServ : PanierService) { 
@@ -29,11 +31,19 @@ export class MesCommandesComponent implements OnInit {
 
   ngOnInit(): void {
     this.commandes$ = this.commandeServ.$commandesClient(this.enCours)
+    this.commandes$.
+      subscribe(data => {
+        this.count = data.length
+      })
   }
 
   onValChange(value :string){
     this.filterVal = value
     this.commandes$ = this.commandeServ.$commandesClient(this.filterVal)
+    this.commandes$.
+      subscribe(data => {
+        this.count = data.length
+      })
   }
 
   detailsCommande(commande : Commande){
@@ -62,7 +72,13 @@ export class MesCommandesComponent implements OnInit {
   }
 
   dateFilter(value:string){
-    this.commandes$ = this.commandeServ.$commandesClient(this.filterVal)
+    // if (value == '') {
+    //   this.commandes$ = this.commandeServ.$commandesClient(this.filterVal)
+    //   this.commandes$.
+    //   subscribe(data => {
+    //     this.count = data.length
+    //   })
+    // }
     const date = new Date(value)
     this.commandes$ = this.commandes$.pipe(
       map(data => {
@@ -79,6 +95,10 @@ export class MesCommandesComponent implements OnInit {
         return newData
       })
     )
+    this.commandes$.
+      subscribe(data => {
+        this.count = data.length
+      })
   }
 
   recommanderCommande(_commande : Commande): void {

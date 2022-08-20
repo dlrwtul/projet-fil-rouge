@@ -1,88 +1,88 @@
-<div #content class="toile">
-    <div class="details p-3 bg-light shadow" >
-        <ng-container *ngIf="(produitComplements | async) as produitComplements">
-            <div class="head d-flex justify-content-between">
-                
-                <span class="fs-4">Details {{produitComplements.produit.nom}}</span>
-                <span>
-                    <img routerLink="{{quitRoute}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAArCAYAAADhXXHAAAAABmJLR0QA/wD/AP+gvaeTAAAB0UlEQVRYhe2YT0sCQRjGf5H0HewLJEKSnesQVC5ZfY7sIxQFfpo6delQWeqhTvaHpEPn6JCnNG+JYofZAVm1ZmbfFaR94EGZdZ/35+wwOzMQK1asWAAzAhlZYAdYAVLAPDALdIEP4BW4A86BZ4F6TtoCnoC+hR8Bb5KQaaBiCRl0GfUUIpUHtEKCareB3ahA91HjUAJUuwsUpEG9CEC1e8C2FGga+IoIVLuF0BguRwyqXQ0Lmp8QqHYuDKzpPHrC+CdwA5wa5ty7gi4bFqj5v59leP6t+O0AD4Z5GRfYY8PwJpD070kCDb+9EWhvGuYdusCWDMODPbgOdPxPGN3jv/nSBfbdokAfKA7cmx34XrTMeXOB7VgW6QGbgYw17F8m37agCcsC2vVATt0xJ2ELPDU9C1M2Zq8sCkjOBhcusEeG4Z/IzrMHLrBLhuHSb7BFF1hQeyaTAmeoVdOoa1X/us0fd5JnWETKG2FgAa4nBFoJCwpqBS+1SRznJrAgAQtqURzlHiwvBapViAC4C+xJg2rlMJ8v/3IbdewUqVKorUoY0BKCY9REOdSeyQayxvBix1gSp4gZ1ONcRfV6EphDrQ/0KeIt6hTxRaBerFix/r1+AFK7sPaI+GAqAAAAAElFTkSuQmCC">
-                </span>
+
+<div #details class="details p-3 bg-light shadow" >
+    <ng-container *ngIf="(produitComplements | async) as produitComplements">
+        <div class="head d-flex justify-content-between">
+            
+            <span class="fs-4">Details {{produitComplements.produit.nom}}</span>
+            <span>
+                <img routerLink="{{quitRoute}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAArCAYAAADhXXHAAAAABmJLR0QA/wD/AP+gvaeTAAAB0UlEQVRYhe2YT0sCQRjGf5H0HewLJEKSnesQVC5ZfY7sIxQFfpo6delQWeqhTvaHpEPn6JCnNG+JYofZAVm1ZmbfFaR94EGZdZ/35+wwOzMQK1asWAAzAhlZYAdYAVLAPDALdIEP4BW4A86BZ4F6TtoCnoC+hR8Bb5KQaaBiCRl0GfUUIpUHtEKCareB3ahA91HjUAJUuwsUpEG9CEC1e8C2FGga+IoIVLuF0BguRwyqXQ0Lmp8QqHYuDKzpPHrC+CdwA5wa5ty7gi4bFqj5v59leP6t+O0AD4Z5GRfYY8PwJpD070kCDb+9EWhvGuYdusCWDMODPbgOdPxPGN3jv/nSBfbdokAfKA7cmx34XrTMeXOB7VgW6QGbgYw17F8m37agCcsC2vVATt0xJ2ELPDU9C1M2Zq8sCkjOBhcusEeG4Z/IzrMHLrBLhuHSb7BFF1hQeyaTAmeoVdOoa1X/us0fd5JnWETKG2FgAa4nBFoJCwpqBS+1SRznJrAgAQtqURzlHiwvBapViAC4C+xJg2rlMJ8v/3IbdewUqVKorUoY0BKCY9REOdSeyQayxvBix1gSp4gZ1ONcRfV6EphDrQ/0KeIt6hTxRaBerFix/r1+AFK7sPaI+GAqAAAAAElFTkSuQmCC">
+            </span>
+        </div>
+        <div class="container-1">
+            <div #bgImg class="shadow">
+                <img class="w-full h-full" src="data:image/png;base64,{{produitComplements.produit.image}}" alt="">
             </div>
-            <div class="container-1">
-                <div #bgImg class="shadow">
-                    <img class="w-full h-full" src="data:image/png;base64,{{produitComplements.produit.image}}" alt="">
+            <div>
+                <span><span>Nom :</span><span>{{produitComplements.produit.nom}}</span></span>
+                <span><span>Prix :</span><span mx-2>{{produitComplements.produit.prix}} FCFA</span></span>
+                <span><span>Description :</span><span>{{produitComplements.produit.description}}</span></span>
+            </div>
+        </div>
+        <div class="container-2">
+            <div d-flex>
+                <span (click)="onValueChange(quantiteVal-1)" class="shadow-sm">-</span>
+                <input #quantite (change)="onValueChange(quantite.value)"  class="shadow" type="text" name="" id="" value="{{quantiteVal}}">
+                <span (click)="onValueChange(quantiteVal+1)" class="shadow-sm">+</span>
+            </div>
+        </div>
+        <ng-container *ngIf="produitComplements.produit?.type == 'Menu'">
+            <div class="container-menu">
+                <div class="menu-recap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Produit</th>
+                                <th>Quantite</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let duo of produitComplements.produit?.menuBurgers">
+                                <td>{{duo.burger?.nom}}</td>
+                                <td>{{duo.quantite}}</td>
+                            </tr>
+                            <tr *ngFor="let duo of produitComplements.produit?.menuPortionFrites">
+                                <td>{{duo.burger?.nom}}</td>
+                                <td>{{duo.quantite}}</td>
+                            </tr>
+                            <tr *ngFor="let duo of produitComplements.produit?.menuTailles">
+                                    <td>{{duo.taille.libelle}}</td>
+                                    <td>{{duo.quantite}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="menu-boissons">
+                        <ng-container *ngFor="let duo of produitComplements.produit?.menuTailles">
+                            <ild-menu-boisson [commandeMenuBoissonTaillesMod]="produitComplements?.produit?.commandeMenuBoissonTailles" [quantite]="quantiteVal" (emiter2)="getCommandeMenuBoissonTailles($event)" (emiter)="activeBtn($event)" [menuTaille]="duo"></ild-menu-boisson>
+                        </ng-container>
+                    </div>
+                </div>
+            </ng-container>
+            <div class="container-3">
+                <div>
+                    <div class="fs-5">Nos Boissons</div>
+                    <div class="card-container">
+                        <ng-container *ngFor="let boissonTaille of produitComplements?.boissonTailles">
+                            <ild-mini-card [produit]="boissonTaille"></ild-mini-card>
+                        </ng-container>
+                        
+                    </div>
                 </div>
                 <div>
-                    <span><span>Nom :</span><span>{{produitComplements.produit.nom}}</span></span>
-                    <span><span>Prix :</span><span mx-2>{{produitComplements.produit.prix}} FCFA</span></span>
-                    <span><span>Description :</span><span>{{produitComplements.produit.description}}</span></span>
+                    <div class="fs-5">Nos Frites</div>
+                    <div class="card-container">
+                        <ng-container *ngFor="let frite of produitComplements?.portionFrites">
+                            <ild-mini-card [produit]="frite"></ild-mini-card>
+                        </ng-container>
+                    </div>
                 </div>
             </div>
-            <div class="container-2">
-                <div d-flex>
-                    <span (click)="onValueChange(quantiteVal-1)" class="shadow-sm">-</span>
-                    <input #quantite (change)="onValueChange(quantite.value)"  class="shadow" type="text" name="" id="" value="{{quantiteVal}}">
-                    <span (click)="onValueChange(quantiteVal+1)" class="shadow-sm">+</span>
-                </div>
+            <div class="footer">
+                <button #ajoutBtn (click)="addBtn(produitComplements.produit)" [disabled]="nbrBlockCheck != produitComplements.produit.menuTailles?.length && produitComplements.produit.type == 'Menu' " class="btn shadow-md">Ajouter au Panier</button>
             </div>
-            <ng-container *ngIf="produitComplements.produit?.type == 'Menu'">
-                <div class="container-menu">
-                    <div class="menu-recap">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Produit</th>
-                                    <th>Quantite</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let duo of produitComplements.produit?.menuBurgers">
-                                    <td>{{duo.burger?.nom}}</td>
-                                    <td>{{duo.quantite}}</td>
-                                </tr>
-                                <tr *ngFor="let duo of produitComplements.produit?.menuPortionFrites">
-                                    <td>{{duo.burger?.nom}}</td>
-                                    <td>{{duo.quantite}}</td>
-                                </tr>
-                                <tr *ngFor="let duo of produitComplements.produit?.menuTailles">
-                                        <td>{{duo.taille.libelle}}</td>
-                                        <td>{{duo.quantite}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="menu-boissons">
-                            <ng-container *ngFor="let duo of produitComplements.produit?.menuTailles">
-                                <ild-menu-boisson [commandeMenuBoissonTaillesMod]="produitComplements?.produit?.commandeMenuBoissonTailles" [quantite]="quantiteVal" (emiter2)="getCommandeMenuBoissonTailles($event)" (emiter)="activeBtn($event)" [menuTaille]="duo"></ild-menu-boisson>
-                            </ng-container>
-                        </div>
-                    </div>
-                </ng-container>
-                <div class="container-3">
-                    <div>
-                        <div class="fs-5">Nos Boissons</div>
-                        <div class="card-container">
-                            <ng-container *ngFor="let boissonTaille of produitComplements?.boissonTailles">
-                                <ild-mini-card [produit]="boissonTaille"></ild-mini-card>
-                            </ng-container>
-                            
-                        </div>
-                    </div>
-                    <div>
-                        <div class="fs-5">Nos Frites</div>
-                        <div class="card-container">
-                            <ng-container *ngFor="let frite of produitComplements?.portionFrites">
-                                <ild-mini-card [produit]="frite"></ild-mini-card>
-                            </ng-container>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer">
-                    <button #ajoutBtn (click)="addBtn(produitComplements.produit)" [disabled]="nbrBlockCheck != produitComplements.produit.menuTailles?.length && produitComplements.produit.type == 'Menu' " class="btn shadow-md">Ajouter au Panier</button>
-                </div>
-        </ng-container>
-        <ng-container *ngIf="produitComplements == null">
-            <ild-loader></ild-loader>>
-        </ng-container>
-    </div>
+    </ng-container>
+    <ng-container *ngIf="produitComplements == null">
+        <ild-loader></ild-loader>>
+    </ng-container>
 </div>
+<div #toile class="toile"></div>

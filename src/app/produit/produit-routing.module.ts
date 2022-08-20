@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AjoutListProduitComponent } from './pages/ajout-list-produit/ajout-list-produit.component';
 import { CatalogueComponent } from './pages/catalogue/catalogue.component';
 import { DetailsComponent } from './pages/details/details.component';
-import { AuthGuard } from '../authentification/shared/services/auth.guard';
 
 const routes: Routes = [
   { 
@@ -14,6 +13,9 @@ const routes: Routes = [
     path: 'details/:id', 
     outlet: 'sidebar',
     component: DetailsComponent ,
+    data : {
+      animation : 'slider'
+    }
   },
   { 
     path: 'ajout-list-produit', 

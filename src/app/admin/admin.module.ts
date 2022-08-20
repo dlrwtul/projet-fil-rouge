@@ -10,12 +10,12 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 @NgModule({
   declarations: [
     AdminComponent,
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class AdminModule { }

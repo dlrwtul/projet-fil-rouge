@@ -43,7 +43,7 @@ export class ProduitDataStoreService {
         'Authorization': `Bearer ${this.tokenServ.getToken()}`
       })
     };
-      return this.http.get<any>(`${this.url}${key}?parpage=${parpage}&&page=${page}`,options).pipe(
+      return this.http.get<any>(`${this.url}${key}?parpage=${parpage}&&page=${page}&&isEtat=true`,options).pipe(
         // map(data => {
         //   data["hydra:member"].forEach((element:any) => {
         //     if (!element.isEtat) {
@@ -88,17 +88,13 @@ export class ProduitDataStoreService {
     )
   }
 
-  newProduit$ = (produit:FormData,key : string):Observable<any> => {
-    const options = {
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${this.tokenServ.getToken()}`,
-      })
-    };
-    return this.http.post(`${this.url}${key}`,produit,options).pipe(
-      catchError((err) => {
-        return throwError(() => err)
-      }),
-    )
+  newProduit$ = (produit:FormData,key : string) => {
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.tokenServ.getToken()}`,
+    })
+    return this.http.post(`${this.url}${key}`,produit,{
+      headers : headers
+    })
   }
 
 }

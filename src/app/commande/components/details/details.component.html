@@ -33,6 +33,16 @@
                 <div class="flex justify-center items-center w-1/5">{{calcMontant(commandeProduit)}}</div>
             </div>
         </div>
+        <div *ngIf="commande?.zone != null" class="w-full flex mx-3 py-1 px-5 border-2 border-black">
+            <div class="w-1/2 p-2 flex flex-col">
+                <span class="my-1 text-xl">Zone Livraison : {{commande?.zone?.libelle}}</span>
+                <span class="my-1 text-xl">Montant : {{commande?.zone?.montantLivraison}} FCFA</span>
+            </div>
+            <div class="w-1/2 p-2 flex flex-col">
+                <span class="my-1 text-xl">Adresse Livraison : {{commande?.adresse}}</span>
+                <span class="my-1 text-xl">Telephone : {{commande?.telephone}}</span>
+            </div>
+        </div>
     </div>
     <div class="details-footer flex items-center justify-end p-2">
         <button *ngIf="etat == termine || etat == enCoursLivraison" class="py-2 px-4 bg-success text-light mx-2 font-bold rounded">Valider</button>

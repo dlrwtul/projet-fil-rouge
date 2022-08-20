@@ -12,8 +12,10 @@ const PANIER_KEY = "current-panier"
 })
 export class PanierService {
   private panier : Commande = {
-    zone : undefined,
-    quartier:undefined,
+    zone : {},
+    quartier:{
+      zone : {}
+    },
     commandeBoissonTailles:[],
     commandeBurgers:[],
     commandeMenus : [],
@@ -25,6 +27,18 @@ export class PanierService {
   setZone(zone : Zone) {
     return this.commandePanier?.next({
       ...this.commandePanier.value,zone:zone
+    })
+  }
+
+  setTelephone(telephone : string) {
+    return this.commandePanier?.next({
+      ...this.commandePanier.value,telephone:telephone
+    })
+  }
+
+  setAdresse(adresse : string) {
+    return this.commandePanier?.next({
+      ...this.commandePanier.value,adresse:adresse
     })
   }
 
@@ -79,6 +93,8 @@ export class PanierService {
   }
 
   addCommandeBurger(commandeBurger:CommandeProduit) {
+    console.log(this.panier);
+    
     let isIn =false
 
     this.commandePanier.value.commandeBurgers?.map(data => {
@@ -208,17 +224,8 @@ export class PanierService {
     )
   }
 
-  viderPanier() {
-    this.panier = {
-      zone : undefined,
-      quartier:undefined,
-      commandeBoissonTailles:[],
-      commandeBurgers:[],
-      commandeMenus : [],
-      commandePortionFrites: [],
-      commandeProduits: []
-    }
-    this.commandePanier = new BehaviorSubject(this.panier)
+  viderPanier() {    
+    return this.commandePanier?.next(this.panier)
   }
 
   savePanier(){

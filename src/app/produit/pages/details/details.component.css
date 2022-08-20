@@ -1,6 +1,6 @@
 .details {
     height: 100vh;
-    z-index: 100;
+    z-index: 101;
     position: absolute;
     width: 80em;
     right: 0;
@@ -284,4 +284,5 @@
     width: 100vw;
     position: absolute;
     z-index: 100;
+    display: none;
 }

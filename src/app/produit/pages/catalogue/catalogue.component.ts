@@ -29,7 +29,7 @@ export class CatalogueComponent implements OnInit {
   ngOnInit(): void {
 
     this.store.catalogue$().pipe(
-      timeout(5000)
+      timeout(10000)
     ).subscribe( (x) => {
       this.catalogue = x
       this.catalogue.produits = [...this.catalogue?.burgers,...this.catalogue?.menus];
