@@ -25,6 +25,7 @@ export class AjoutListProduitComponent implements OnInit {
   page : number = 1
   first : number = 1
   last : number = 0
+  newProduit$ : Observable<any> = new Observable
 
   
   constructor(private builder : FormBuilder,private produitServ : ProduitDataStoreService,private toast : NgToastService,private menuServ : MenuService) { }
@@ -54,10 +55,12 @@ export class AjoutListProduitComponent implements OnInit {
       this.formData.append('menuTailles',JSON.stringify(tab[0].menuTailles))
     }
 
-    this.produitServ.newProduit$(this.formData,tab[1]).subscribe(
+    this.newProduit$ = this.produitServ.newProduit$(this.formData,tab[1])
+    this.newProduit$.subscribe(
       {
-        next:(value) => {
-          console.log(value.body)
+        next:(value:Produit) => {
+          this.produits.unshift(value)
+          this.produits.pop()
           this.toast.success({detail:"SUCCESS",summary:"Nouveau produit ajouté",position:'tl',duration:5000});
         },
         error:(err:any) => {

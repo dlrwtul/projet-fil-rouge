@@ -88,14 +88,12 @@ export class ProduitDataStoreService {
     )
   }
 
-  newProduit$ = (produit:FormData,key : string) => {
+  newProduit$ = (produit:FormData,key : string):Observable<Produit> => {
     let headers = new HttpHeaders({
       'Authorization': `Bearer ${this.tokenServ.getToken()}`,
     })
-    return this.http.post(`${this.url}${key}`,produit,{
-      headers : headers,
-      observe: 'response',
-      responseType : 'json'
+    return this.http.post<Produit>(`${this.url}${key}`,produit,{
+      headers : headers
     })
   }
 
