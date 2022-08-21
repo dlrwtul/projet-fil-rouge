@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DashboardComponent } from './admin/pages/dashboard/dashboard.component';
 import { AuthGuard } from './authentification/shared/services/auth.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
 
@@ -21,7 +22,8 @@ const routes: Routes = [
   },
   { 
     path: 'admin', 
-    children : [{
+    children : [
+    {
       path: 'produit', 
       loadChildren: () => import('./produit/produit.module').then(m => m.ProduitModule) ,
     },
@@ -32,6 +34,10 @@ const routes: Routes = [
     { 
       path: 'livraison', 
       loadChildren: () => import('./livraison/livraison.module').then(m => m.LivraisonModule) 
+    },
+    {
+      path: 'dashboard', 
+      component : DashboardComponent ,
     }
   ],
     canActivate : [AuthGuard],

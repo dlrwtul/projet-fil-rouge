@@ -14,18 +14,18 @@
             </div>
         </div>
         <div class="produits w-full py-3 px-4 overflow-y-scroll">
-            <div *ngFor="let commandeProduit of commande?.commandeProduits" class="ligne rounded h-24 flex mb-2">
+            <div *ngFor="let commandeProduit of commande?.commandeProduits" class="ligne rounded h-24 flex mb-2 shadow border-none bg-gray-100">
                 <ng-container *ngIf="commandeProduit['@type'] == 'CommandeProduit'">
                     <div class="flex justify-start items-center w-1/5">
                         <img class="td-img w-2/3 h-full rounded" src="data:image/png;base64,{{commandeProduit.burger?.image}}{{commandeProduit.menu?.image}}{{commandeProduit.portionFrites?.image}}" alt="">
                     </div>
-                    <div class="flex justify-center items-center w-1/5">{{commandeProduit.portionFrites?.nom}}{{commandeProduit.burger?.nom}}{{commandeProduit.menu?.nom}}</div>
+                    <div class="flex justify-center items-center w-1/5 font-medium">{{commandeProduit.portionFrites?.nom}}{{commandeProduit.burger?.nom}}{{commandeProduit.menu?.nom}}</div>
                 </ng-container>
                 <ng-container *ngIf="commandeProduit['@type'] == 'CommandeBoissonTaille'">
                     <div class="flex justify-start items-center w-1/5">
                         <img class="td-img w-2/3 h-full rounded" src="data:image/png;base64,{{commandeProduit.boissonTaille?.boisson?.image}}" alt="">
                     </div>
-                    <div class="flex justify-center items-center w-1/5">{{commandeProduit.boissonTaille?.boisson?.nom}}</div>
+                    <div class="flex justify-center items-center w-1/5 font-medium">{{commandeProduit.boissonTaille?.taille?.libelle}} {{commandeProduit.boissonTaille?.boisson?.nom}}</div>
                 </ng-container>
                 
                 <div class="flex justify-center items-center w-1/5">{{commandeProduit.prix}}</div>
@@ -33,16 +33,22 @@
                 <div class="flex justify-center items-center w-1/5">{{calcMontant(commandeProduit)}}</div>
             </div>
         </div>
-        <div *ngIf="commande?.zone != null" class="w-full flex mx-3 py-1 px-5 border-2 border-black">
-            <div class="w-1/2 p-2 flex flex-col">
-                <span class="my-1 text-xl">Zone Livraison : {{commande?.zone?.libelle}}</span>
-                <span class="my-1 text-xl">Montant : {{commande?.zone?.montantLivraison}} FCFA</span>
+        <div *ngIf="commande?.zone != null" class="w-11/12 flex mx-3 py-1 px-5 ">
+            <div class="w-1/2 p-1 flex flex-col">
+                <span class="my-1 p-1 px-3 text-xl shadow bg-gray-100 rounded border-l-8 border-orange-500"><span class="font-medium">Zone Livraison</span> : {{commande?.zone?.libelle}}</span>
+                <span class="my-1 p-1 px-3 text-xl shadow bg-gray-100 rounded border-l-8 border-orange-500"><span class="font-medium">Montant</span> : {{commande?.zone?.montantLivraison}} FCFA</span>
             </div>
             <div class="w-1/2 p-2 flex flex-col">
-                <span class="my-1 text-xl">Adresse Livraison : {{commande?.adresse}}</span>
-                <span class="my-1 text-xl">Telephone : {{commande?.telephone}}</span>
+                <span class="my-1 p-1 px-3 text-xl shadow bg-gray-100 rounded border-l-8 border-orange-500"><span class="font-medium">Adresse Livraison</span> : {{commande?.adresse}}</span>
+                <span class="my-1 p-1 px-3 text-xl shadow bg-gray-100 rounded border-l-8 border-orange-500"><span class="font-medium">Telephone</span> : {{commande?.telephone}}</span>
             </div>
         </div>
+        <div *ngIf="commande?.zone == null" class="w-11/12 flex mx-3 py-1 px-5 ">
+            <div class="w-1/2 p-1 flex flex-col">
+                <span class="my-1 p-1 px-3 text-xl shadow bg-gray-100 rounded border-l-8 border-orange-500"><span class="font-medium">Livraison : Sur place</span></span>
+            </div>
+        </div>
+
     </div>
     <div class="details-footer flex items-center justify-end p-2">
         <button *ngIf="etat == termine || etat == enCoursLivraison" class="py-2 px-4 bg-success text-light mx-2 font-bold rounded">Valider</button>

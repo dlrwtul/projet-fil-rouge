@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
         this.toast.success({detail:"SUCCESS",summary:'Connexion reussie',position:'tl',duration:5000});
         let decoded : any = jwt_decode(value.token)
         if (decoded.roles[0] == "ROLE_GESTIONNAIRE") {
-          this.router.navigate(["/admin"])
+          this.router.navigate(["/admin/dashboard"])
         }else {
           if (this.previousUrl != null) {
             if (this.previousUrl == '/client/panier') {

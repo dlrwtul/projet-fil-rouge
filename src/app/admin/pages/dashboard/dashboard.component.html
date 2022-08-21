@@ -1,1 +1,58 @@
-<p>dashboard works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.24.0/dist/full.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
+    <title>Document</title>
+</head>
+<div class="dashboard p-2 w-full">
+    <div class="header w-full my-1 flex flex-col">
+        <div class="header1 flex justify-center my-3">
+            <div class="stack mx-2">
+                <div class="grid w-96 h-36 rounded bg-gray-600 text-primary-content place-content-start p-3">
+                    <span class="text-lg"><span class="font-bold">Nbre commandes Validée</span> : 100</span>
+                    <span class="text-sm"><span class="font-bold">Total Vente</span> : 1000000 FCFA</span>
+                </div> 
+                <div class="grid w-96 h-36 rounded bg-blue-300 text-accent-content place-content-center">2</div> 
+                <div class="grid w-96 h-36 rounded bg-blue-200 text-secondary-content place-content-center">3</div>
+            </div>
+            <div class="stack mx-28">
+                <div class="grid w-96 h-36 rounded bg-gray-600 text-primary-content place-content-start p-3">
+                    <span class="text-lg"><span class="font-bold">Commandes en cours</span> : 100</span>
+                    <span class="text-lg"><span class="font-bold">Commandes terminées</span> : 100</span>
+                    <span class="text-lg"><span class="font-bold">Commandes en cours de livraison</span> : 100</span>
+                </div> 
+                <div class="grid w-96 h-36 rounded bg-blue-300 text-accent-content place-content-center">2</div> 
+                <div class="grid w-96 h-36 rounded bg-blue-200 text-secondary-content place-content-center">3</div>
+            </div>
+            <div class="stack mx-2">
+                <div class="grid w-96 h-36 rounded bg-gray-600 text-primary-content place-content-start p-3">
+                    <span class="text-lg"><span class="font-bold">Zone plus livrée</span> : Pikine</span>
+                    <span class="text-sm"><span class="font-bold">Montant Livraison</span> : 3500 FCFA</span>
+                </div> 
+                <div class="grid w-96 h-36 rounded bg-blue-300 text-accent-content place-content-center">2</div> 
+                <div class="grid w-96 h-36 rounded bg-blue-200 text-secondary-content place-content-center">3</div>
+            </div>
+        </div>
+        <div class="header2 bg-gray-300 shadow rounded flex w-full justify-between">
+            <div class="h-full flex flex-col p-5">
+                <span class="text-xl"><span class="p-1 bg-gray-50 rounded text-blue-900 font-bold">Produit Burger/Menu le plus vendu</span> : Burger King Queen</span>
+                <span class="text-lg"><span class="p-1 bg-gray-50 rounded text-blue-900 font-bold">Nbre de vente par jour</span> : 100</span>
+                <span class="text-lg"><span class="p-1 bg-gray-50 rounded text-blue-900 font-bold">Prix</span> : 5400 FCFA</span>
+            </div>
+            <div class="trait border-2 border-blue-900 "></div>
+            <div class="h-full flex justify-start flex-col-reverse p-5">
+                <span class="text-xl"><span class="p-1 bg-gray-50 rounded text-blue-900 font-bold">Complement Frites/Boisson le plus vendu</span> : Frites Portions Double</span>
+                <span class="text-lg"><span class="p-1 bg-gray-50 rounded text-blue-900 font-bold">Nbre de vente par jour</span> : 100</span>
+                <span class="text-lg"><span class="p-1 bg-gray-50 rounded text-blue-900 font-bold">Prix</span> : 1500 FCFA</span>
+            </div>
+        </div>
+    </div>
+    <div class="body w-full overflow-y-scroll my-1">
+        
+    </div>
+</div>
+</html>

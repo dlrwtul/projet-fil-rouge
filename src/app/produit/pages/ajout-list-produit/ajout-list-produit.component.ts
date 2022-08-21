@@ -56,8 +56,8 @@ export class AjoutListProduitComponent implements OnInit {
 
     this.produitServ.newProduit$(this.formData,tab[1]).subscribe(
       {
-        next:(value:any) => {
-          console.log(value)
+        next:(value) => {
+          console.log(value.body)
           this.toast.success({detail:"SUCCESS",summary:"Nouveau produit ajouté",position:'tl',duration:5000});
         },
         error:(err:any) => {

@@ -93,7 +93,9 @@ export class ProduitDataStoreService {
       'Authorization': `Bearer ${this.tokenServ.getToken()}`,
     })
     return this.http.post(`${this.url}${key}`,produit,{
-      headers : headers
+      headers : headers,
+      observe: 'response',
+      responseType : 'json'
     })
   }
 
