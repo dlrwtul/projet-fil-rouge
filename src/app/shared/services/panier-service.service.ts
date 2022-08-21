@@ -225,7 +225,7 @@ export class PanierService {
   }
 
   viderPanier() {    
-    return this.commandePanier?.next(structuredClone(this.panier))
+    return this.commandePanier?.next(this.panier)
   }
 
   savePanier(){
