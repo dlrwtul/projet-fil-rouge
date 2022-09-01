@@ -36,4 +36,9 @@ export class LivraisonService {
   getLivraison() {
     return this.livraisonSubject$.asObservable()
   }
+
+  viderLivraison() {
+    this.livraisonSubject$ = new BehaviorSubject(this.livraison)
+    return this.livraisonSubject$.next(this.livraisonSubject$.value)
+  }
 }

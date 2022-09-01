@@ -45,8 +45,8 @@ export class CardLivreurComponent implements OnInit {
       }
       this.livServ.newLivraison$(this.livraison).subscribe({
         next:(value:Livraison) => {
-          console.log(value);
           this.livraison = value
+          this.livraisonServ.viderLivraison()
           this.toast.success({detail:"SUCCESS",summary:'Livraison Ajoutée',position:'tr',duration:5000});
           this.router.navigate(["/admin/livraison"])
         },
