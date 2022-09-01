@@ -27,9 +27,7 @@ export class CardLivreurComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-    console.log(this.livreur);
-    
+  ngOnInit(): void {    
   }
 
   newLivraison() {
@@ -44,7 +42,7 @@ export class CardLivreurComponent implements OnInit {
       if (this.livraison.commandes?.length == 0) {
         this.toast.warning({detail:"WARNING",summary:"Veuillez selectionner des commandes",position:'tr',duration:5000});  
         return 
-      }      
+      }
       this.livServ.newLivraison$(this.livraison).subscribe({
         next:(value:Livraison) => {
           console.log(value);

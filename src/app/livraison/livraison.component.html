@@ -40,7 +40,7 @@
                     <ngb-panel *ngIf="livraison.commandes?.length != 0" title="Matricule Moto N° : {{livraison.livreur?.matriculeMoto}}">
                       <ng-template ngbPanelContent>
                         <button (click)="validerLivraison(livraison.id)" class="bg-gray-800 h-max w-max py-1 p-2 my-3 rounded font-medium text-white relative">Valider Livraison</button>
-                        <div class="flex flex-row">
+                        <div class="flex flex-row flex-wrap">
                             <ng-container *ngFor="let commande of livraison.commandes">
                                 <ild-card-commande [commande]="commande"></ild-card-commande>
                             </ng-container>
@@ -52,6 +52,6 @@
         </ngb-accordion>
     </div>
 </div>
-<button [ngClass]="{'bg-green-500':nbr > 0,'bg-blue-500':nbr == 0}" [routerLink]='[{ outlets: { sidebar: ["livreur"] } }]' class="w-16 h-16 bg-gray-8checked00 rounded-full flex justify-center items-center fixed bottom-5 right-5 cursor-pointer bg-blue-500 text-white">
+<button [ngClass]="{'bg-green-500':nbr > 0,'bg-blue-500':nbr == 0}" [routerLink]='[{ outlets: { sidebar: ["livreur"] } }]' class="w-16 h-16 bg-gray-800 checked rounded-full flex justify-center items-center fixed bottom-5 right-5 cursor-pointer bg-blue-500 text-white">
     Livrer
 </button>

@@ -75,7 +75,6 @@ export class ProduitDataStoreService {
 
   getWithComplements$ = (id:number) => {
     return this.http.get<DetailsProduitComplement>(`${this.url}detailsProduitComplements/${id}`).pipe(
-      timeout(10000),
       map(data => {
         if (data.menu != null) {
           data.produit = data.menu;
